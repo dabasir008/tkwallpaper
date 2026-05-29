@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f0f0f">
+  <meta name="description" content="Free HD wallpapers, live wallpapers and AI custom wallpapers for your phone and desktop.">
+  <title>TK Wallpaper - Free HD & Live Wallpapers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">TK Wallpaper</a>
+      <nav class="nav" id="mainNav">
+        <a href="#" class="nav-link active" data-category="all">All</a>
+        <a href="#" class="nav-link" data-category="anime">Anime</a>
+        <a href="#" class="nav-link" data-category="nature">Nature</a>
+        <a href="#" class="nav-link" data-category="cyberpunk">Cyberpunk</a>
+        <a href="#" class="nav-link" data-category="minimal">Minimal</a>
+        <a href="#" class="nav-link" data-category="abstract">Abstract</a>
+        <a href="#" class="nav-link" data-category="car">Car</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle">Menu</button>
+      <!-- 未登录 -->
+      <div class="header-auth" id="headerNotLoggedIn">
+        <button class="header-buy-btn" id="btnLogin">Login</button>
+      </div>
+      <!-- 已登录 -->
+      <div class="header-auth" id="headerLoggedIn" style="display:none;">
+        <span class="header-email" id="headerEmail"></span>
+        <span class="header-points-icon">&#9679;</span>
+        <span id="headerPointsDisplay">0</span> pts
+        <button class="header-buy-btn" id="btnBuyPoints">Get Points</button>
+        <button class="header-buy-btn" id="btnLogout" style="border-color:#e53e3e;color:#e53e3e;">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要内容区 -->
+  <main class="main">
+    <section class="hero">
+      <h1>Wallpapers for Your Phone</h1>
+      <p>Free static wallpapers, premium live wallpapers, and AI custom wallpapers. Updated with trending styles weekly.</p>
+    </section>
+
+    <!-- 三大板块切换 -->
+    <div class="section-tabs">
+      <button class="section-tab active" data-section="static">
+        Static
+      </button>
+      <button class="section-tab" data-section="live">
+        Live
+      </button>
+      <button class="section-tab" data-section="custom">
+        AI Custom
+      </button>
+    </div>
+
+    <!-- 搜索栏 -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search wallpapers...">
+    </div>
+
+    <!-- 动态壁纸提示条 -->
+    <div class="points-bar" id="pointsBar" style="display:none;">
+      <span>My Points: <strong id="pointsDisplay">0</strong></span>
+      <button class="btn-buy-points" id="btnBuyPoints">Get Points</button>
+    </div>
+
+    <!-- 图片网格 -->
+    <div class="wallpaper-grid" id="wallpaperGrid">
+      <!-- JS 动态填充 -->
+    </div>
+
+    <!-- AI自定义板块：上传区 -->
+    <div class="ai-upload-area" id="aiUploadArea" style="display:none;">
+      <div class="ai-upload-box">
+        <h3>Add Your Own Image</h3>
+        <p>Upload a photo to turn it into a live wallpaper.</p>
+        <input type="file" id="aiFileInput" accept="image/*" style="display:none;">
+        <button class="btn-generate" id="aiBtnUpload">Choose from Gallery</button>
+        <span class="ai-upload-or">Upload your own photo to generate</span>
+      </div>
+    </div>
+
+    <!-- 加载更多 -->
+    <div class="load-more-wrap">
+      <button class="load-more" id="loadMore">Load More</button>
+    </div>
+  </main>
+
+  <!-- 底部 -->
+  <footer class="footer">
+    <p>TK Wallpaper &copy; 2026. Free wallpapers for personal use. Live wallpapers and AI wallpapers require points.</p>
+  </footer>
+
+  <!-- 图片放大弹窗 -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">X</button>
+    <div class="lightbox-content">
+      <img src="" alt="" id="lightboxImg">
+      <div class="lightbox-actions">
+        <span class="lightbox-res" id="lightboxRes"></span>
+        <button class="btn-download" id="btnDownload">Download</button>
+        <button class="btn-set-wallpaper" id="btnSetWallpaper" style="display:none;">Set as Wallpaper</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI自定义对比弹窗 -->
+  <div class="compare-modal" id="compareModal">
+    <button class="compare-close" id="compareClose">X</button>
+    <div class="compare-body">
+      <div class="compare-panel">
+        <span class="compare-label">Before (Static)</span>
+        <div class="compare-img-wrap" id="compareImgWrap">
+          <img src="" alt="Original" id="compareImg">
+          <div class="compare-placeholder" id="comparePlaceholder">
+            <span class="placeholder-plus">+</span>
+            <span class="placeholder-text">Upload Your Photo</span>
+          </div>
+        </div>
+        <div class="compare-img-actions">
+          <button class="btn-small" id="compareUpload">Upload Photo</button>
+          <button class="btn-small" id="compareDelete">Delete</button>
+        </div>
+      </div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-panel">
+        <span class="compare-label">After (Live Wallpaper)</span>
+        <div class="compare-img-wrap" id="compareResultWrap">
+          <img src="" alt="Result" id="compareResultImg" style="display:none;">
+          <video id="compareVideo" loop muted playsinline autoplay></video>
+          <div class="compare-placeholder" id="compareResultPlaceholder">
+            <span class="placeholder-plus">?</span>
+            <span class="placeholder-text">Click Generate</span>
+          </div>
+        </div>
+        <div class="compare-actions">
+          <button class="btn-download" id="compareDownload">Download</button>
+        </div>
+      </div>
+    </div>
+    <div class="compare-generate">
+      <button class="btn-generate" id="compareBtnGenerate">Generate Live Wallpaper (20 pts)</button>
+      <div class="generate-status" id="compareStatus" style="display:none;">
+        <div class="spinner"></div>
+        <span id="compareStatusText">Processing...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 登录/注册弹窗 -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-box">
+      <button class="modal-close" id="authModalClose">X</button>
+      <h3 id="authModalTitle">Login</h3>
+      <div class="auth-form">
+        <input type="email" id="authEmail" placeholder="Email address">
+        <input type="password" id="authPassword" placeholder="Password">
+        <button class="btn-generate" id="authBtnSubmit">Login</button>
+        <p class="auth-switch">
+          <span id="authSwitchText">Don't have an account?</span>
+          <a href="#" id="authToggle">Sign Up</a>
+        </p>
+        <p class="auth-note">New users get <strong>10 free credits</strong> to try AI wallpapers!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 积分提示 -->
+  <div class="points-toast" id="pointsToast"></div>
+
+  <!-- 积分购买弹窗 -->
+  <div class="modal-overlay" id="purchaseModal">
+    <div class="modal-box">
+      <button class="modal-close" id="purchaseModalClose">X</button>
+      <h3>Get Credits</h3>
+      <p class="modal-sub">Buy credits to download live wallpapers and AI custom wallpapers.</p>
+      <div class="pricing-list">
+        <a href="https://tk-wallpaper.lemonsqueezy.com/checkout/buy/1097506" target="_blank" class="pricing-item">
+          <div class="pricing-header">
+            <span class="pricing-name">Starter</span>
+            <span class="pricing-price">$3.99</span>
+          </div>
+          <span class="pricing-credits">100 Credits</span>
+          <span class="pricing-desc">5 AI generations</span>
+        </a>
+        <a href="https://tk-wallpaper.lemonsqueezy.com/checkout/buy/1097512" target="_blank" class="pricing-item pricing-popular">
+          <div class="pricing-header">
+            <span class="pricing-name">Popular</span>
+            <span class="pricing-price">$6.99</span>
+          </div>
+          <span class="pricing-credits">200 Credits</span>
+          <span class="pricing-desc">10 AI generations · Save 12%</span>
+          <span class="pricing-badge">BEST SELLER</span>
+        </a>
+        <a href="https://tk-wallpaper.lemonsqueezy.com/checkout/buy/1097509" target="_blank" class="pricing-item">
+          <div class="pricing-header">
+            <span class="pricing-name">Best Value</span>
+            <span class="pricing-price">$12.99</span>
+          </div>
+          <span class="pricing-credits">500 Credits</span>
+          <span class="pricing-desc">25 AI generations · Save 35%</span>
+        </a>
+        <a href="https://tk-wallpaper.lemonsqueezy.com/checkout/buy/1097513" target="_blank" class="pricing-item">
+          <div class="pricing-header">
+            <span class="pricing-name">Pro</span>
+            <span class="pricing-price">$24.99</span>
+          </div>
+          <span class="pricing-credits">1200 Credits</span>
+          <span class="pricing-desc">60 AI generations · Best value</span>
+        </a>
+      </div>
+      <p class="modal-note">After purchase, credits will be added to your account automatically.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
