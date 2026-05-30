@@ -243,11 +243,19 @@ function renderCards(data) {
     }
 
     card.className = "wallpaper-card" + extraClass;
-    card.innerHTML = `
-      <img src="${item.src}" alt="${item.label}" loading="lazy">
-      <span class="card-label">${item.label}</span>
-      ${badgeHTML}
-    `;
+    if (item.section === "custom" && item.videoUrl) {
+      card.innerHTML = `
+        <video src="${item.videoUrl}#t=0,2" autoplay muted loop playsinline poster="${item.src}"></video>
+        <span class="card-label">${item.label}</span>
+        ${badgeHTML}
+      `;
+    } else {
+      card.innerHTML = `
+        <img src="${item.src}" alt="${item.label}" loading="lazy">
+        <span class="card-label">${item.label}</span>
+        ${badgeHTML}
+      `;
+    }
     card.addEventListener("click", () => {
       if (item.section === "custom") {
         openCompareModal(item);
