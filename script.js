@@ -138,9 +138,9 @@ const liveWallpapers = [
 
 // AI 自定义壁纸（每张包含静态图 + 样板视频）
 const aiWallpapers = [
-  { id: 201, src: R2 + "/wallpapers/08e1d3b2e2bf7ebf0e574b2118872a31.jpg", videoUrl: R2 + "/samples/sample_live_01.mp4", category: "custom", label: "Anime Style Live", section: "custom", free: false, points: 20 },
-  { id: 202, src: R2 + "/wallpapers/86e87f5620a8f5e5e5c82ba0a04f864e.jpg", videoUrl: R2 + "/samples/sample_live_02.mp4", category: "custom", label: "Cyberpunk Live", section: "custom", free: false, points: 20 },
-  { id: 203, src: R2 + "/wallpapers/04668af86f5badd3a0577e01b032f6ae.jpg", videoUrl: R2 + "/samples/sample_live_03.mp4", category: "custom", label: "Nature Live", section: "custom", free: false, points: 20 },
+  { id: 201, src: R2 + "/wallpapers/08e1d3b2e2bf7ebf0e574b2118872a31.jpg", videoUrl: "", category: "custom", label: "Anime Style Live", section: "custom", free: false, points: 20 },
+  { id: 202, src: R2 + "/wallpapers/86e87f5620a8f5e5e5c82ba0a04f864e.jpg", videoUrl: "", category: "custom", label: "Cyberpunk Live", section: "custom", free: false, points: 20 },
+  { id: 203, src: R2 + "/wallpapers/04668af86f5badd3a0577e01b032f6ae.jpg", videoUrl: "", category: "custom", label: "Nature Live", section: "custom", free: false, points: 20 },
 ];
 
 // ===== 状态 =====
@@ -332,7 +332,7 @@ loadMoreBtn.addEventListener("click", () => {
       section: currentSection,
       free: currentSection === "static",
       points: currentSection === "live" ? 20 : currentSection === "custom" ? 20 : 0,
-      videoUrl: currentSection === "custom" ? R2 + "/samples/sample_live_0" + (Math.floor(Math.random() * 3) + 1) + ".mp4" : "",
+      videoUrl: "",
     });
   }
   applyFilter();
