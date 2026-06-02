@@ -1,13 +1,15 @@
 /**
  * Lemon Squeezy Webhook Handler
- * 支付成功后向 Supabase 用户账户加积分
+ * Adds purchased points to a Supabase profile after signature verification.
  */
 
 import crypto from "crypto";
 import https from "https";
 
-const SUPABASE_URL = "https://cctguqfxiihtjtpntdqb.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjdGd1cWZ4aWlodGp0cG50ZHFiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDA0NzE4NywiZXhwIjoyMDk1NjIzMTg3fQ.DMsP_oCbErs7VEu49IXS5CgIGPzg8t70Rir6R1KZyTM";
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+export const config = { api: { bodyParser: false } };
 
 async function supabaseQuery(path, method, body) {
   return new Promise((resolve, reject) => {
@@ -16,7 +18,7 @@ async function supabaseQuery(path, method, body) {
     const opts = {
       hostname: u.hostname,
       port: 443,
-      path: u.pathname,
+      path: u.pathname + u.search,
       method,
       headers: {
         "Content-Type": "application/json",
@@ -25,13 +27,11 @@ async function supabaseQuery(path, method, body) {
         Prefer: "return=representation",
       },
     };
-    if (data) {
-      opts.headers["Content-Length"] = Buffer.byteLength(data);
-    }
-    const req = https.request(opts, (res) => {
+    if (data) opts.headers["Content-Length"] = Buffer.byteLength(data);
+    const req = https.request(opts, (resp) => {
       let d = "";
-      res.on("data", (c) => (d += c));
-      res.on("end", () => {
+      resp.on("data", (c) => (d += c));
+      resp.on("end", () => {
         try {
           resolve(JSON.parse(d));
         } catch {
@@ -46,41 +46,66 @@ async function supabaseQuery(path, method, body) {
   });
 }
 
+async function readRawBody(req) {
+  const chunks = [];
+  for await (const chunk of req) chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+  return Buffer.concat(chunks);
+}
+
+function verifySignature(rawBody, signature, secret) {
+  const expected = crypto.createHmac("sha256", secret).update(rawBody).digest("hex");
+  const received = String(signature || "").trim();
+  const expectedBuffer = Buffer.from(expected, "hex");
+  const receivedBuffer = Buffer.from(received, "hex");
+  return expectedBuffer.length === receivedBuffer.length && crypto.timingSafeEqual(expectedBuffer, receivedBuffer);
+}
+
+function creditsForProduct(productName) {
+  if (productName?.includes("1200")) return 1200;
+  if (productName?.includes("500")) return 500;
+  if (productName?.includes("200")) return 200;
+  if (productName?.includes("100")) return 100;
+  return 0;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  if (!SUPABASE_URL || !SUPABASE_KEY) return res.status(500).json({ error: "Supabase env vars are not configured" });
 
-  // 签名验证
+  const rawBody = await readRawBody(req);
   const signature = req.headers["x-signature"];
   const secret = process.env.LEMONSQUEEZY_SECRET;
-  if (signature && secret) {
-    const rawBody = JSON.stringify(req.body);
-    const hmac = crypto.createHmac("sha256", secret);
-    hmac.update(rawBody);
-    if (hmac.digest("hex") !== signature) {
-      return res.status(403).json({ error: "Invalid signature" });
-    }
+  if (!signature || !secret) return res.status(403).json({ error: "Missing signature config" });
+  if (!verifySignature(rawBody, signature, secret)) return res.status(403).json({ error: "Invalid signature" });
+
+  let event;
+  try {
+    event = JSON.parse(rawBody.toString("utf8"));
+  } catch {
+    return res.status(400).json({ error: "Invalid JSON" });
   }
 
-  const event = req.body;
   try {
     const eventName = event?.meta?.event_name;
-    if (eventName !== "order_created") {
-      return res.status(200).json({ received: true, skipped: true });
-    }
+    if (eventName !== "order_created") return res.status(200).json({ received: true, skipped: true });
 
     const orderData = event?.data;
+    const orderId = orderData?.id;
     const customerEmail = orderData?.attributes?.user_email;
     const productName = orderData?.attributes?.first_order_item?.product_name;
     const orderTotal = orderData?.attributes?.total;
-    let credits = 0;
-    if (productName?.includes("100")) credits = 100;
-    else if (productName?.includes("200")) credits = 200;
-    else if (productName?.includes("500")) credits = 500;
-    else if (productName?.includes("1200")) credits = 1200;
+    const credits = creditsForProduct(productName);
+    if (!orderId || !customerEmail || credits <= 0) return res.status(200).json({ received: true, skipped: true });
 
-    console.log("New order:", orderData.id, customerEmail, productName);
+    const purchaseDescription = `Purchase order ${orderId}: ${productName} ($${orderTotal / 100})`;
+    const existingTxResp = await supabaseQuery(
+      `/rest/v1/transactions?description=eq.${encodeURIComponent(purchaseDescription)}&select=id&limit=1`,
+      "GET"
+    );
+    if (Array.isArray(existingTxResp) && existingTxResp.length > 0) {
+      return res.status(200).json({ received: true, duplicate: true });
+    }
 
-    // 根据邮箱查找 Supabase 用户
     const usersResp = await supabaseQuery(
       `/rest/v1/profiles?email=eq.${encodeURIComponent(customerEmail)}&select=id,points`,
       "GET"
@@ -95,9 +120,9 @@ export default async function handler(req, res) {
         user_id: profile.id,
         type: "purchase",
         amount: credits,
-        description: `Purchase: ${productName} ($${orderTotal / 100})`,
+        description: purchaseDescription,
       });
-      console.log("Credited", credits, "pts to", customerEmail, "→ now", newPoints);
+      console.log("Credited", credits, "pts to", customerEmail, "now", newPoints);
     } else {
       console.log("No Supabase user found for email:", customerEmail);
     }

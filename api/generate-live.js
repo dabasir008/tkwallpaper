@@ -1,17 +1,38 @@
 /**
- * 动态壁纸生成 API
- * POST: 提交图片URL，返回 RunningHub 任务ID
- * GET:  查询任务状态，返回结果
+ * Live wallpaper generation API.
+ * POST submits an image URL to RunningHub; GET queries a RunningHub task.
  */
 
 import crypto from "crypto";
 import https from "https";
-import http from "http";
 
-const RH_KEY = "7b29e8ff03c24164b5da4a59aef8da85";
+const RH_KEY = process.env.RUNNINGHUB_API_KEY;
 const RH_UPLOAD = "https://www.runninghub.cn/task/openapi/upload";
 const RH_RUN = "https://www.runninghub.cn/openapi/v2/run/ai-app/1934910866645000194";
 const RH_QUERY = "https://www.runninghub.cn/openapi/v2/query";
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+const DEFAULT_ALLOWED_IMAGE_HOSTS = ["pub-47bcb2d7ff1d4d90b554d3cc5a254b57.r2.dev"];
+
+function allowedImageHosts() {
+  const configured = (process.env.ALLOWED_IMAGE_HOSTS || "")
+    .split(",")
+    .map((host) => host.trim())
+    .filter(Boolean);
+  return new Set([...DEFAULT_ALLOWED_IMAGE_HOSTS, ...configured]);
+}
+
+function assertAllowedImageUrl(imageUrl) {
+  let parsed;
+  try {
+    parsed = new URL(imageUrl);
+  } catch {
+    throw new Error("Invalid imageUrl");
+  }
+  if (parsed.protocol !== "https:" || !allowedImageHosts().has(parsed.hostname)) {
+    throw new Error("imageUrl host is not allowed");
+  }
+  return parsed;
+}
 
 function httpsPost(url, body, headers = {}) {
   return new Promise((resolve, reject) => {
@@ -29,10 +50,10 @@ function httpsPost(url, body, headers = {}) {
         "Content-Length": Buffer.byteLength(data),
       },
     };
-    const req = https.request(opts, (res) => {
+    const req = https.request(opts, (resp) => {
       let d = "";
-      res.on("data", (c) => (d += c));
-      res.on("end", () => {
+      resp.on("data", (c) => (d += c));
+      resp.on("end", () => {
         try { resolve(JSON.parse(d)); } catch { reject(new Error(d)); }
       });
     });
@@ -47,8 +68,6 @@ function httpsPostMultipart(url, apiKey, imageBuffer, fileName) {
   return new Promise((resolve, reject) => {
     const u = new URL(url);
     const boundary = "----FormBoundary" + crypto.randomBytes(16).toString("hex");
-    const buf = imageBuffer;
-
     const chunks = [];
     chunks.push(Buffer.from(`--${boundary}\r\n`));
     chunks.push(Buffer.from('Content-Disposition: form-data; name="apiKey"\r\n\r\n'));
@@ -56,12 +75,12 @@ function httpsPostMultipart(url, apiKey, imageBuffer, fileName) {
     chunks.push(Buffer.from(`--${boundary}\r\n`));
     chunks.push(Buffer.from(`Content-Disposition: form-data; name="file"; filename="${fileName}"\r\n`));
     chunks.push(Buffer.from("Content-Type: image/jpeg\r\n\r\n"));
-    chunks.push(buf);
+    chunks.push(imageBuffer);
     chunks.push(Buffer.from(`\r\n--${boundary}\r\n`));
     chunks.push(Buffer.from('Content-Disposition: form-data; name="fileType"\r\n\r\n'));
     chunks.push(Buffer.from("image\r\n"));
     chunks.push(Buffer.from(`--${boundary}--\r\n`));
-    const body = Buffer.concat(chunks);
+    const multipartBody = Buffer.concat(chunks);
 
     const opts = {
       hostname: u.hostname,
@@ -70,40 +89,61 @@ function httpsPostMultipart(url, apiKey, imageBuffer, fileName) {
       method: "POST",
       headers: {
         "Content-Type": `multipart/form-data; boundary=${boundary}`,
-        "Content-Length": body.length,
+        "Content-Length": multipartBody.length,
         "User-Agent": "Mozilla/5.0",
       },
     };
-    const req = https.request(opts, (res) => {
+    const req = https.request(opts, (resp) => {
       let d = "";
-      res.on("data", (c) => (d += c));
-      res.on("end", () => {
+      resp.on("data", (c) => (d += c));
+      resp.on("end", () => {
         try { resolve(JSON.parse(d)); } catch { reject(new Error(d)); }
       });
     });
     req.on("error", reject);
     req.setTimeout(60000, () => { req.destroy(); reject(new Error("timeout")); });
-    req.write(body);
+    req.write(multipartBody);
     req.end();
   });
 }
 
-function downloadImage(url) {
+function downloadImage(imageUrl, redirects = 0) {
+  const parsed = assertAllowedImageUrl(imageUrl);
   return new Promise((resolve, reject) => {
-    const mod = url.startsWith("https") ? https : http;
-    mod.get(url, { timeout: 30000 }, (res) => {
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return downloadImage(res.headers.location).then(resolve).catch(reject);
+    const req = https.get(parsed, { timeout: 30000 }, (resp) => {
+      if (resp.statusCode >= 300 && resp.statusCode < 400 && resp.headers.location) {
+        if (redirects >= 3) return reject(new Error("Too many redirects"));
+        const nextUrl = new URL(resp.headers.location, parsed).toString();
+        resp.resume();
+        return downloadImage(nextUrl, redirects + 1).then(resolve).catch(reject);
+      }
+      if (resp.statusCode !== 200) {
+        resp.resume();
+        return reject(new Error(`Image download failed: ${resp.statusCode}`));
+      }
+      const contentType = String(resp.headers["content-type"] || "");
+      if (!contentType.startsWith("image/")) {
+        resp.resume();
+        return reject(new Error("imageUrl did not return an image"));
       }
       const chunks = [];
-      res.on("data", (c) => chunks.push(c));
-      res.on("end", () => resolve(Buffer.concat(chunks)));
-    }).on("error", reject);
+      let total = 0;
+      resp.on("data", (chunk) => {
+        total += chunk.length;
+        if (total > MAX_IMAGE_BYTES) {
+          req.destroy(new Error("Image is too large"));
+          return;
+        }
+        chunks.push(chunk);
+      });
+      resp.on("end", () => resolve(Buffer.concat(chunks)));
+    });
+    req.on("error", reject);
+    req.setTimeout(30000, () => { req.destroy(new Error("timeout")); });
   });
 }
 
 export default async function handler(req, res) {
-  // 处理 CORS 预检
   if (req.method === "OPTIONS") {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -112,8 +152,8 @@ export default async function handler(req, res) {
   }
 
   res.setHeader("Access-Control-Allow-Origin", "*");
+  if (!RH_KEY) return res.status(500).json({ error: "RUNNINGHUB_API_KEY is not configured" });
 
-  // GET: 查询任务状态
   if (req.method === "GET") {
     const taskId = req.query?.taskId;
     if (!taskId) return res.status(400).json({ error: "Missing taskId" });
@@ -126,27 +166,25 @@ export default async function handler(req, res) {
     }
   }
 
-  // POST: 提交生成任务
   if (req.method === "POST") {
     const { imageUrl } = req.body || {};
     if (!imageUrl) return res.status(400).json({ error: "Missing imageUrl" });
+    let parsedImageUrl;
+    try {
+      parsedImageUrl = new URL(imageUrl);
+    } catch {
+      return res.status(400).json({ error: "Invalid imageUrl" });
+    }
+    if (parsedImageUrl.protocol !== "https:" && parsedImageUrl.protocol !== "http:") {
+      return res.status(400).json({ error: "Unsupported imageUrl protocol" });
+    }
 
     try {
-      // 1. 下载图片
-      console.log("下载图片:", imageUrl);
       const imgBuffer = await downloadImage(imageUrl);
-
-      // 2. 上传到 RunningHub
-      console.log("上传到 RunningHub...");
       const uploadResp = await httpsPostMultipart(RH_UPLOAD, RH_KEY, imgBuffer, "wallpaper.jpg");
-      if (uploadResp.code !== 0) {
-        return res.status(500).json({ error: "Upload failed", detail: uploadResp });
-      }
-      const imgHash = uploadResp.data.fileName;
-      console.log("上传成功:", imgHash);
+      if (uploadResp.code !== 0) return res.status(500).json({ error: "Upload failed", detail: uploadResp });
 
-      // 3. 提交 AI 任务
-      console.log("提交 AI 任务...");
+      const imgHash = uploadResp.data.fileName;
       const runResp = await httpsPost(RH_RUN, {
         nodeInfoList: [
           { nodeId: "131", fieldName: "image", fieldValue: imgHash },
@@ -157,15 +195,13 @@ export default async function handler(req, res) {
         usePersonalQueue: "false",
       }, { Authorization: `Bearer ${RH_KEY}` });
 
-      console.log("任务已提交:", runResp.taskId);
-
       return res.status(200).json({
         success: true,
         taskId: runResp.taskId,
         status: runResp.status,
       });
     } catch (err) {
-      console.error("生成失败:", err.message);
+      console.error("Generate failed:", err.message);
       return res.status(500).json({ error: err.message });
     }
   }

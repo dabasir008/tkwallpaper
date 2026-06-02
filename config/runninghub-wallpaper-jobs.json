@@ -1,0 +1,150 @@
+{
+  "appId": "2046794551444119554",
+  "promptNodeId": "18",
+  "promptFieldName": "prompt",
+  "aspectRatioNodeId": "18",
+  "aspectRatioFieldName": "aspectRatio",
+  "aspectRatio": "9:16",
+  "pollSeconds": 10,
+  "maxPolls": 90,
+  "jobs": [
+    {
+      "slug": "liquid-glass-shadow",
+      "category": "abstract",
+      "label": "Liquid Glass Shadow",
+      "prompt": "abstract liquid glass phone wallpaper, translucent layered glass panels, soft refraction, dark background, subtle blue and violet glow, premium iOS-inspired aesthetic, 9:16, no logo, no text"
+    },
+    {
+      "slug": "icy-blue-glacier",
+      "category": "nature",
+      "label": "Icy Blue Glacier",
+      "prompt": "icy blue glacier aesthetic phone wallpaper, frosted crystal texture, soft cold light, elegant minimal composition, high detail, 9:16, no people, no text"
+    },
+    {
+      "slug": "alien-pearl-planet",
+      "category": "abstract",
+      "label": "Alien Pearl Planet",
+      "prompt": "aliencore celestial phone wallpaper, opalescent planets, soft chrome glow, surreal night sky, futuristic but elegant, deep black background, 9:16, no text"
+    },
+    {
+      "slug": "glitch-chrome-neon",
+      "category": "cyberpunk",
+      "label": "Glitch Chrome Neon",
+      "prompt": "glitch glam phone wallpaper, chrome reflections, holographic distortion, neon highlights, luxury cyber aesthetic, black background, 9:16, no text, no logo"
+    },
+    {
+      "slug": "amoled-blue-pulse",
+      "category": "minimal",
+      "label": "AMOLED Blue Pulse",
+      "prompt": "AMOLED black phone wallpaper, minimal glowing geometric shape, deep pure black background, tiny blue neon accent, elegant premium look, 9:16, no text"
+    },
+    {
+      "slug": "liquid-glass-halo",
+      "category": "abstract",
+      "label": "Liquid Glass Halo",
+      "prompt": "abstract liquid glass halo phone wallpaper, translucent circular glass layers, soft refraction, premium black background, cyan and pearl glow, elegant iOS-inspired look, 9:16, no logo, no text"
+    },
+    {
+      "slug": "liquid-glass-dusk",
+      "category": "abstract",
+      "label": "Liquid Glass Dusk",
+      "prompt": "liquid glass dusk phone wallpaper, translucent wavy glass, smoky violet sunset gradient, subtle gold rim light, premium abstract composition, 9:16, no logo, no text"
+    },
+    {
+      "slug": "frosted-crystal",
+      "category": "minimal",
+      "label": "Frosted Crystal",
+      "prompt": "frosted crystal phone wallpaper, icy transparent shards, soft glacier blue light, minimal luxury texture, clean dark background, 9:16, no people, no text"
+    },
+    {
+      "slug": "extra-celestial-black",
+      "category": "abstract",
+      "label": "Extra Celestial Black",
+      "prompt": "extra celestial phone wallpaper, opalescent stars and pearl nebula, deep pure black space, subtle chrome glow, elegant surreal abstract, 9:16, no text, no logo"
+    },
+    {
+      "slug": "dark-oled-neon-ring",
+      "category": "minimal",
+      "label": "Dark OLED Neon Ring",
+      "prompt": "dark OLED phone wallpaper, pure black background, single floating neon ring, subtle electric blue glow, premium minimal design, 9:16, no text"
+    },
+    {
+      "slug": "poetcore-moon-desk",
+      "category": "minimal",
+      "label": "Poetcore Moon Desk",
+      "prompt": "poetcore phone wallpaper, vintage paper texture, moonlit writing desk, dried flowers, ink shadows, analog journal aesthetic, muted warm colors, 9:16, no readable text"
+    },
+    {
+      "slug": "analog-paper-flower",
+      "category": "nature",
+      "label": "Analog Paper Flower",
+      "prompt": "analog paper flower phone wallpaper, pressed botanical texture, soft beige and sage tones, vintage journal collage, elegant minimal layout, 9:16, no readable text"
+    },
+    {
+      "slug": "forest-deer-glow",
+      "category": "nature",
+      "label": "Forest Deer Glow",
+      "prompt": "forest deer glow phone wallpaper, mossy woodland, deer silhouette, soft fantasy sunlight particles, calm green atmosphere, high-end nature aesthetic, 9:16, no text"
+    },
+    {
+      "slug": "butterfly-wing-moss",
+      "category": "nature",
+      "label": "Butterfly Wing Moss",
+      "prompt": "butterfly wing moss phone wallpaper, macro natural texture, iridescent wing pattern, tiny water droplets, soft forest green light, premium organic aesthetic, 9:16, no text"
+    },
+    {
+      "slug": "gold-chrome-velvet",
+      "category": "abstract",
+      "label": "Gold Chrome Velvet",
+      "prompt": "gold chrome velvet phone wallpaper, 1980s luxury abstract, black velvet background, polished gold reflections, dramatic studio light, elegant premium composition, 9:16, no text"
+    },
+    {
+      "slug": "80s-luxury-abstract",
+      "category": "abstract",
+      "label": "80s Luxury Abstract",
+      "prompt": "80s luxury abstract phone wallpaper, black and gold geometric forms, chrome highlights, soft spotlight, glamoratti aesthetic, premium editorial style, 9:16, no people, no text"
+    },
+    {
+      "slug": "biophilic-soft-green",
+      "category": "nature",
+      "label": "Biophilic Soft Green",
+      "prompt": "biophilic soft green phone wallpaper, organic flowing shapes, botanical texture, calm natural light, premium spa aesthetic, 9:16, no text"
+    },
+    {
+      "slug": "organic-stone-texture",
+      "category": "minimal",
+      "label": "Organic Stone Texture",
+      "prompt": "organic stone texture phone wallpaper, soft mineral layers, subtle beige grey and green tones, calm premium natural surface, high detail, 9:16, no text"
+    },
+    {
+      "slug": "jelly-pastel-shapes",
+      "category": "abstract",
+      "label": "Jelly Pastel Shapes",
+      "prompt": "jelly pastel shapes phone wallpaper, translucent gummy glass forms, glossy 3D texture, soft candy colors, playful clean composition, 9:16, no characters, no text"
+    },
+    {
+      "slug": "cute-gummy-glass",
+      "category": "abstract",
+      "label": "Cute Gummy Glass",
+      "prompt": "cute gummy glass phone wallpaper, translucent rounded shapes, pastel cyan pink and lemon colors, glossy reflections, playful premium minimal style, 9:16, no text"
+    },
+    {
+      "slug": "neon-rain-cyber-glow",
+      "category": "cyberpunk",
+      "label": "Neon Rain Cyber Glow",
+      "prompt": "neon rain cyber glow phone wallpaper, blurred futuristic city lights, dark wet glass, cyan and magenta reflections, premium cyberpunk aesthetic, 9:16, no people, no logo, no text"
+    },
+    {
+      "slug": "cosmic-drift",
+      "category": "abstract",
+      "label": "Cosmic Drift",
+      "prompt": "cosmic drift phone wallpaper, slow nebula inspired composition, tiny stars, opalescent planet glow, deep black space, elegant surreal atmosphere, 9:16, no text"
+    },
+    {
+      "slug": "forest-light-loop",
+      "category": "nature",
+      "label": "Forest Light Loop",
+      "prompt": "forest light phone wallpaper, moss, leaves, soft sunlight particles, dreamy calm nature, premium green fantasy aesthetic, 9:16, no text"
+    }
+  ]
+}

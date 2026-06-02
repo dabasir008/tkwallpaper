@@ -1,1 +1,6 @@
 config.json
+docs/chrome-pdf-profile/
+data/runninghub-generated-*.json
+data/runninghub-submitted-*.json
+data/static-wallpapers-candidates.json
+assets/generated/contact-sheet.png

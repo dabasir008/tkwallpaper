@@ -1,4 +1,4 @@
-/* ===== 基础重置 ===== */
+﻿/* ===== 鍩虹閲嶇疆 ===== */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +10,7 @@ body {
   background: #0f0f0f;
   color: #e0e0e0;
   min-height: 100vh;
-  /* 防止 iOS 橡皮筋效果导致误触 */
+  /* 闃叉 iOS 姗＄毊绛嬫晥鏋滃鑷磋瑙?*/
   overscroll-behavior-y: none;
 }
 
@@ -19,7 +19,7 @@ a {
   color: inherit;
 }
 
-/* ===== 顶部导航 ===== */
+/* ===== 椤堕儴瀵艰埅 ===== */
 .header {
   position: sticky;
   top: 0;
@@ -42,12 +42,19 @@ a {
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  color: #fff;
-  /* 增大触控区域 */
-  padding: 8px 0;
+  display: inline-flex;
+  align-items: center;
+  min-width: 164px;
+  height: 36px;
+  padding: 0;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.logo img {
+  display: block;
+  width: 164px;
+  height: 36px;
 }
 
 .nav {
@@ -63,7 +70,7 @@ a {
   color: #999;
   transition: all 0.2s;
   white-space: nowrap;
-  /* 触控最小 44px 高度 */
+  /* 瑙︽帶鏈€灏?44px 楂樺害 */
   min-height: 36px;
   display: flex;
   align-items: center;
@@ -79,7 +86,7 @@ a {
   background: #4f46e5;
 }
 
-/* ===== 导航栏积分区 ===== */
+/* ===== 瀵艰埅鏍忕Н鍒嗗尯 ===== */
 .header-points {
   display: flex;
   align-items: center;
@@ -122,14 +129,14 @@ a {
   min-width: 44px;
 }
 
-/* ===== 主区域 ===== */
+/* ===== 涓诲尯鍩?===== */
 .main {
   max-width: 1400px;
   margin: 0 auto;
   padding: 20px 12px 80px;
 }
 
-/* ===== Hero 区 ===== */
+/* ===== Hero 鍖?===== */
 .hero {
   text-align: center;
   padding: 24px 0 12px;
@@ -152,7 +159,65 @@ a {
   padding: 0 16px;
 }
 
-/* ===== 板块切换标签 ===== */
+.browse-panel {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid #222;
+  background: #141414;
+  border-radius: 8px;
+  padding: 18px;
+  margin: 10px 0 18px;
+}
+
+.browse-eyebrow {
+  display: block;
+  color: #8b8b8b;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  margin-bottom: 6px;
+}
+
+.browse-copy h2 {
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.browse-copy p {
+  color: #777;
+  font-size: 13px;
+  max-width: 620px;
+}
+
+.sort-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.sort-tab {
+  border: 1px solid #303030;
+  background: #1b1b1b;
+  color: #aaa;
+  border-radius: 8px;
+  min-height: 38px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.sort-tab.active {
+  color: #fff;
+  border-color: #4f46e5;
+  background: #25234a;
+}
+
+/* ===== 鏉垮潡鍒囨崲鏍囩 ===== */
 .section-tabs {
   display: flex;
   justify-content: center;
@@ -179,6 +244,7 @@ a {
   white-space: nowrap;
   text-align: center;
   min-height: 40px;
+  text-decoration: none;
 }
 
 .section-tab.active {
@@ -186,7 +252,14 @@ a {
   color: #fff;
 }
 
-/* ===== 搜索栏 ===== */
+.section-helper {
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+  margin: 10px 0 0;
+}
+
+/* ===== 鎼滅储鏍?===== */
 .search-bar {
   display: flex;
   justify-content: center;
@@ -205,7 +278,7 @@ a {
   font-size: 15px;
   outline: none;
   transition: border-color 0.2s;
-  /* iOS 不自动缩放 */
+  /* iOS 涓嶈嚜鍔ㄧ缉鏀?*/
   font-size: 16px;
 }
 
@@ -217,7 +290,16 @@ a {
   color: #555;
 }
 
-/* ===== 图片网格 ===== */
+.results-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #777;
+  font-size: 12px;
+  margin: -4px 2px 12px;
+}
+
+/* ===== 鍥剧墖缃戞牸 ===== */
 .wallpaper-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -232,7 +314,7 @@ a {
   background: #1a1a1a;
   aspect-ratio: 9 / 16;
   transition: transform 0.15s, box-shadow 0.15s;
-  /* 触控反馈 */
+  /* 瑙︽帶鍙嶉 */
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-select: none;
@@ -279,6 +361,34 @@ a {
   pointer-events: none;
 }
 
+.card-badge-dynamic {
+  position: absolute;
+  top: 38px;
+  right: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(79, 70, 229, 0.92);
+  pointer-events: none;
+}
+
+.card-action-hint {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 36px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #f2f2f2;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 11px;
+  text-align: center;
+  pointer-events: none;
+}
+
 .badge-free {
   background: #22c55e;
   color: #000;
@@ -289,7 +399,7 @@ a {
   color: #000;
 }
 
-/* ===== 加载更多按钮 ===== */
+/* ===== 鍔犺浇鏇村鎸夐挳 ===== */
 .load-more-wrap {
   text-align: center;
   margin-top: 32px;
@@ -312,7 +422,7 @@ a {
   border-color: #4f46e5;
 }
 
-/* ===== 底部 ===== */
+/* ===== 搴曢儴 ===== */
 .footer {
   text-align: center;
   padding: 32px 16px;
@@ -322,7 +432,7 @@ a {
   line-height: 1.6;
 }
 
-/* ===== 图片放大弹窗 ===== */
+/* ===== 鍥剧墖鏀惧ぇ寮圭獥 ===== */
 .lightbox {
   display: none;
   position: fixed;
@@ -365,7 +475,8 @@ a {
   gap: 16px;
 }
 
-.lightbox-content img {
+.lightbox-content img,
+.lightbox-content video {
   max-width: 94vw;
   max-height: 65vh;
   border-radius: 8px;
@@ -419,7 +530,7 @@ a {
   color: #fff;
 }
 
-/* ===== 购买积分弹窗 ===== */
+/* ===== 璐拱绉垎寮圭獥 ===== */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -536,7 +647,7 @@ a {
   text-align: center;
 }
 
-/* ===== 登录注册表单 ===== */
+/* ===== 鐧诲綍娉ㄥ唽琛ㄥ崟 ===== */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -575,7 +686,7 @@ a {
   margin-top: 4px;
 }
 
-/* header 认证区 */
+/* header 璁よ瘉鍖?*/
 .header-auth {
   display: flex;
   align-items: center;
@@ -610,11 +721,11 @@ a {
   color: #fff;
 }
 
-/* ===== 积分条（原样） ===== */
+/* ===== 绉垎鏉★紙鍘熸牱锛?===== */
 .points-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 12px;
   padding: 8px 16px;
   margin-bottom: 12px;
@@ -624,7 +735,67 @@ a {
   color: #ccc;
 }
 
-/* ===== 积分提示弹窗 ===== */
+.points-account {
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.ai-mode-panel {
+  margin: 0 0 14px;
+  padding: 14px;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  background: #151515;
+}
+
+.ai-mode-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.ai-mode-tab {
+  flex: 1;
+  border: 1px solid #303030;
+  background: #1d1d1d;
+  color: #aaa;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.ai-mode-tab.active {
+  color: #fff;
+  border-color: #4f46e5;
+  background: #4f46e5;
+}
+
+.ai-mode-copy {
+  margin: 0;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ai-text-prompt {
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.ai-text-prompt input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #303030;
+  background: #101010;
+  color: #fff;
+  border-radius: 8px;
+  padding: 11px 12px;
+}
+
+/* ===== 绉垎鎻愮ず寮圭獥 ===== */
 .points-toast {
   position: fixed;
   bottom: 24px;
@@ -645,7 +816,7 @@ a {
   opacity: 1;
 }
 
-/* ===== 卡片动态效果（AI自定义板块） ===== */
+/* ===== 鍗＄墖鍔ㄦ€佹晥鏋滐紙AI鑷畾涔夋澘鍧楋級 ===== */
 .wallpaper-card.card-dynamic {
   overflow: hidden;
 }
@@ -674,7 +845,7 @@ a {
   50% { opacity: 1; box-shadow: 0 0 12px rgba(79,70,229,0.6); }
 }
 
-/* ===== AI上传区 ===== */
+/* ===== AI涓婁紶鍖?===== */
 .ai-upload-area {
   margin-bottom: 20px;
   display: flex;
@@ -749,7 +920,7 @@ a {
   cursor: pointer;
 }
 
-/* ===== AI自定义对比弹窗 ===== */
+/* ===== AI鑷畾涔夊姣斿脊绐?===== */
 .compare-modal {
   display: none;
   position: fixed;
@@ -882,8 +1053,38 @@ a {
   to { transform: rotate(360deg); }
 }
 
-/* ===== 768px 以下 ===== */
+/* ===== 768px 浠ヤ笅 ===== */
 @media (max-width: 768px) {
+  .browse-panel {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  .browse-copy h2 {
+    font-size: 20px;
+  }
+
+  .sort-tabs {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 2px;
+  }
+
+  .sort-tab {
+    flex: 0 0 auto;
+  }
+
+  .ai-text-prompt {
+    flex-direction: column;
+  }
+
+  .ai-text-prompt .btn-generate {
+    width: 100%;
+  }
+
   .compare-body {
     flex-direction: column;
     align-items: center;
@@ -976,14 +1177,20 @@ a {
   }
 }
 
-/* ===== 480px 以下（小手机） ===== */
+/* ===== 480px 浠ヤ笅锛堝皬鎵嬫満锛?===== */
 @media (max-width: 480px) {
   .header-inner {
     padding: 10px 12px;
   }
 
   .logo {
-    font-size: 18px;
+    min-width: 138px;
+    height: 30px;
+  }
+
+  .logo img {
+    width: 138px;
+    height: 30px;
   }
 
   .main {
@@ -1017,3 +1224,4 @@ a {
     max-width: 240px;
   }
 }
+

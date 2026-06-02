@@ -1,0 +1,9 @@
+<svg width="164" height="36" viewBox="0 0 164 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0.5" y="0.5" width="35" height="35" rx="8" fill="#0F0F0F" stroke="#2F2F2F"/>
+  <path d="M9 10H27" stroke="#F8FAFC" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M18 10V27" stroke="#F8FAFC" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M27 10L18 19L28 27" stroke="#6EE7F9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="27" cy="9" r="3" fill="#8B5CF6"/>
+  <text x="44" y="23.5" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">TK</text>
+  <text x="71" y="23.5" fill="#A1A1AA" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">Wallpaper</text>
+</svg>

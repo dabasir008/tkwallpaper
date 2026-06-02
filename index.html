@@ -6,14 +6,16 @@
   <meta name="theme-color" content="#0f0f0f">
   <meta name="description" content="Free HD wallpapers, live wallpapers and AI custom wallpapers for your phone and desktop.">
   <title>TK Wallpaper - Free HD & Live Wallpapers</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260602-ai-modes-4">
 </head>
 <body>
 
   <!-- 顶部导航 -->
   <header class="header">
     <div class="header-inner">
-      <a href="/" class="logo">TK Wallpaper</a>
+      <a href="/" class="logo" aria-label="TK Wallpaper home">
+        <img src="assets/tk-logo.svg" alt="TK Wallpaper">
+      </a>
       <nav class="nav" id="mainNav">
         <a href="#" class="nav-link active" data-category="all">All</a>
         <a href="#" class="nav-link" data-category="anime">Anime</a>
@@ -33,7 +35,7 @@
         <span class="header-email" id="headerEmail"></span>
         <span class="header-points-icon">&#9679;</span>
         <span id="headerPointsDisplay">0</span> pts
-        <button class="header-buy-btn" id="btnBuyPoints">Get Points</button>
+        <button class="header-buy-btn js-buy-points" id="btnBuyPointsHeader">Get Points</button>
         <button class="header-buy-btn" id="btnLogout" style="border-color:#e53e3e;color:#e53e3e;">Logout</button>
       </div>
     </div>
@@ -46,31 +48,65 @@
       <p>Free static wallpapers, premium live wallpapers, and AI custom wallpapers. Updated with trending styles weekly.</p>
     </section>
 
+    <section class="browse-panel">
+      <div class="browse-copy">
+        <span class="browse-eyebrow">Popular phone wallpapers</span>
+        <h2 id="browseTitle">All Phone Wallpapers</h2>
+        <p id="browseSubtitle">Browse free static wallpapers, premium live wallpapers, and AI custom samples in a phone-first grid.</p>
+      </div>
+      <div class="sort-tabs" aria-label="Wallpaper sorting">
+        <button class="sort-tab active" data-sort="popular">Popular</button>
+        <button class="sort-tab" data-sort="latest">Latest</button>
+        <button class="sort-tab" data-sort="downloaded">Most Downloaded</button>
+      </div>
+    </section>
+
     <!-- 三大板块切换 -->
     <div class="section-tabs">
-      <button class="section-tab active" data-section="static">
+      <a href="#static" class="section-tab active" data-section="static" onclick="window.setWallpaperSection && window.setWallpaperSection('static')">
         Static
-      </button>
-      <button class="section-tab" data-section="live">
+      </a>
+      <a href="#live" class="section-tab" data-section="live" onclick="window.setWallpaperSection && window.setWallpaperSection('live')">
         Live
-      </button>
-      <button class="section-tab" data-section="custom">
+      </a>
+      <a href="#custom" class="section-tab" data-section="custom" onclick="window.setWallpaperSection && window.setWallpaperSection('custom')">
         AI Custom
-      </button>
+      </a>
     </div>
+    <p class="section-helper" id="sectionHelper">Free HD phone wallpapers for quick downloads.</p>
 
     <!-- 搜索栏 -->
     <div class="search-bar">
       <input type="text" id="searchInput" placeholder="Search wallpapers...">
     </div>
 
+    <div class="results-meta">
+      <span id="resultsCount">0 wallpapers</span>
+      <span id="activeBrowseMode">Popular</span>
+    </div>
+
     <!-- 动态壁纸提示条 -->
     <div class="points-bar" id="pointsBar" style="display:none;">
-      <span>My Points: <strong id="pointsDisplay">0</strong></span>
-      <button class="btn-buy-points" id="btnBuyPoints">Get Points</button>
+      <span id="pointsHint">Live downloads use 15 credits. AI generations use 20 credits.</span>
+      <span class="points-account" id="pointsAccount" style="display:none;">
+        My Points: <strong id="pointsDisplay">0</strong>
+        <button class="btn-buy-points js-buy-points" id="btnBuyPointsInline">Get Points</button>
+      </span>
     </div>
 
     <!-- 图片网格 -->
+    <div class="ai-mode-panel" id="aiModePanel" style="display:none;">
+      <div class="ai-mode-tabs" aria-label="AI custom mode">
+        <a href="#custom-image" class="ai-mode-tab active" data-ai-mode="image" onclick="window.setAiMode && window.setAiMode('image')">Image to Image</a>
+        <a href="#custom-text" class="ai-mode-tab" data-ai-mode="text" onclick="window.setAiMode && window.setAiMode('text')">Text to Image</a>
+      </div>
+      <p class="ai-mode-copy" id="aiModeCopy">Upload your photo, preview the target motion style, then generate a live wallpaper.</p>
+      <div class="ai-text-prompt" id="aiTextPromptBox" style="display:none;">
+        <input type="text" id="aiTextPrompt" placeholder="Describe your wallpaper style...">
+        <button class="btn-generate" id="aiTextGenerate">Generate Text Wallpaper (20 pts)</button>
+      </div>
+    </div>
+
     <div class="wallpaper-grid" id="wallpaperGrid">
       <!-- JS 动态填充 -->
     </div>
@@ -102,6 +138,7 @@
     <button class="lightbox-close" id="lightboxClose">X</button>
     <div class="lightbox-content">
       <img src="" alt="" id="lightboxImg">
+      <video src="" id="lightboxVideo" loop muted playsinline autoplay style="display:none;"></video>
       <div class="lightbox-actions">
         <span class="lightbox-res" id="lightboxRes"></span>
         <button class="btn-download" id="btnDownload">Download</button>
@@ -219,6 +256,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260602-ai-modes-4"></script>
 </body>
 </html>
