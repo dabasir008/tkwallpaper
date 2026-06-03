@@ -138,21 +138,17 @@ const staticWallpapers = [
 ];
 
 const liveWallpapers = [
-  { id: 101, src: "assets/live/IMB_1AhtK5-HEIC.mp4", videoUrl: "assets/live/IMB_1AhtK5-HEIC.mp4", category: "abstract", label: "Live Wallpaper 01", section: "live", free: false, points: 15 },
-  { id: 102, src: "assets/live/IMB_i6GI7l-HEIC-heic.mp4", videoUrl: "assets/live/IMB_i6GI7l-HEIC-heic.mp4", category: "cyberpunk", label: "Live Wallpaper 02", section: "live", free: false, points: 15 },
-  { id: 103, src: "assets/live/IMG_2785-HEIC.mp4", videoUrl: "assets/live/IMG_2785-HEIC.mp4", category: "minimal", label: "Live Wallpaper 03", section: "live", free: false, points: 15 },
-  { id: 104, src: "assets/live/IMG_3475-HEIC.mp4", videoUrl: "assets/live/IMG_3475-HEIC.mp4", category: "nature", label: "Live Wallpaper 04", section: "live", free: false, points: 15 },
-  { id: 105, src: "assets/live/IMG_4718-HEIC-heic.mp4", videoUrl: "assets/live/IMG_4718-HEIC-heic.mp4", category: "abstract", label: "Live Wallpaper 05", section: "live", free: false, points: 15 },
-  { id: 106, src: "assets/live/IMG_4961-HEIC-heic.mp4", videoUrl: "assets/live/IMG_4961-HEIC-heic.mp4", category: "cyberpunk", label: "Live Wallpaper 06", section: "live", free: false, points: 15 },
-  { id: 107, src: "assets/live/IMG_5632-HEIC-heic.mp4", videoUrl: "assets/live/IMG_5632-HEIC-heic.mp4", category: "minimal", label: "Live Wallpaper 07", section: "live", free: false, points: 15 },
-  { id: 108, src: "assets/live/IMB_i6GI7l-HEIC.mp4", videoUrl: "assets/live/IMB_i6GI7l-HEIC.mp4", category: "nature", label: "Live Wallpaper 08", section: "live", free: false, points: 15 },
+  { id: 101, src: "assets/live/09-07.mp4", videoUrl: "assets/live/09-07.mp4", category: "nature", label: "Mountain Light", section: "live", free: false, points: 15 },
+  { id: 102, src: "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4", videoUrl: "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4", category: "minimal", label: "Blue Light Trail", section: "live", free: false, points: 15 },
+  { id: 103, src: "assets/live/20-102148a60657b50a2fd5a2b2cbc6a86c.mp4", videoUrl: "assets/live/20-102148a60657b50a2fd5a2b2cbc6a86c.mp4", category: "abstract", label: "Red Light Trail", section: "live", free: false, points: 15 },
+  { id: 104, src: "assets/live/30-1728319144338.mp4", videoUrl: "assets/live/30-1728319144338.mp4", category: "cyberpunk", label: "Rain City Glass", section: "live", free: false, points: 15 },
 ];
 
 // AI custom samples.
 const aiWallpapers = [
-  { id: 201, src: R2 + "/wallpapers/08e1d3b2e2bf7ebf0e574b2118872a31.jpg", videoUrl: "assets/live/IMB_1AhtK5-HEIC.mp4", category: "anime", label: "AI Live Sample 01", section: "custom", free: false, points: 20 },
-  { id: 202, src: R2 + "/wallpapers/86e87f5620a8f5e5e5c82ba0a04f864e.jpg", videoUrl: "assets/live/IMG_2785-HEIC.mp4", category: "cyberpunk", label: "AI Live Sample 02", section: "custom", free: false, points: 20 },
-  { id: 203, src: R2 + "/wallpapers/04668af86f5badd3a0577e01b032f6ae.jpg", videoUrl: "assets/live/IMG_5632-HEIC-heic.mp4", category: "nature", label: "AI Live Sample 03", section: "custom", free: false, points: 20 },
+  { id: 201, src: "assets/generated/liquid-glass-shadow.png", category: "abstract", label: "Liquid Glass Style", section: "custom", free: false, points: 20 },
+  { id: 202, src: "assets/generated/forest-light-loop.png", category: "nature", label: "Forest Glow Style", section: "custom", free: false, points: 20 },
+  { id: 203, src: "assets/generated/neon-rain-cyber-glow.png", category: "cyberpunk", label: "Neon Rain Style", section: "custom", free: false, points: 20 },
 ];
 let aiTextWallpapers = [];
 
@@ -175,14 +171,10 @@ const r2Pool = [
   "24f3da1a16ce8e294fa5d627d9d964dc", "e87b72ef0e8c67eaacaa1c0a6b5f5a05", "ada4b291c9498275673b43ef61a871d2",
 ];
 const localVideoPool = [
-  "assets/live/IMB_1AhtK5-HEIC.mp4",
-  "assets/live/IMB_i6GI7l-HEIC-heic.mp4",
-  "assets/live/IMB_i6GI7l-HEIC.mp4",
-  "assets/live/IMG_2785-HEIC.mp4",
-  "assets/live/IMG_3475-HEIC.mp4",
-  "assets/live/IMG_4718-HEIC-heic.mp4",
-  "assets/live/IMG_4961-HEIC-heic.mp4",
-  "assets/live/IMG_5632-HEIC-heic.mp4",
+  "assets/live/09-07.mp4",
+  "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4",
+  "assets/live/20-102148a60657b50a2fd5a2b2cbc6a86c.mp4",
+  "assets/live/30-1728319144338.mp4",
 ];
 
 // ===== DOM 鍏冪礌 =====
@@ -334,7 +326,7 @@ async function loadWallpaperManifests() {
     const aiResp = await fetch("data/ai-samples.json", { cache: "no-store" });
     if (aiResp.ok) {
       const items = await aiResp.json();
-      if (Array.isArray(items) && items.length) aiWallpapers.splice(0, aiWallpapers.length, ...items.filter(item => item && item.videoUrl));
+      if (Array.isArray(items) && items.length) aiWallpapers.splice(0, aiWallpapers.length, ...items.filter(item => item && item.src));
     }
   } catch {}
 
@@ -798,10 +790,11 @@ compareBtnGenerate.addEventListener("click", async () => {
   compareStatusText.textContent = "Uploading image...";
 
   try {
+    const imageUrl = new URL(currentCustomItem.src, window.location.origin).toString();
     const submitResp = await fetch("/api/generate-live", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageUrl: currentCustomItem.src }),
+      body: JSON.stringify({ imageUrl }),
     });
     const submitData = await submitResp.json();
     if (!submitData.success) throw new Error(submitData.error || "Submit failed");

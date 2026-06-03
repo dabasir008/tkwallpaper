@@ -11,7 +11,11 @@ const RH_UPLOAD = "https://www.runninghub.cn/task/openapi/upload";
 const RH_RUN = "https://www.runninghub.cn/openapi/v2/run/ai-app/1934910866645000194";
 const RH_QUERY = "https://www.runninghub.cn/openapi/v2/query";
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
-const DEFAULT_ALLOWED_IMAGE_HOSTS = ["pub-47bcb2d7ff1d4d90b554d3cc5a254b57.r2.dev"];
+const DEFAULT_ALLOWED_IMAGE_HOSTS = [
+  "pub-47bcb2d7ff1d4d90b554d3cc5a254b57.r2.dev",
+  "tkwallpaper.com",
+  "www.tkwallpaper.com",
+];
 
 function allowedImageHosts() {
   const configured = (process.env.ALLOWED_IMAGE_HOSTS || "")

@@ -1,32 +1,38 @@
 [
   {
     "id": 201,
-    "src": "https://pub-47bcb2d7ff1d4d90b554d3cc5a254b57.r2.dev/wallpapers/08e1d3b2e2bf7ebf0e574b2118872a31.jpg",
-    "videoUrl": "assets/live/IMB_1AhtK5-HEIC.mp4",
-    "category": "anime",
-    "label": "AI Live Sample 01",
+    "src": "assets/generated/liquid-glass-shadow.png",
+    "category": "abstract",
+    "label": "Liquid Glass Style",
     "section": "custom",
+    "mode": "image",
     "free": false,
-    "points": 20
+    "points": 20,
+    "source": "runninghub",
+    "license": "ai-generated-original"
   },
   {
     "id": 202,
-    "src": "https://pub-47bcb2d7ff1d4d90b554d3cc5a254b57.r2.dev/wallpapers/86e87f5620a8f5e5e5c82ba0a04f864e.jpg",
-    "videoUrl": "assets/live/IMG_2785-HEIC.mp4",
+    "src": "assets/generated/neon-rain-cyber-glow.png",
     "category": "cyberpunk",
-    "label": "AI Live Sample 02",
+    "label": "Neon Rain Style",
     "section": "custom",
+    "mode": "image",
     "free": false,
-    "points": 20
+    "points": 20,
+    "source": "runninghub",
+    "license": "ai-generated-original"
   },
   {
     "id": 203,
-    "src": "https://pub-47bcb2d7ff1d4d90b554d3cc5a254b57.r2.dev/wallpapers/04668af86f5badd3a0577e01b032f6ae.jpg",
-    "videoUrl": "assets/live/IMG_5632-HEIC-heic.mp4",
+    "src": "assets/generated/forest-light-loop.png",
     "category": "nature",
-    "label": "AI Live Sample 03",
+    "label": "Forest Glow Style",
     "section": "custom",
+    "mode": "image",
     "free": false,
-    "points": 20
+    "points": 20,
+    "source": "runninghub",
+    "license": "ai-generated-original"
   }
 ]

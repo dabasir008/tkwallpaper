@@ -1,322 +1,46 @@
 [
   {
-    "id": 101,
-    "src": "assets/live/01-01-1.mp4",
-    "videoUrl": "assets/live/01-01-1.mp4",
-    "category": "abstract",
-    "label": "Live Wallpaper 01",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 102,
-    "src": "assets/live/02-01.mp4",
-    "videoUrl": "assets/live/02-01.mp4",
-    "category": "cyberpunk",
-    "label": "Live Wallpaper 02",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 103,
-    "src": "assets/live/03-019cc2849a014995306a4e60e470a1d2.mp4",
-    "videoUrl": "assets/live/03-019cc2849a014995306a4e60e470a1d2.mp4",
-    "category": "minimal",
-    "label": "Live Wallpaper 03",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 104,
-    "src": "assets/live/04-02.mp4",
-    "videoUrl": "assets/live/04-02.mp4",
-    "category": "nature",
-    "label": "Live Wallpaper 04",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 105,
-    "src": "assets/live/05-03.mp4",
-    "videoUrl": "assets/live/05-03.mp4",
-    "category": "abstract",
-    "label": "Live Wallpaper 05",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 106,
-    "src": "assets/live/06-0398e1b62b19e995f504f818499bb64a.mp4",
-    "videoUrl": "assets/live/06-0398e1b62b19e995f504f818499bb64a.mp4",
-    "category": "cyberpunk",
-    "label": "Live Wallpaper 06",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 107,
-    "src": "assets/live/07-05.mp4",
-    "videoUrl": "assets/live/07-05.mp4",
-    "category": "minimal",
-    "label": "Live Wallpaper 07",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 108,
-    "src": "assets/live/08-06.mp4",
-    "videoUrl": "assets/live/08-06.mp4",
-    "category": "nature",
-    "label": "Live Wallpaper 08",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
     "id": 109,
     "src": "assets/live/09-07.mp4",
     "videoUrl": "assets/live/09-07.mp4",
-    "category": "abstract",
-    "label": "Live Wallpaper 09",
+    "category": "nature",
+    "label": "Snow Mountain Loop",
     "section": "live",
     "free": false,
-    "points": 15
-  },
-  {
-    "id": 110,
-    "src": "assets/live/10-08.mp4",
-    "videoUrl": "assets/live/10-08.mp4",
-    "category": "cyberpunk",
-    "label": "Live Wallpaper 10",
-    "section": "live",
-    "free": false,
-    "points": 15
+    "points": 15,
+    "review": "no obvious person, logo, character, or brand in visual review"
   },
   {
     "id": 111,
     "src": "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4",
     "videoUrl": "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4",
     "category": "minimal",
-    "label": "Live Wallpaper 11",
+    "label": "Blue Light Trail",
     "section": "live",
     "free": false,
-    "points": 15
-  },
-  {
-    "id": 112,
-    "src": "assets/live/12-08cef8f3091cc105cb5e948d51ec09e5.mp4",
-    "videoUrl": "assets/live/12-08cef8f3091cc105cb5e948d51ec09e5.mp4",
-    "category": "nature",
-    "label": "Live Wallpaper 12",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 113,
-    "src": "assets/live/13-09-1.mp4",
-    "videoUrl": "assets/live/13-09-1.mp4",
-    "category": "abstract",
-    "label": "Live Wallpaper 13",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 114,
-    "src": "assets/live/14-09.mp4",
-    "videoUrl": "assets/live/14-09.mp4",
-    "category": "cyberpunk",
-    "label": "Live Wallpaper 14",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 115,
-    "src": "assets/live/15-0b15c66c0ccea369ca7dec04cdb9cfd7.mp4",
-    "videoUrl": "assets/live/15-0b15c66c0ccea369ca7dec04cdb9cfd7.mp4",
-    "category": "minimal",
-    "label": "Live Wallpaper 15",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 116,
-    "src": "assets/live/16-0f94cb2fa0b17b89721d4c74d96ec56c.mp4",
-    "videoUrl": "assets/live/16-0f94cb2fa0b17b89721d4c74d96ec56c.mp4",
-    "category": "nature",
-    "label": "Live Wallpaper 16",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 117,
-    "src": "assets/live/17-0f9d629d9db07157d46e1fd78ae7133a.mp4",
-    "videoUrl": "assets/live/17-0f9d629d9db07157d46e1fd78ae7133a.mp4",
-    "category": "abstract",
-    "label": "Live Wallpaper 17",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 118,
-    "src": "assets/live/18-10-1.mp4",
-    "videoUrl": "assets/live/18-10-1.mp4",
-    "category": "cyberpunk",
-    "label": "Live Wallpaper 18",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 119,
-    "src": "assets/live/19-10.mp4",
-    "videoUrl": "assets/live/19-10.mp4",
-    "category": "minimal",
-    "label": "Live Wallpaper 19",
-    "section": "live",
-    "free": false,
-    "points": 15
+    "points": 15,
+    "review": "abstract light trail, no obvious person, logo, character, or brand in visual review"
   },
   {
     "id": 120,
     "src": "assets/live/20-102148a60657b50a2fd5a2b2cbc6a86c.mp4",
     "videoUrl": "assets/live/20-102148a60657b50a2fd5a2b2cbc6a86c.mp4",
-    "category": "nature",
-    "label": "Live Wallpaper 20",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 121,
-    "src": "assets/live/21-11.mp4",
-    "videoUrl": "assets/live/21-11.mp4",
-    "category": "abstract",
-    "label": "Live Wallpaper 21",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 122,
-    "src": "assets/live/22-12-1.mp4",
-    "videoUrl": "assets/live/22-12-1.mp4",
-    "category": "cyberpunk",
-    "label": "Live Wallpaper 22",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 123,
-    "src": "assets/live/23-14.mp4",
-    "videoUrl": "assets/live/23-14.mp4",
     "category": "minimal",
-    "label": "Live Wallpaper 23",
+    "label": "Red Light Trail",
     "section": "live",
     "free": false,
-    "points": 15
-  },
-  {
-    "id": 124,
-    "src": "assets/live/24-1565841f0485707abca9819ff0a7325b.mp4",
-    "videoUrl": "assets/live/24-1565841f0485707abca9819ff0a7325b.mp4",
-    "category": "nature",
-    "label": "Live Wallpaper 24",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 125,
-    "src": "assets/live/25-1728319089840.mp4",
-    "videoUrl": "assets/live/25-1728319089840.mp4",
-    "category": "abstract",
-    "label": "Live Wallpaper 25",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 126,
-    "src": "assets/live/26-1728319093431.mp4",
-    "videoUrl": "assets/live/26-1728319093431.mp4",
-    "category": "cyberpunk",
-    "label": "Live Wallpaper 26",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 127,
-    "src": "assets/live/27-1728319101370.mp4",
-    "videoUrl": "assets/live/27-1728319101370.mp4",
-    "category": "minimal",
-    "label": "Live Wallpaper 27",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 128,
-    "src": "assets/live/28-1728319109712.mp4",
-    "videoUrl": "assets/live/28-1728319109712.mp4",
-    "category": "nature",
-    "label": "Live Wallpaper 28",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 129,
-    "src": "assets/live/29-1728319118229.mp4",
-    "videoUrl": "assets/live/29-1728319118229.mp4",
-    "category": "abstract",
-    "label": "Live Wallpaper 29",
-    "section": "live",
-    "free": false,
-    "points": 15
+    "points": 15,
+    "review": "abstract light trail, no obvious person, logo, character, or brand in visual review"
   },
   {
     "id": 130,
     "src": "assets/live/30-1728319144338.mp4",
     "videoUrl": "assets/live/30-1728319144338.mp4",
     "category": "cyberpunk",
-    "label": "Live Wallpaper 30",
+    "label": "Rain City Glass",
     "section": "live",
     "free": false,
-    "points": 15
-  },
-  {
-    "id": 131,
-    "src": "assets/live/31-1728319155050.mp4",
-    "videoUrl": "assets/live/31-1728319155050.mp4",
-    "category": "minimal",
-    "label": "Live Wallpaper 31",
-    "section": "live",
-    "free": false,
-    "points": 15
-  },
-  {
-    "id": 132,
-    "src": "assets/live/32-1728319175990.mp4",
-    "videoUrl": "assets/live/32-1728319175990.mp4",
-    "category": "nature",
-    "label": "Live Wallpaper 32",
-    "section": "live",
-    "free": false,
-    "points": 15
+    "points": 15,
+    "review": "blurred rain city scene, no obvious person, logo, character, or brand in visual review"
   }
 ]
