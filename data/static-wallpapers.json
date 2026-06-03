@@ -240,5 +240,38 @@
     "source": "runninghub",
     "sourcePage": "task:2061451967548588033",
     "license": "ai-generated-original"
+  },
+  {
+    "id": "rh-rain-glass-neon-alley",
+    "src": "assets/generated/rain-glass-neon-alley.png",
+    "category": "cyberpunk",
+    "label": "Rain Glass Neon Alley",
+    "section": "static",
+    "free": true,
+    "source": "runninghub",
+    "sourcePage": "task:2062085783564804097",
+    "license": "ai-generated-original"
+  },
+  {
+    "id": "rh-black-aurora-light-trails",
+    "src": "assets/generated/black-aurora-light-trails.png",
+    "category": "minimal",
+    "label": "Black Aurora Light Trails",
+    "section": "static",
+    "free": true,
+    "source": "runninghub",
+    "sourcePage": "task:2062086080957743105",
+    "license": "ai-generated-original"
+  },
+  {
+    "id": "rh-snow-peak-dream-loop",
+    "src": "assets/generated/snow-peak-dream-loop.png",
+    "category": "nature",
+    "label": "Snow Peak Dream Loop",
+    "section": "static",
+    "free": true,
+    "source": "runninghub",
+    "sourcePage": "task:2062089013296324610",
+    "license": "ai-generated-original"
   }
 ]

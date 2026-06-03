@@ -42,5 +42,47 @@
     "free": false,
     "points": 15,
     "review": "blurred rain city scene, no obvious person, logo, character, or brand in visual review"
+  },
+  {
+    "id": 131,
+    "src": "assets/live/safe-motion-rain-glass-neon-alley.mp4",
+    "videoUrl": "assets/live/safe-motion-rain-glass-neon-alley.mp4",
+    "category": "cyberpunk",
+    "label": "Rain Glass Neon Alley",
+    "section": "live",
+    "free": false,
+    "points": 15,
+    "source": "runninghub-static-motion",
+    "sourcePage": "task:2062085783564804097",
+    "license": "ai-generated-original",
+    "review": "AI-generated original static source with local motion render; no obvious people, logo, text, character, or brand in visual review"
+  },
+  {
+    "id": 132,
+    "src": "assets/live/safe-motion-black-aurora-light-trails.mp4",
+    "videoUrl": "assets/live/safe-motion-black-aurora-light-trails.mp4",
+    "category": "minimal",
+    "label": "Black Aurora Light Trails",
+    "section": "live",
+    "free": false,
+    "points": 15,
+    "source": "runninghub-static-motion",
+    "sourcePage": "task:2062086080957743105",
+    "license": "ai-generated-original",
+    "review": "AI-generated original static source with local motion render; no obvious people, logo, text, character, or brand in visual review"
+  },
+  {
+    "id": 133,
+    "src": "assets/live/safe-motion-snow-peak-dream-loop.mp4",
+    "videoUrl": "assets/live/safe-motion-snow-peak-dream-loop.mp4",
+    "category": "nature",
+    "label": "Snow Peak Dream Loop",
+    "section": "live",
+    "free": false,
+    "points": 15,
+    "source": "runninghub-static-motion",
+    "sourcePage": "task:2062089013296324610",
+    "license": "ai-generated-original",
+    "review": "AI-generated original static source with local motion render; no obvious people, logo, text, character, or brand in visual review"
   }
 ]

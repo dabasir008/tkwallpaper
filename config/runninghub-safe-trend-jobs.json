@@ -1,0 +1,60 @@
+{
+  "appId": "2046794551444119554",
+  "promptNodeId": "18",
+  "promptFieldName": "prompt",
+  "aspectRatioNodeId": "18",
+  "aspectRatioFieldName": "aspectRatio",
+  "aspectRatio": "9:16",
+  "pollSeconds": 10,
+  "maxPolls": 90,
+  "jobs": [
+    {
+      "slug": "rain-glass-neon-alley",
+      "category": "cyberpunk",
+      "label": "Rain Glass Neon Alley",
+      "prompt": "original phone wallpaper, rain on dark glass, blurred neon alley reflections, cyan magenta amber light streaks, cinematic depth, premium OLED black background, no people, no face, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16"
+    },
+    {
+      "slug": "black-aurora-light-trails",
+      "category": "minimal",
+      "label": "Black Aurora Light Trails",
+      "prompt": "original live-wallpaper style phone background, flowing blue and red aurora light trails on pure black, smooth luminous ribbons, elegant minimal composition, high contrast OLED look, no people, no face, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16"
+    },
+    {
+      "slug": "snow-peak-dream-loop",
+      "category": "nature",
+      "label": "Snow Peak Dream Loop",
+      "prompt": "original phone wallpaper, snow mountain peak at sunrise, soft mist, pale gold and icy blue light, clean atmospheric landscape, premium mobile wallpaper, no buildings, no people, no animals, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16"
+    },
+    {
+      "slug": "liquid-chrome-orb",
+      "category": "abstract",
+      "label": "Liquid Chrome Orb",
+      "prompt": "original abstract phone wallpaper, floating liquid chrome orb, black velvet background, soft cyan rim light, subtle gold reflection, glass refraction, premium futuristic aesthetic, no people, no face, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16"
+    },
+    {
+      "slug": "futuristic-shadow-vehicle",
+      "category": "car",
+      "label": "Futuristic Shadow Vehicle",
+      "prompt": "original futuristic concept vehicle silhouette for phone wallpaper, glossy black body, wet road reflections, blue rim light, no real car model, no badge, no trademark, no logo, no text, no people, no copyrighted character, no known brand, no celebrity, no real person, 9:16"
+    },
+    {
+      "slug": "glass-forest-glow",
+      "category": "nature",
+      "label": "Glass Forest Glow",
+      "prompt": "original phone wallpaper, dark forest path with soft glowing particles, glassy dew, moonlit atmosphere, emerald and cyan highlights, dreamy but clean premium style, no people, no animals, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16"
+    },
+    {
+      "slug": "soft-hologram-waves",
+      "category": "abstract",
+      "label": "Soft Hologram Waves",
+      "prompt": "original abstract phone wallpaper, soft hologram waves, translucent silk-like ribbons, pearl cyan violet highlights, deep black background, luxury minimal mobile wallpaper, no people, no face, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16"
+    },
+    {
+      "slug": "gold-blue-plasma-ring",
+      "category": "minimal",
+      "label": "Gold Blue Plasma Ring",
+      "prompt": "original OLED phone wallpaper, single floating plasma ring, electric blue and warm gold sparks, pure black background, crisp premium minimal composition, no people, no face, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16"
+    }
+  ]
+}

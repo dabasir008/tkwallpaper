@@ -1,0 +1,167 @@
+[
+  {
+    "slug": "rain-glass-neon-alley",
+    "category": "cyberpunk",
+    "label": "Rain Glass Neon Alley",
+    "prompt": "original phone wallpaper, rain on dark glass, blurred neon alley reflections, cyan magenta amber light streaks, cinematic depth, premium OLED black background, no people, no face, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16",
+    "taskId": "2062085783564804097",
+    "result": {
+      "taskId": "2062085783564804097",
+      "status": "SUCCESS",
+      "errorCode": "",
+      "errorMessage": "",
+      "results": [
+        {
+          "url": "https://rh-images-1252422369.cos.ap-beijing.myqcloud.com/cf51bde5bf41ac846eca08d86a29cbbc/output/ComfyUI_00001_kcjnf_1780474596.png",
+          "nodeId": "19",
+          "outputType": "png",
+          "text": null
+        }
+      ],
+      "clientId": "",
+      "promptTips": "",
+      "failedReason": {},
+      "usage": {
+        "consumeMoney": null,
+        "consumeCoins": "2",
+        "taskCostTime": "63",
+        "thirdPartyConsumeMoney": "0.1"
+      },
+      "parentTaskId": null,
+      "taskUsageList": [
+        {
+          "taskId": "2062085783564804097",
+          "parentTaskId": null,
+          "taskStatus": "SUCCESS",
+          "usage": {
+            "consumeMoney": null,
+            "consumeCoins": "2",
+            "taskCostTime": "63",
+            "thirdPartyConsumeMoney": null
+          }
+        },
+        {
+          "taskId": "2062085793601970178",
+          "parentTaskId": "2062085783564804097",
+          "taskStatus": "SUCCESS",
+          "usage": {
+            "consumeMoney": null,
+            "consumeCoins": null,
+            "taskCostTime": "0",
+            "thirdPartyConsumeMoney": "0.1"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "slug": "black-aurora-light-trails",
+    "category": "minimal",
+    "label": "Black Aurora Light Trails",
+    "prompt": "original live-wallpaper style phone background, flowing blue and red aurora light trails on pure black, smooth luminous ribbons, elegant minimal composition, high contrast OLED look, no people, no face, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16",
+    "taskId": "2062086080957743105",
+    "result": {
+      "taskId": "2062086080957743105",
+      "status": "SUCCESS",
+      "errorCode": "",
+      "errorMessage": "",
+      "results": [
+        {
+          "url": "https://rh-images-1252422369.cos.ap-beijing.myqcloud.com/cf51bde5bf41ac846eca08d86a29cbbc/output/ComfyUI_00002_rfjrx_1780475297.png",
+          "nodeId": "19",
+          "outputType": "png",
+          "text": null
+        }
+      ],
+      "clientId": "",
+      "promptTips": "",
+      "failedReason": {},
+      "usage": {
+        "consumeMoney": null,
+        "consumeCoins": "14",
+        "taskCostTime": "692",
+        "thirdPartyConsumeMoney": "0.1"
+      },
+      "parentTaskId": null,
+      "taskUsageList": [
+        {
+          "taskId": "2062086080957743105",
+          "parentTaskId": null,
+          "taskStatus": "SUCCESS",
+          "usage": {
+            "consumeMoney": null,
+            "consumeCoins": "14",
+            "taskCostTime": "692",
+            "thirdPartyConsumeMoney": null
+          }
+        },
+        {
+          "taskId": "2062086090508353537",
+          "parentTaskId": "2062086080957743105",
+          "taskStatus": "SUCCESS",
+          "usage": {
+            "consumeMoney": null,
+            "consumeCoins": null,
+            "taskCostTime": "0",
+            "thirdPartyConsumeMoney": "0.1"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "slug": "snow-peak-dream-loop",
+    "category": "nature",
+    "label": "Snow Peak Dream Loop",
+    "prompt": "original phone wallpaper, snow mountain peak at sunrise, soft mist, pale gold and icy blue light, clean atmospheric landscape, premium mobile wallpaper, no buildings, no people, no animals, no logo, no text, no copyrighted character, no known brand, no celebrity, no real person, 9:16",
+    "taskId": "2062089013296324610",
+    "result": {
+      "taskId": "2062089013296324610",
+      "status": "SUCCESS",
+      "errorCode": "",
+      "errorMessage": "",
+      "results": [
+        {
+          "url": "https://rh-images-1252422369.cos.ap-beijing.myqcloud.com/cf51bde5bf41ac846eca08d86a29cbbc/output/ComfyUI_00001_csijh_1780475376.png",
+          "nodeId": "19",
+          "outputType": "png",
+          "text": null
+        }
+      ],
+      "clientId": "",
+      "promptTips": "",
+      "failedReason": {},
+      "usage": {
+        "consumeMoney": null,
+        "consumeCoins": "2",
+        "taskCostTime": "73",
+        "thirdPartyConsumeMoney": "0.1"
+      },
+      "parentTaskId": null,
+      "taskUsageList": [
+        {
+          "taskId": "2062089013296324610",
+          "parentTaskId": null,
+          "taskStatus": "SUCCESS",
+          "usage": {
+            "consumeMoney": null,
+            "consumeCoins": "2",
+            "taskCostTime": "73",
+            "thirdPartyConsumeMoney": null
+          }
+        },
+        {
+          "taskId": "2062089022003888130",
+          "parentTaskId": "2062089013296324610",
+          "taskStatus": "SUCCESS",
+          "usage": {
+            "consumeMoney": null,
+            "consumeCoins": null,
+            "taskCostTime": "0",
+            "thirdPartyConsumeMoney": "0.1"
+          }
+        }
+      ]
+    }
+  }
+]

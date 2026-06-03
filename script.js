@@ -113,28 +113,13 @@ async function logTransaction(type, amount, desc) {
 }
 
 // ===== 澹佺焊鏁版嵁 =====
-const R2 = "https://pub-47bcb2d7ff1d4d90b554d3cc5a254b57.r2.dev";
-
 const staticWallpapers = [
-  // Anime
-  { id: 1, src: R2 + "/wallpapers/08e1d3b2e2bf7ebf0e574b2118872a31.jpg", category: "anime", label: "Anime Girl", section: "static", free: true },
-  { id: 2, src: R2 + "/wallpapers/b96001ef8c893fcceb691c77c3e5ba25.jpg", category: "anime", label: "Anime Art", section: "static", free: true },
-  { id: 3, src: R2 + "/wallpapers/8cb6ea8e2cdf5be5687afba72243be85.jpg", category: "anime", label: "Anime Style", section: "static", free: true },
-  // Cyberpunk
-  { id: 4, src: R2 + "/wallpapers/86e87f5620a8f5e5e5c82ba0a04f864e.jpg", category: "cyberpunk", label: "Cyberpunk City", section: "static", free: true },
-  { id: 5, src: R2 + "/wallpapers/2ccca866ca5b0f75f6c0225a22c5afec.jpg", category: "cyberpunk", label: "Neon City", section: "static", free: true },
-  { id: 6, src: R2 + "/wallpapers/6cd06135791c43e867a94a607e3d5030.jpg", category: "cyberpunk", label: "Night City", section: "static", free: true },
-  { id: 7, src: R2 + "/wallpapers/db297c2817881b195ceb82db0f3c06d2.jpg", category: "cyberpunk", label: "Neon Lights", section: "static", free: true },
-  { id: 8, src: R2 + "/wallpapers/87581c5fade4564d30c46c68b5af2b6b.jpg", category: "cyberpunk", label: "Cyber Streets", section: "static", free: true },
-  { id: 9, src: R2 + "/wallpapers/9785881c6386c4d3bdfa606bdd83ad5b.jpg", category: "cyberpunk", label: "Synthwave", section: "static", free: true },
-  // Nature
-  { id: 10, src: R2 + "/wallpapers/04668af86f5badd3a0577e01b032f6ae.jpg", category: "nature", label: "Nature View", section: "static", free: true },
-  { id: 11, src: R2 + "/wallpapers/730d29ef123da817c86f749cfe20365a.jpg", category: "nature", label: "Scenery", section: "static", free: true },
-  { id: 12, src: R2 + "/wallpapers/fa3461e7bba5f6f176bd34ff779f3e97.jpg", category: "nature", label: "Landscape", section: "static", free: true },
-  // Minimal
-  { id: 13, src: R2 + "/wallpapers/24f3da1a16ce8e294fa5d627d9d964dc.jpg", category: "minimal", label: "Clean Look", section: "static", free: true },
-  { id: 14, src: R2 + "/wallpapers/e87b72ef0e8c67eaacaa1c0a6b5f5a05.jpg", category: "minimal", label: "Minimal Art", section: "static", free: true },
-  { id: 15, src: R2 + "/wallpapers/ada4b291c9498275673b43ef61a871d2.jpg", category: "minimal", label: "Simple Style", section: "static", free: true },
+  { id: 1, src: "assets/generated/liquid-glass-shadow.png", category: "abstract", label: "Liquid Glass Shadow", section: "static", free: true },
+  { id: 2, src: "assets/generated/icy-blue-glacier.png", category: "nature", label: "Icy Blue Glacier", section: "static", free: true },
+  { id: 3, src: "assets/generated/amoled-blue-pulse.png", category: "minimal", label: "AMOLED Blue Pulse", section: "static", free: true },
+  { id: 4, src: "assets/generated/neon-rain-cyber-glow.png", category: "cyberpunk", label: "Neon Rain Cyber Glow", section: "static", free: true },
+  { id: 5, src: "assets/generated/cosmic-drift.png", category: "abstract", label: "Cosmic Drift", section: "static", free: true },
+  { id: 6, src: "assets/generated/forest-light-loop.png", category: "nature", label: "Forest Light Loop", section: "static", free: true },
 ];
 
 const liveWallpapers = [
@@ -142,6 +127,9 @@ const liveWallpapers = [
   { id: 102, src: "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4", videoUrl: "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4", category: "minimal", label: "Blue Light Trail", section: "live", free: false, points: 15 },
   { id: 103, src: "assets/live/20-102148a60657b50a2fd5a2b2cbc6a86c.mp4", videoUrl: "assets/live/20-102148a60657b50a2fd5a2b2cbc6a86c.mp4", category: "abstract", label: "Red Light Trail", section: "live", free: false, points: 15 },
   { id: 104, src: "assets/live/30-1728319144338.mp4", videoUrl: "assets/live/30-1728319144338.mp4", category: "cyberpunk", label: "Rain City Glass", section: "live", free: false, points: 15 },
+  { id: 105, src: "assets/live/safe-motion-rain-glass-neon-alley.mp4", videoUrl: "assets/live/safe-motion-rain-glass-neon-alley.mp4", category: "cyberpunk", label: "Rain Glass Neon Alley", section: "live", free: false, points: 15 },
+  { id: 106, src: "assets/live/safe-motion-black-aurora-light-trails.mp4", videoUrl: "assets/live/safe-motion-black-aurora-light-trails.mp4", category: "minimal", label: "Black Aurora Light Trails", section: "live", free: false, points: 15 },
+  { id: 107, src: "assets/live/safe-motion-snow-peak-dream-loop.mp4", videoUrl: "assets/live/safe-motion-snow-peak-dream-loop.mp4", category: "nature", label: "Snow Peak Dream Loop", section: "live", free: false, points: 15 },
 ];
 
 // AI custom samples.
@@ -158,23 +146,18 @@ let currentCategory = "all";
 let currentSearch = "";
 let currentSort = "popular";
 let currentAiMode = "image";
-let userPoints = 10;
+let userPoints = 0;
 let extraWallpapers = [];
 let extraIdCounter = 1000;
 let managedStaticWallpapers = [];
-
-const r2Pool = [
-  "08e1d3b2e2bf7ebf0e574b2118872a31", "b96001ef8c893fcceb691c77c3e5ba25", "8cb6ea8e2cdf5be5687afba72243be85",
-  "86e87f5620a8f5e5e5c82ba0a04f864e", "2ccca866ca5b0f75f6c0225a22c5afec", "6cd06135791c43e867a94a607e3d5030",
-  "db297c2817881b195ceb82db0f3c06d2", "87581c5fade4564d30c46c68b5af2b6b", "9785881c6386c4d3bdfa606bdd83ad5b",
-  "04668af86f5badd3a0577e01b032f6ae", "730d29ef123da817c86f749cfe20365a", "fa3461e7bba5f6f176bd34ff779f3e97",
-  "24f3da1a16ce8e294fa5d627d9d964dc", "e87b72ef0e8c67eaacaa1c0a6b5f5a05", "ada4b291c9498275673b43ef61a871d2",
-];
 const localVideoPool = [
   "assets/live/09-07.mp4",
   "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4",
   "assets/live/20-102148a60657b50a2fd5a2b2cbc6a86c.mp4",
   "assets/live/30-1728319144338.mp4",
+  "assets/live/safe-motion-rain-glass-neon-alley.mp4",
+  "assets/live/safe-motion-black-aurora-light-trails.mp4",
+  "assets/live/safe-motion-snow-peak-dream-loop.mp4",
 ];
 
 // ===== DOM 鍏冪礌 =====
@@ -581,16 +564,20 @@ function applyFilter() {
 
 // ===== 鍔犺浇鏇村 =====
 loadMoreBtn.addEventListener("click", () => {
-  const categories = ["nature", "anime", "cyberpunk", "minimal"];
+  const categories = ["nature", "abstract", "cyberpunk", "minimal", "car"];
   const count = currentSection === "live" || currentSection === "custom" ? 4 : 8;
+  const staticPool = (managedStaticWallpapers.length ? managedStaticWallpapers : staticWallpapers).filter(item => item.src);
+  const customPool = (currentAiMode === "text" ? aiTextWallpapers : aiWallpapers).filter(item => item.src);
   for (let i = 0; i < count; i++) {
-    const hash = r2Pool[Math.floor(Math.random() * r2Pool.length)];
+    const staticItem = staticPool[Math.floor(Math.random() * staticPool.length)];
+    const customItem = customPool[Math.floor(Math.random() * customPool.length)];
     const videoUrl = localVideoPool[Math.floor(Math.random() * localVideoPool.length)];
-    const cat = categories[Math.floor(Math.random() * categories.length)];
-    const label = cat.charAt(0).toUpperCase() + cat.slice(1);
+    const baseItem = currentSection === "custom" ? customItem : staticItem;
+    const cat = baseItem?.category || categories[Math.floor(Math.random() * categories.length)];
+    const label = baseItem?.label || cat.charAt(0).toUpperCase() + cat.slice(1);
     extraWallpapers.push({
       id: Date.now() + i,
-      src: currentSection === "live" ? videoUrl : R2 + "/wallpapers/" + hash + ".jpg",
+      src: currentSection === "live" ? videoUrl : baseItem?.src,
       category: cat,
       label: label,
       section: currentSection,
