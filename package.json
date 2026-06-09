@@ -2,5 +2,7 @@
   "scripts": {
     "dev": "python -m http.server 4173 --bind 127.0.0.1"
   },
-  "devDependencies": {}
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1064.0"
+  }
 }

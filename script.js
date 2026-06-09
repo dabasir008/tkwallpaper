@@ -150,6 +150,24 @@ let userPoints = 0;
 let extraWallpapers = [];
 let extraIdCounter = 1000;
 let managedStaticWallpapers = [];
+const categoryLabels = {
+  all: "All",
+  abstract: "Abstract",
+  animals: "Animals",
+  anime: "Anime",
+  car: "Car",
+  cool: "Cool",
+  cyberpunk: "Cyberpunk",
+  fantasy: "Fantasy",
+  funny: "Funny",
+  lucky: "Lucky",
+  minimal: "Minimal",
+  mystic: "Mystic",
+  nature: "Nature",
+  scenery: "Scenery",
+  "sci-fi": "Sci-Fi",
+  wealth: "Wealth",
+};
 const localVideoPool = [
   "assets/live/09-07.mp4",
   "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4",
@@ -536,7 +554,7 @@ navLinks.forEach(link => {
 });
 
 function updateBrowseCopy() {
-  const categoryLabel = currentCategory === "all" ? "All" : currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
+  const categoryLabel = categoryLabels[currentCategory] || currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
   const sectionLabel = currentSection === "custom" ? "AI Custom" : currentSection.charAt(0).toUpperCase() + currentSection.slice(1);
   if (browseTitle) browseTitle.textContent = categoryLabel + " " + sectionLabel + " Wallpapers";
   if (!browseSubtitle) return;
@@ -564,7 +582,7 @@ function applyFilter() {
 
 // ===== 鍔犺浇鏇村 =====
 loadMoreBtn.addEventListener("click", () => {
-  const categories = ["nature", "abstract", "cyberpunk", "minimal", "car"];
+  const categories = ["nature", "abstract", "cyberpunk", "minimal", "car", "anime", "animals", "wealth", "lucky", "funny", "cool", "mystic", "sci-fi", "scenery", "fantasy"];
   const count = currentSection === "live" || currentSection === "custom" ? 4 : 8;
   const staticPool = (managedStaticWallpapers.length ? managedStaticWallpapers : staticWallpapers).filter(item => item.src);
   const customPool = (currentAiMode === "text" ? aiTextWallpapers : aiWallpapers).filter(item => item.src);

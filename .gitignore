@@ -1,4 +1,8 @@
 config.json
+.env
+.env.*
+!.env.example
+node_modules/
 docs/chrome-pdf-profile/
 data/runninghub-generated-*.json
 data/runninghub-submitted-*.json
