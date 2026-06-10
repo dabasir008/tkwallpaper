@@ -139,9 +139,10 @@ const aiWallpapers = [
   { id: 203, src: "assets/generated/neon-rain-cyber-glow.png", category: "cyberpunk", label: "Neon Rain Style", section: "custom", free: false, points: 20 },
 ];
 let aiTextWallpapers = [];
+const photoToCgPreviewSrc = "assets/ai-workflows/photo-to-cg-preview.webp?v=20260610-ai5-5";
 const aiWorkflowSamples = [
   { id: 401, src: "assets/generated/liquid-glass-halo.png", category: "custom", labelKey: "ai.sample.textImage", section: "custom", mode: "text-image", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.textImage" },
-  { id: 402, src: "assets/generated/forest-deer-glow.png", category: "custom", labelKey: "ai.sample.cgImage", section: "custom", mode: "cg-image", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.cgImage" },
+  { id: 402, src: photoToCgPreviewSrc, category: "custom", labelKey: "ai.sample.cgImage", section: "custom", mode: "cg-image", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.cgImage" },
   { id: 403, src: "assets/live/safe-motion-rain-glass-neon-alley.mp4", videoUrl: "assets/live/safe-motion-rain-glass-neon-alley.mp4", category: "custom", labelKey: "ai.sample.imageVideo", section: "custom", mode: "image-video", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.imageVideo" },
   { id: 404, src: "assets/ai-workflows/face-swap-result.mp4", videoUrl: "assets/ai-workflows/face-swap-result.mp4", category: "custom", labelKey: "ai.sample.faceSwap", section: "custom", mode: "face-swap", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.faceSwap" },
   { id: 405, src: "assets/generated/poetcore-moon-desk.png", category: "custom", labelKey: "ai.sample.couplePhoto", section: "custom", mode: "couple-photo", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.couplePhoto" },
@@ -163,7 +164,7 @@ const aiWorkflows = {
     titleKey: "ai.mode.cgImage",
     copyKey: "ai.workflow.cgImage.copy",
     fields: [
-      { key: "image", type: "image", labelKey: "ai.field.photo", captionKey: "ai.caption.uploadPhoto", sample: "assets/generated/forest-deer-glow.png" },
+      { key: "image", type: "image", labelKey: "ai.field.photo", captionKey: "ai.caption.uploadPhoto", sample: photoToCgPreviewSrc },
       { key: "prompt", type: "prompt", labelKey: "ai.field.stylePrompt", placeholderKey: "ai.prompt.cgStyle", optional: true },
     ],
   },
@@ -1846,6 +1847,15 @@ function updateAuthUI(user) {
   updatePointsBarVisibility();
 }
 
+function loadAdsenseAfterPaint() {
+  if (document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) return;
+  const script = document.createElement("script");
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8489634814754606";
+  document.head.appendChild(script);
+}
+
 // 鐧诲綍/娉ㄥ唽鎻愪氦
 authBtnSubmit.addEventListener("click", async () => {
   const email = authEmail.value.trim();
@@ -1905,4 +1915,6 @@ setTimeout(() => clearSearchAutofill({ rerender: true }), 250);
 setTimeout(() => clearSearchAutofill({ rerender: true }), 1200);
 
 restoreSavedSession();
+
+window.addEventListener("load", () => setTimeout(loadAdsenseAfterPaint, 1500), { once: true });
 
