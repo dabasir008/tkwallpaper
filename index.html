@@ -8,7 +8,7 @@
   <title>TK Wallpaper - Free HD & Live Wallpapers</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8489634814754606"
      crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css?v=20260610-ai5-1">
+  <link rel="stylesheet" href="style.css?v=20260610-ai5-3">
 </head>
 <body>
 
@@ -116,13 +116,14 @@
     <!-- 图片网格 -->
     <div class="ai-mode-panel" id="aiModePanel" style="display:none;">
       <div class="ai-mode-tabs" aria-label="AI custom mode">
-        <a href="#custom-text-image" class="ai-mode-tab active" data-ai-mode="text-image" onclick="window.setAiMode && window.setAiMode('text-image')">文生图</a>
-        <a href="#custom-cg-image" class="ai-mode-tab" data-ai-mode="cg-image" onclick="window.setAiMode && window.setAiMode('cg-image')">真人转CG</a>
-        <a href="#custom-image-video" class="ai-mode-tab" data-ai-mode="image-video" onclick="window.setAiMode && window.setAiMode('image-video')">图生视频</a>
-        <a href="#custom-face-swap" class="ai-mode-tab" data-ai-mode="face-swap" onclick="window.setAiMode && window.setAiMode('face-swap')">AI视频人物替换</a>
-        <a href="#custom-couple-photo" class="ai-mode-tab" data-ai-mode="couple-photo" onclick="window.setAiMode && window.setAiMode('couple-photo')">AI双人合影</a>
+        <a href="#custom-all" class="ai-mode-tab active" data-ai-mode="all" onclick="window.setAiMode && window.setAiMode('all')" data-i18n="ai.mode.all">All</a>
+        <a href="#custom-text-image" class="ai-mode-tab" data-ai-mode="text-image" onclick="window.setAiMode && window.setAiMode('text-image')" data-i18n="ai.mode.textImage">Text to Image</a>
+        <a href="#custom-cg-image" class="ai-mode-tab" data-ai-mode="cg-image" onclick="window.setAiMode && window.setAiMode('cg-image')" data-i18n="ai.mode.cgImage">Photo to CG</a>
+        <a href="#custom-image-video" class="ai-mode-tab" data-ai-mode="image-video" onclick="window.setAiMode && window.setAiMode('image-video')" data-i18n="ai.mode.imageVideo">Image to Video</a>
+        <a href="#custom-face-swap" class="ai-mode-tab" data-ai-mode="face-swap" onclick="window.setAiMode && window.setAiMode('face-swap')" data-i18n="ai.mode.faceSwap">AI Video Face Swap</a>
+        <a href="#custom-couple-photo" class="ai-mode-tab" data-ai-mode="couple-photo" onclick="window.setAiMode && window.setAiMode('couple-photo')" data-i18n="ai.mode.couplePhoto">AI Couple Photo</a>
       </div>
-      <p class="ai-mode-copy" id="aiModeCopy">选择一个 AI 生成工具，上传素材或输入提示词后消耗 20 积分生成。</p>
+      <p class="ai-mode-copy" id="aiModeCopy">Choose an AI tool, then upload assets or enter a prompt to generate.</p>
       <div class="ai-workflow-panel" id="aiWorkflowPanel"></div>
     </div>
 
@@ -275,6 +276,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=20260610-ai5-1"></script>
+  <script src="script.js?v=20260610-ai5-3"></script>
 </body>
 </html>

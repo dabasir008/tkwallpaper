@@ -140,50 +140,56 @@ const aiWallpapers = [
 ];
 let aiTextWallpapers = [];
 const aiWorkflowSamples = [
-  { id: 401, src: "assets/generated/liquid-glass-halo.png", category: "custom", label: "文生图样例", section: "custom", mode: "text-image", free: false, points: 20, workflowPreview: true, badge: "文生图" },
-  { id: 402, src: "assets/generated/forest-deer-glow.png", category: "custom", label: "真人转CG样例", section: "custom", mode: "cg-image", free: false, points: 20, workflowPreview: true, badge: "CG" },
-  { id: 403, src: "assets/live/safe-motion-rain-glass-neon-alley.mp4", videoUrl: "assets/live/safe-motion-rain-glass-neon-alley.mp4", category: "custom", label: "图生视频样例", section: "custom", mode: "image-video", free: false, points: 20, workflowPreview: true, badge: "视频" },
-  { id: 404, src: "assets/ai-workflows/face-swap-result.mp4", videoUrl: "assets/ai-workflows/face-swap-result.mp4", category: "custom", label: "AI视频人物替换样例", section: "custom", mode: "face-swap", free: false, points: 20, workflowPreview: true, badge: "换脸" },
-  { id: 405, src: "assets/generated/poetcore-moon-desk.png", category: "custom", label: "AI双人合影样例", section: "custom", mode: "couple-photo", free: false, points: 20, workflowPreview: true, badge: "合影" },
+  { id: 401, src: "assets/generated/liquid-glass-halo.png", category: "custom", labelKey: "ai.sample.textImage", section: "custom", mode: "text-image", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.textImage" },
+  { id: 402, src: "assets/generated/forest-deer-glow.png", category: "custom", labelKey: "ai.sample.cgImage", section: "custom", mode: "cg-image", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.cgImage" },
+  { id: 403, src: "assets/live/safe-motion-rain-glass-neon-alley.mp4", videoUrl: "assets/live/safe-motion-rain-glass-neon-alley.mp4", category: "custom", labelKey: "ai.sample.imageVideo", section: "custom", mode: "image-video", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.imageVideo" },
+  { id: 404, src: "assets/ai-workflows/face-swap-result.mp4", videoUrl: "assets/ai-workflows/face-swap-result.mp4", category: "custom", labelKey: "ai.sample.faceSwap", section: "custom", mode: "face-swap", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.faceSwap" },
+  { id: 405, src: "assets/generated/poetcore-moon-desk.png", category: "custom", labelKey: "ai.sample.couplePhoto", section: "custom", mode: "couple-photo", free: false, points: 20, workflowPreview: true, badgeKey: "ai.badge.couplePhoto" },
 ];
 const aiWorkflows = {
+  all: {
+    titleKey: "ai.mode.all",
+    copyKey: "ai.workflow.all.copy",
+    fields: [],
+  },
   "text-image": {
-    title: "文生图",
-    copy: "输入提示词生成手机壁纸。默认 9:16 竖图，消耗 20 积分。",
+    titleKey: "ai.mode.textImage",
+    copyKey: "ai.workflow.textImage.copy",
     fields: [
-      { key: "prompt", type: "prompt", label: "提示词", placeholder: "在此输入提示词" },
+      { key: "prompt", type: "prompt", labelKey: "ai.field.prompt", placeholderKey: "ai.prompt.enter" },
     ],
   },
   "cg-image": {
-    title: "图生图 - 真人转CG",
-    copy: "上传真人照片，生成 CG 风格成品。下方示例图用于展示效果方向。",
+    titleKey: "ai.mode.cgImage",
+    copyKey: "ai.workflow.cgImage.copy",
     fields: [
-      { key: "image", type: "image", label: "真人照片", caption: "在此上传你的照片", sample: "assets/generated/forest-deer-glow.png" },
+      { key: "image", type: "image", labelKey: "ai.field.photo", captionKey: "ai.caption.uploadPhoto", sample: "assets/generated/forest-deer-glow.png" },
+      { key: "prompt", type: "prompt", labelKey: "ai.field.stylePrompt", placeholderKey: "ai.prompt.cgStyle", optional: true },
     ],
   },
   "image-video": {
-    title: "图生视频",
-    copy: "上传图片并输入运动提示词，默认生成 5 秒视频。",
+    titleKey: "ai.mode.imageVideo",
+    copyKey: "ai.workflow.imageVideo.copy",
     fields: [
-      { key: "image", type: "image", label: "上传图片", caption: "上传要生成视频的图片", sample: "assets/generated/rain-glass-neon-alley.png" },
-      { key: "prompt", type: "prompt", label: "视频提示词", placeholder: "在此输入提示词" },
+      { key: "image", type: "image", labelKey: "ai.field.image", captionKey: "ai.caption.uploadImage", sample: "assets/generated/rain-glass-neon-alley.png" },
+      { key: "prompt", type: "prompt", labelKey: "ai.field.videoPrompt", placeholderKey: "ai.prompt.enter" },
     ],
   },
   "face-swap": {
-    title: "AI视频人物替换",
-    copy: "上传原视频和替换人脸，参考右侧成品效果生成 5 秒视频。",
+    titleKey: "ai.mode.faceSwap",
+    copyKey: "ai.workflow.faceSwap.copy",
     fields: [
-      { key: "video", type: "video", label: "原视频", caption: "上传要替换人物的原视频", sample: "assets/ai-workflows/face-swap-original.mp4" },
-      { key: "face", type: "image", label: "替换人脸", caption: "上传替换的人脸照片", sample: "assets/ai-workflows/face-swap-face.png" },
-      { key: "result", type: "output-video", label: "成品视频", caption: "生成后在此预览并下载", sample: "assets/ai-workflows/face-swap-result.mp4" },
+      { key: "video", type: "video", labelKey: "ai.field.sourceVideo", captionKey: "ai.caption.sourceVideo", sample: "assets/ai-workflows/face-swap-original.mp4" },
+      { key: "face", type: "image", labelKey: "ai.field.facePhoto", captionKey: "ai.caption.facePhoto", sample: "assets/ai-workflows/face-swap-face.png" },
+      { key: "result", type: "output-video", labelKey: "ai.field.resultVideo", captionKey: "ai.caption.resultVideo", sample: "assets/ai-workflows/face-swap-result.mp4" },
     ],
   },
   "couple-photo": {
-    title: "AI双人合影",
-    copy: "上传两张人物照片，生成自然双人合影。",
+    titleKey: "ai.mode.couplePhoto",
+    copyKey: "ai.workflow.couplePhoto.copy",
     fields: [
-      { key: "image", type: "image", label: "人物照片 1", caption: "上传第一张照片", sample: "assets/generated/analog-paper-flower.png" },
-      { key: "image2", type: "image", label: "人物照片 2", caption: "上传第二张照片", sample: "assets/generated/jelly-pastel-shapes.png" },
+      { key: "image", type: "image", labelKey: "ai.field.personOne", captionKey: "ai.caption.personOne", sample: "assets/generated/analog-paper-flower.png" },
+      { key: "image2", type: "image", labelKey: "ai.field.personTwo", captionKey: "ai.caption.personTwo", sample: "assets/generated/jelly-pastel-shapes.png" },
     ],
   },
 };
@@ -194,7 +200,7 @@ let currentSection = "static";
 let currentCategory = "all";
 let currentSearch = "";
 let currentSort = "popular";
-let currentAiMode = "text-image";
+let currentAiMode = "all";
 let userPoints = 0;
 let extraWallpapers = [];
 let extraIdCounter = 1000;
@@ -270,6 +276,63 @@ const translations = {
     "ai.copy.text": "Start from a text prompt, preview proven styles, then generate a fresh AI wallpaper.",
     "ai.prompt.placeholder": "Describe your wallpaper style...",
     "ai.generateText": "Generate Text Wallpaper (20 pts)",
+    "ai.mode.all": "All",
+    "ai.mode.textImage": "Text to Image",
+    "ai.mode.cgImage": "Photo to CG",
+    "ai.mode.imageVideo": "Image to Video",
+    "ai.mode.faceSwap": "AI Video Face Swap",
+    "ai.mode.couplePhoto": "AI Couple Photo",
+    "ai.workflow.all.copy": "Browse every AI custom sample, then choose a tool to generate your own result.",
+    "ai.workflow.textImage.copy": "Enter a prompt to generate a phone wallpaper. Default output is a 9:16 vertical image.",
+    "ai.workflow.cgImage.copy": "Upload a portrait and optionally describe the CG style. The layout matches Image to Video for a consistent workflow.",
+    "ai.workflow.imageVideo.copy": "Upload an image and enter a motion prompt. Video duration is set to 5 seconds by default.",
+    "ai.workflow.faceSwap.copy": "Upload a source video and a replacement face. Preview the source, face, and final video before generating.",
+    "ai.workflow.couplePhoto.copy": "Upload two portraits to generate a natural AI couple photo.",
+    "ai.field.prompt": "Prompt",
+    "ai.field.stylePrompt": "Style prompt",
+    "ai.field.videoPrompt": "Video prompt",
+    "ai.field.photo": "Portrait photo",
+    "ai.field.image": "Upload image",
+    "ai.field.sourceVideo": "Source video",
+    "ai.field.facePhoto": "Replacement face",
+    "ai.field.resultVideo": "Final video",
+    "ai.field.personOne": "Person photo 1",
+    "ai.field.personTwo": "Person photo 2",
+    "ai.caption.uploadPhoto": "Upload your photo here",
+    "ai.caption.uploadImage": "Upload the image to animate",
+    "ai.caption.sourceVideo": "Upload the source video",
+    "ai.caption.facePhoto": "Upload the replacement face photo",
+    "ai.caption.resultVideo": "Preview and download the generated result here",
+    "ai.caption.personOne": "Upload the first photo",
+    "ai.caption.personTwo": "Upload the second photo",
+    "ai.prompt.enter": "Enter your prompt here",
+    "ai.prompt.cgStyle": "Optional: describe the CG style",
+    "ai.sample.textImage": "Text to Image Sample",
+    "ai.sample.cgImage": "Photo to CG Sample",
+    "ai.sample.imageVideo": "Image to Video Sample",
+    "ai.sample.faceSwap": "AI Video Face Swap Sample",
+    "ai.sample.couplePhoto": "AI Couple Photo Sample",
+    "ai.badge.textImage": "Text",
+    "ai.badge.cgImage": "CG",
+    "ai.badge.imageVideo": "Video",
+    "ai.badge.faceSwap": "Swap",
+    "ai.badge.couplePhoto": "Couple",
+    "ai.generate.credits": "Generate (20 credits)",
+    "ai.generate.busy": "Generating...",
+    "ai.status.chooseTool": "Choose a tool above to generate",
+    "ai.status.configured": "{tool} API configured",
+    "ai.status.uploading": "Uploading {field}...",
+    "ai.status.submitting": "Submitting RunningHub task...",
+    "ai.status.task": "Task submitted: {taskId}",
+    "ai.status.running": "Generating... {seconds}s",
+    "ai.status.done": "Done. Preview and download the result.",
+    "ai.status.doneNoUrl": "Task finished, but no result URL was found. Check RunningHub later.",
+    "ai.status.failed": "Generation failed: {message}",
+    "ai.result.title": "Generated result",
+    "ai.result.download": "Download result",
+    "ai.sample.download": "Download sample",
+    "ai.error.prompt": "Please enter a prompt first",
+    "ai.error.upload": "Please upload {field}",
     "upload.title": "Add Your Own Image",
     "upload.copy": "Upload a photo to turn it into a live wallpaper.",
     "upload.choose": "Choose from Gallery",
@@ -309,6 +372,7 @@ const translations = {
     "card.free": "Free",
     "card.previewText": "Preview text style - {points} credits",
     "card.previewLive": "Preview live - {points} credits",
+    "card.previewAi": "{badge} - {points} credits",
     "card.freeDownload": "Free download",
     "toast.downloaded": "Downloaded! {points} pts used.",
     "toast.downloadFailed": "Download failed: {message}",
@@ -328,7 +392,7 @@ const translations = {
   },
   es: {
     "meta.title": "TK Wallpaper - Fondos HD y animados gratis",
-    "meta.description": "Fondos HD gratis, fondos animados y fondos AI personalizados para tu teléfono y escritorio.",
+    "meta.description": "Fondos HD gratis, fondos animados y fondos IA personalizados para tu teléfono y escritorio.",
     "lang.label": "Idioma",
     "nav.menu": "Menú",
     "nav.close": "Cerrar",
@@ -357,35 +421,35 @@ const translations = {
     "auth.createAccount": "Crear cuenta",
     "auth.email": "Correo electrónico",
     "auth.password": "Contraseña",
-    "auth.note": "Los usuarios nuevos reciben 10 créditos gratis para probar fondos AI.",
+    "auth.note": "Los usuarios nuevos reciben 10 créditos gratis para probar fondos IA.",
     "points.get": "Comprar puntos",
     "points.my": "Mis puntos:",
     "points.hint.live": "Las descargas animadas usan 15 créditos.",
-    "points.hint.custom": "Las generaciones AI usan 20 créditos cada una.",
+    "points.hint.custom": "Las generaciones IA usan 20 créditos cada una.",
     "points.getCredits": "Comprar créditos",
-    "points.buyCopy": "Compra créditos para descargar fondos animados y fondos AI personalizados.",
+    "points.buyCopy": "Compra créditos para descargar fondos animados y fondos IA personalizados.",
     "points.afterPurchase": "Después de comprar, los créditos se añadirán automáticamente a tu cuenta.",
     "hero.title": "Fondos para tu teléfono",
-    "hero.copy": "Fondos estáticos gratis, fondos animados premium y fondos AI personalizados. Actualizado cada semana con estilos tendencia.",
+    "hero.copy": "Fondos estáticos gratis, fondos animados premium y fondos IA personalizados. Actualizado cada semana con estilos tendencia.",
     "browse.eyebrow": "Fondos populares para móvil",
     "browse.title.all": "Fondos {section}: todos",
     "browse.title.category": "Fondos {section}: {category}",
-    "browse.subtitle.default": "Explora fondos estáticos gratis, fondos animados premium y muestras AI en una cuadrícula pensada para móvil.",
+    "browse.subtitle.default": "Explora fondos estáticos gratis, fondos animados premium y muestras IA en una cuadrícula pensada para móvil.",
     "browse.subtitle.static": "Explora fondos gratis por categoría, estilo y tendencia.",
     "browse.subtitle.live": "Previsualiza fondos en movimiento y descarga loops premium con créditos.",
-    "browse.subtitle.custom": "Explora muestras AI, sube tu imagen y genera un fondo animado.",
+    "browse.subtitle.custom": "Explora muestras IA, sube tu imagen y genera un fondo animado.",
     "sort.popular": "Populares",
     "sort.latest": "Recientes",
     "sort.downloaded": "Más descargados",
     "section.static": "Estáticos",
     "section.live": "Animados",
-    "section.custom": "AI Custom",
+    "section.custom": "IA personalizada",
     "section.staticTitle": "estáticos",
     "section.liveTitle": "animados",
-    "section.customTitle": "AI personalizados",
+    "section.customTitle": "IA personalizados",
     "helper.static": "Fondos HD gratis para descargar rápido.",
     "helper.live": "Previsualiza fondos en movimiento y descárgalos con créditos.",
-    "helper.custom": "Sube una foto o escribe un prompt para generar fondos AI.",
+    "helper.custom": "Sube una foto o escribe un prompt para generar fondos IA.",
     "search.placeholder": "Buscar fondos...",
     "results.count": "{count} fondo",
     "results.countPlural": "{count} fondos",
@@ -393,15 +457,72 @@ const translations = {
     "ai.imageMode": "Imagen a imagen",
     "ai.textMode": "Texto a imagen",
     "ai.copy.image": "Sube tu foto, previsualiza el estilo animado y genera un fondo.",
-    "ai.copy.text": "Empieza con un prompt, revisa estilos probados y genera un fondo AI nuevo.",
+    "ai.copy.text": "Empieza con un prompt, revisa estilos probados y genera un fondo IA nuevo.",
     "ai.prompt.placeholder": "Describe el estilo del fondo...",
     "ai.generateText": "Generar fondo con texto (20 pts)",
+    "ai.mode.all": "Todos",
+    "ai.mode.textImage": "Texto a imagen",
+    "ai.mode.cgImage": "Foto a CG",
+    "ai.mode.imageVideo": "Imagen a video",
+    "ai.mode.faceSwap": "Cambio de rostro IA",
+    "ai.mode.couplePhoto": "Foto de pareja IA",
+    "ai.workflow.all.copy": "Explora todas las muestras IA y elige una herramienta para generar tu propio resultado.",
+    "ai.workflow.textImage.copy": "Escribe un prompt para generar un fondo móvil. La salida predeterminada es vertical 9:16.",
+    "ai.workflow.cgImage.copy": "Sube un retrato y, si quieres, describe el estilo CG. El diseño coincide con Imagen a video.",
+    "ai.workflow.imageVideo.copy": "Sube una imagen y escribe un prompt de movimiento. La duración predeterminada es de 5 segundos.",
+    "ai.workflow.faceSwap.copy": "Sube un video original y un rostro de reemplazo. Previsualiza el video, el rostro y el resultado.",
+    "ai.workflow.couplePhoto.copy": "Sube dos retratos para generar una foto de pareja natural con IA.",
+    "ai.field.prompt": "Prompt",
+    "ai.field.stylePrompt": "Prompt de estilo",
+    "ai.field.videoPrompt": "Prompt de video",
+    "ai.field.photo": "Foto de retrato",
+    "ai.field.image": "Subir imagen",
+    "ai.field.sourceVideo": "Video original",
+    "ai.field.facePhoto": "Rostro de reemplazo",
+    "ai.field.resultVideo": "Video final",
+    "ai.field.personOne": "Foto persona 1",
+    "ai.field.personTwo": "Foto persona 2",
+    "ai.caption.uploadPhoto": "Sube tu foto aquí",
+    "ai.caption.uploadImage": "Sube la imagen para animar",
+    "ai.caption.sourceVideo": "Sube el video original",
+    "ai.caption.facePhoto": "Sube la foto del rostro de reemplazo",
+    "ai.caption.resultVideo": "Previsualiza y descarga aquí el resultado generado",
+    "ai.caption.personOne": "Sube la primera foto",
+    "ai.caption.personTwo": "Sube la segunda foto",
+    "ai.prompt.enter": "Escribe tu prompt aquí",
+    "ai.prompt.cgStyle": "Opcional: describe el estilo CG",
+    "ai.sample.textImage": "Muestra texto a imagen",
+    "ai.sample.cgImage": "Muestra foto a CG",
+    "ai.sample.imageVideo": "Muestra imagen a video",
+    "ai.sample.faceSwap": "Muestra cambio de rostro IA",
+    "ai.sample.couplePhoto": "Muestra foto de pareja IA",
+    "ai.badge.textImage": "Texto",
+    "ai.badge.cgImage": "CG",
+    "ai.badge.imageVideo": "Video",
+    "ai.badge.faceSwap": "Cambio",
+    "ai.badge.couplePhoto": "Pareja",
+    "ai.generate.credits": "Generar (20 créditos)",
+    "ai.generate.busy": "Generando...",
+    "ai.status.chooseTool": "Elige una herramienta arriba para generar",
+    "ai.status.configured": "API de {tool} configurada",
+    "ai.status.uploading": "Subiendo {field}...",
+    "ai.status.submitting": "Enviando tarea a RunningHub...",
+    "ai.status.task": "Tarea enviada: {taskId}",
+    "ai.status.running": "Generando... {seconds}s",
+    "ai.status.done": "Listo. Previsualiza y descarga el resultado.",
+    "ai.status.doneNoUrl": "La tarea terminó, pero no se encontró URL de resultado. Revisa RunningHub más tarde.",
+    "ai.status.failed": "Generación fallida: {message}",
+    "ai.result.title": "Resultado generado",
+    "ai.result.download": "Descargar resultado",
+    "ai.sample.download": "Descargar muestra",
+    "ai.error.prompt": "Escribe primero un prompt",
+    "ai.error.upload": "Sube {field}",
     "upload.title": "Añade tu imagen",
     "upload.copy": "Sube una foto para convertirla en fondo animado.",
     "upload.choose": "Elegir de la galería",
     "upload.hint": "Sube tu propia foto para generar",
     "loadMore": "Cargar más",
-    "footer.copy": "TK Wallpaper © 2026. Fondos gratis para uso personal. Los fondos animados y AI requieren puntos.",
+    "footer.copy": "TK Wallpaper © 2026. Fondos gratis para uso personal. Los fondos animados e IA requieren puntos.",
     "download": "Descargar",
     "download.withPoints": "Descargar ({points} pts)",
     "download.regenerate": "Regenerar (20 pts)",
@@ -416,7 +537,7 @@ const translations = {
     "compare.generate": "Generar fondo animado (20 pts)",
     "status.processing": "Procesando...",
     "status.uploadingImage": "Subiendo imagen...",
-    "status.creatingLive": "AI está creando el fondo animado... (1-5 min)",
+    "status.creatingLive": "La IA está creando el fondo animado... (1-5 min)",
     "status.processingSeconds": "Procesando... ({seconds}s)",
     "status.failed": "Falló. Inténtalo de nuevo.",
     "status.timedOut": "Tiempo agotado. Se restauraron los créditos.",
@@ -425,16 +546,17 @@ const translations = {
     "pricing.credits200": "200 créditos",
     "pricing.credits500": "500 créditos",
     "pricing.credits1200": "1200 créditos",
-    "pricing.gen5": "5 generaciones AI",
-    "pricing.gen10": "10 generaciones AI - Ahorra 12%",
-    "pricing.gen25": "25 generaciones AI - Ahorra 35%",
-    "pricing.gen60": "60 generaciones AI - Mejor valor",
+    "pricing.gen5": "5 generaciones IA",
+    "pricing.gen10": "10 generaciones IA - Ahorra 12%",
+    "pricing.gen25": "25 generaciones IA - Ahorra 35%",
+    "pricing.gen60": "60 generaciones IA - Mejor valor",
     "pricing.bestSeller": "MÁS VENDIDO",
     "card.text": "Texto",
     "card.live": "Animado",
     "card.free": "Gratis",
     "card.previewText": "Ver estilo de texto - {points} créditos",
     "card.previewLive": "Ver animación - {points} créditos",
+    "card.previewAi": "{badge} - {points} créditos",
     "card.freeDownload": "Descarga gratis",
     "toast.downloaded": "Descargado. {points} pts usados.",
     "toast.downloadFailed": "Falló la descarga: {message}",
@@ -535,6 +657,7 @@ const activeBrowseMode = document.getElementById("activeBrowseMode");
 const pointsToast = document.getElementById("pointsToast");
 const purchaseModal = document.getElementById("purchaseModal");
 const purchaseModalClose = document.getElementById("purchaseModalClose");
+const categoryNavWrap = document.querySelector(".category-nav-wrap");
 
 const aiModePanel = document.getElementById("aiModePanel");
 const aiModeTabs = document.querySelectorAll(".ai-mode-tab");
@@ -650,12 +773,32 @@ function escapeHtml(value) {
   }[char]));
 }
 
+function workflowTitle(workflow) {
+  return t(workflow?.titleKey || "ai.mode.textImage");
+}
+
+function fieldLabel(field) {
+  return t(field?.labelKey || "ai.field.image");
+}
+
+function fieldCaption(field) {
+  return t(field?.captionKey || "upload.hint");
+}
+
+function aiSampleLabel(item) {
+  return item.labelKey ? t(item.labelKey) : (item.label || "");
+}
+
+function aiSampleBadge(item) {
+  return item.badgeKey ? t(item.badgeKey) : (item.badge || "AI");
+}
+
 function mediaPreviewHTML(field, src) {
   if (!src) return '<span>+</span>';
   if (field.type === "video" || field.type === "output-video") {
     return `<video src="${escapeHtml(src)}" muted loop playsinline autoplay controls></video>`;
   }
-  return `<img src="${escapeHtml(src)}" alt="${escapeHtml(field.label)}">`;
+  return `<img src="${escapeHtml(src)}" alt="${escapeHtml(fieldLabel(field))}">`;
 }
 
 function workflowFieldHTML(field) {
@@ -663,8 +806,8 @@ function workflowFieldHTML(field) {
     const value = aiWorkflowState[currentAiMode]?.[field.key] || "";
     return `
       <label class="ai-workflow-field">
-        <span class="ai-workflow-label">${escapeHtml(field.label)}</span>
-        <textarea class="ai-workflow-textarea js-ai-prompt" data-field="${escapeHtml(field.key)}" placeholder="${escapeHtml(field.placeholder || "在此输入提示词")}">${escapeHtml(value)}</textarea>
+        <span class="ai-workflow-label">${escapeHtml(fieldLabel(field))}</span>
+        <textarea class="ai-workflow-textarea js-ai-prompt" data-field="${escapeHtml(field.key)}" placeholder="${escapeHtml(t(field.placeholderKey || "ai.prompt.enter"))}">${escapeHtml(value)}</textarea>
       </label>
     `;
   }
@@ -677,8 +820,8 @@ function workflowFieldHTML(field) {
     <div class="ai-upload-tile ${field.type === "output-video" ? "ai-output-tile" : ""}" data-field="${escapeHtml(field.key)}">
       <div class="ai-upload-preview">${mediaPreviewHTML(field, previewSrc)}</div>
       <div class="ai-upload-caption">
-        <strong>${escapeHtml(field.label)}</strong>
-        <span>${escapeHtml(selected?.file?.name || field.caption || "")}</span>
+        <strong>${escapeHtml(fieldLabel(field))}</strong>
+        <span>${escapeHtml(selected?.file?.name || fieldCaption(field))}</span>
       </div>
     </div>
   `;
@@ -686,7 +829,7 @@ function workflowFieldHTML(field) {
     return `
       <div class="ai-workflow-field">
         ${tile}
-        ${field.sample ? `<a class="btn-small" href="${escapeHtml(field.sample)}" download>下载示例</a>` : ""}
+        ${field.sample ? `<a class="btn-small" href="${escapeHtml(field.sample)}" download>${escapeHtml(t("ai.sample.download"))}</a>` : ""}
       </div>
     `;
   }
@@ -700,16 +843,22 @@ function workflowFieldHTML(field) {
 
 function renderAiWorkflowPanel() {
   if (!aiWorkflowPanel) return;
-  const workflow = aiWorkflows[currentAiMode] || aiWorkflows["text-image"];
-  if (aiModeCopy) aiModeCopy.textContent = workflow.copy;
+  const workflow = aiWorkflows[currentAiMode] || aiWorkflows.all;
+  const title = workflowTitle(workflow);
+  if (aiModeCopy) aiModeCopy.textContent = t(workflow.copyKey);
   aiWorkflowState[currentAiMode] ||= {};
+  const actionHTML = currentAiMode === "all"
+    ? `<span class="ai-workflow-status" id="aiWorkflowStatus">${escapeHtml(t("ai.status.chooseTool"))}</span>`
+    : `
+      <button class="btn-generate" id="aiWorkflowGenerate">${escapeHtml(t("ai.generate.credits"))}</button>
+      <span class="ai-workflow-status" id="aiWorkflowStatus">${escapeHtml(t("ai.status.configured", { tool: title }))}</span>
+    `;
   aiWorkflowPanel.innerHTML = `
     <div class="ai-workflow-grid">
       ${workflow.fields.map(workflowFieldHTML).join("")}
     </div>
     <div class="ai-workflow-actions">
-      <button class="btn-generate" id="aiWorkflowGenerate">生成（20积分）</button>
-      <span class="ai-workflow-status" id="aiWorkflowStatus">${escapeHtml(workflow.title)} API 已配置</span>
+      ${actionHTML}
     </div>
   `;
 
@@ -755,7 +904,7 @@ function setWallpaperSection(section) {
 }
 
 function setAiMode(mode) {
-  currentAiMode = aiWorkflows[mode] ? mode : "text-image";
+  currentAiMode = aiWorkflows[mode] ? mode : "all";
   currentCategory = "all";
   navLinks.forEach(link => link.classList.toggle("active", link.dataset.category === "all"));
   updateAiModeUI();
@@ -774,11 +923,16 @@ function getSectionData() {
   }
   if (currentSection === "live") return liveWallpapers.concat(extraWallpapers.filter(w => w.section === "live"));
   if (currentSection === "custom") {
-    const textSamples = aiTextWallpapers.map(item => ({ ...item, mode: "text-image", workflowPreview: true, badge: "文生图" }));
-    const baseCustom = currentAiMode === "text-image" && textSamples.length
+    const textSamples = aiTextWallpapers.map(item => ({ ...item, mode: "text-image", workflowPreview: true, badgeKey: "ai.badge.textImage" }));
+    const allCustomSamples = textSamples.length
+      ? textSamples.concat(aiWorkflowSamples.filter(item => item.mode !== "text-image"))
+      : aiWorkflowSamples;
+    const baseCustom = currentAiMode === "all"
+      ? allCustomSamples
+      : currentAiMode === "text-image" && textSamples.length
       ? textSamples
       : aiWorkflowSamples.filter(item => item.mode === currentAiMode);
-    return baseCustom.concat(extraWallpapers.filter(w => w.section === "custom" && (w.mode || "text-image") === currentAiMode));
+    return baseCustom.concat(extraWallpapers.filter(w => w.section === "custom" && (currentAiMode === "all" || (w.mode || "text-image") === currentAiMode)));
   }
   return [];
 }
@@ -827,12 +981,22 @@ function getFilteredData() {
   }
   if (currentSearch) {
     const q = currentSearch.toLowerCase();
-    data = data.filter(item => item.label.toLowerCase().includes(q) || item.category.toLowerCase().includes(q));
+    data = data.filter(item => {
+      const label = item.workflowPreview ? aiSampleLabel(item) : (item.label || "");
+      const category = item.category || "";
+      return label.toLowerCase().includes(q) || category.toLowerCase().includes(q);
+    });
   }
   return sortWallpapers(data);
 }
 
 function updateCategoryAvailability(data) {
+  if (categoryNavWrap) categoryNavWrap.style.display = currentSection === "custom" ? "none" : "";
+  if (currentSection === "custom") {
+    currentCategory = "all";
+    navLinks.forEach(link => link.classList.toggle("active", link.dataset.category === "all"));
+    return;
+  }
   let activeCategoryHasItems = currentCategory === "all";
   navLinks.forEach(link => {
     const category = link.dataset.category;
@@ -870,7 +1034,7 @@ function renderCards(data) {
     if (item.section === "custom" && item.mode === "text") {
       badgeHTML = `<span class="card-badge badge-points">${item.points || 20}P</span><span class="card-badge-dynamic">${t("card.text")}</span>`;
     } else if (item.section === "custom" && item.workflowPreview) {
-      badgeHTML = `<span class="card-badge badge-points">${item.points || 20}P</span><span class="card-badge-dynamic">${escapeHtml(item.badge || "AI")}</span>`;
+      badgeHTML = `<span class="card-badge badge-points">${item.points || 20}P</span><span class="card-badge-dynamic">${escapeHtml(aiSampleBadge(item))}</span>`;
       extraClass = item.videoUrl ? " card-dynamic" : "";
     } else if (item.section === "custom") {
       badgeHTML = `<span class="card-badge badge-points">20P</span><span class="card-badge-dynamic">${t("card.live")}</span>`;
@@ -882,23 +1046,24 @@ function renderCards(data) {
     }
 
     card.className = "wallpaper-card" + extraClass;
+    const cardLabel = item.workflowPreview ? aiSampleLabel(item) : item.label;
     const mediaHTML = item.videoUrl
-      ? `<video src="${item.videoUrl}" muted loop playsinline autoplay preload="metadata" aria-label="${item.label}"></video>`
-      : `<img src="${item.src}" alt="${item.label}" loading="lazy">`;
+      ? `<video src="${item.videoUrl}" muted loop playsinline autoplay preload="metadata" aria-label="${escapeHtml(cardLabel)}"></video>`
+      : `<img src="${item.src}" alt="${escapeHtml(cardLabel)}" loading="lazy">`;
     const actionHint = item.workflowPreview
-      ? `${item.badge || "AI"} 预览 - ${item.points || 20} credits`
+      ? t("card.previewAi", { badge: aiSampleBadge(item), points: item.points || 20 })
       : item.free === false
       ? t(item.mode === "text" ? "card.previewText" : "card.previewLive", { points: item.points })
       : t("card.freeDownload");
     card.innerHTML = `
       ${mediaHTML}
-      <span class="card-label">${escapeHtml(item.label)}</span>
-      <span class="card-action-hint">${actionHint}</span>
+      <span class="card-label">${escapeHtml(cardLabel)}</span>
+      <span class="card-action-hint">${escapeHtml(actionHint)}</span>
       ${badgeHTML}
     `;
     card.addEventListener("click", () => {
       if (item.workflowPreview) {
-        openLightbox(item);
+        openLightbox({ ...item, label: aiSampleLabel(item) });
       } else if (item.section === "custom" && item.mode === "text") {
         openTextPreview(item);
       } else if (item.section === "custom") {
@@ -947,32 +1112,34 @@ document.addEventListener("click", (event) => {
 });
 
 function applyRouteFromHash() {
-  const href = window.location.href || "";
   const hash = (window.location.hash || "").replace("#", "");
-  if (hash === "live" || href.endsWith("#live")) {
+  if (hash === "live") {
     currentSection = "live";
-    currentAiMode = "text-image";
-  } else if (hash === "custom-text-image" || hash === "custom-text" || href.includes("#custom-text")) {
+    currentAiMode = "all";
+  } else if (hash === "custom-all") {
+    currentSection = "custom";
+    currentAiMode = "all";
+  } else if (hash === "custom-text-image" || hash === "custom-text") {
     currentSection = "custom";
     currentAiMode = "text-image";
-  } else if (hash === "custom-cg-image" || hash === "custom-image" || href.includes("#custom-cg-image") || href.includes("#custom-image")) {
+  } else if (hash === "custom-cg-image" || hash === "custom-image") {
     currentSection = "custom";
     currentAiMode = "cg-image";
-  } else if (hash === "custom-image-video" || href.includes("#custom-image-video")) {
+  } else if (hash === "custom-image-video") {
     currentSection = "custom";
     currentAiMode = "image-video";
-  } else if (hash === "custom-face-swap" || href.includes("#custom-face-swap")) {
+  } else if (hash === "custom-face-swap") {
     currentSection = "custom";
     currentAiMode = "face-swap";
-  } else if (hash === "custom-couple-photo" || href.includes("#custom-couple-photo")) {
+  } else if (hash === "custom-couple-photo") {
     currentSection = "custom";
     currentAiMode = "couple-photo";
-  } else if (hash === "custom" || href.endsWith("#custom")) {
+  } else if (hash === "custom") {
     currentSection = "custom";
-    currentAiMode = "text-image";
+    currentAiMode = "all";
   } else {
     currentSection = "static";
-    currentAiMode = "text-image";
+    currentAiMode = "all";
   }
   currentCategory = "all";
   sectionTabs.forEach(tab => tab.classList.toggle("active", tab.dataset.section === currentSection));
@@ -988,7 +1155,7 @@ window.addEventListener("hashchange", applyRouteFromHash);
 
 aiModeTabs.forEach(tab => {
   tab.addEventListener("click", () => {
-    currentAiMode = tab.dataset.aiMode || "image";
+    currentAiMode = tab.dataset.aiMode || "all";
     currentCategory = "all";
     navLinks.forEach(link => link.classList.toggle("active", link.dataset.category === "all"));
     updateAiModeUI();
@@ -1344,7 +1511,7 @@ function setAiWorkflowBusy(isBusy) {
   const button = document.getElementById("aiWorkflowGenerate");
   if (!button) return;
   button.disabled = isBusy;
-  button.textContent = isBusy ? "生成中..." : "生成（20积分）";
+  button.textContent = isBusy ? t("ai.generate.busy") : t("ai.generate.credits");
 }
 
 function findResultUrl(value, seen = new Set()) {
@@ -1378,8 +1545,8 @@ function showAiWorkflowResult(mode, resultUrl) {
   const resultHTML = `
     <div class="ai-upload-preview">${resultMedia}</div>
     <div class="ai-upload-caption">
-      <strong>生成结果</strong>
-      <a href="${escapeHtml(resultUrl)}" download>下载成品</a>
+      <strong>${escapeHtml(t("ai.result.title"))}</strong>
+      <a href="${escapeHtml(resultUrl)}" download>${escapeHtml(t("ai.result.download"))}</a>
     </div>
   `;
   if (outputTile) {
@@ -1398,14 +1565,14 @@ async function pollAiWorkflowResult(taskId, mode) {
     await new Promise(resolve => setTimeout(resolve, 10000));
     const queryResp = await fetch(`/api/ai-workflow?taskId=${encodeURIComponent(taskId)}`);
     const queryData = await queryResp.json();
-    setAiWorkflowStatus(`生成中... ${attempt * 10}s`);
+    setAiWorkflowStatus(t("ai.status.running", { seconds: attempt * 10 }));
     if (queryData.status === "SUCCESS" || queryData.data?.status === "SUCCESS") {
       const resultUrl = findResultUrl(queryData);
       if (resultUrl) {
         showAiWorkflowResult(mode, resultUrl);
-        setAiWorkflowStatus("生成完成，可预览和下载成品。");
+        setAiWorkflowStatus(t("ai.status.done"));
       } else {
-        setAiWorkflowStatus("任务完成，但没有识别到结果链接，请稍后到 RunningHub 后台查看。");
+        setAiWorkflowStatus(t("ai.status.doneNoUrl"));
       }
       return true;
     }
@@ -1424,13 +1591,17 @@ async function buildAiWorkflowPayload(mode) {
   for (const field of workflow.fields) {
     if (field.type === "prompt") {
       const prompt = String(state[field.key] || "").trim();
-      if (!prompt) throw new Error("请先输入提示词");
+      if (!prompt) {
+        if (field.optional) continue;
+        throw new Error(t("ai.error.prompt"));
+      }
       payload.prompt = prompt;
     }
     if (field.type === "image") {
       const file = state[field.key]?.file;
-      if (!file) throw new Error(`请上传${field.label}`);
-      setAiWorkflowStatus(`正在上传${field.label}...`);
+      const label = fieldLabel(field);
+      if (!file) throw new Error(t("ai.error.upload", { field: label }));
+      setAiWorkflowStatus(t("ai.status.uploading", { field: label }));
       const url = await uploadFileToR2(file);
       if (field.key === "image2") payload.imageUrl2 = url;
       else if (field.key === "face") payload.faceUrl = url;
@@ -1438,8 +1609,9 @@ async function buildAiWorkflowPayload(mode) {
     }
     if (field.type === "video") {
       const file = state[field.key]?.file;
-      if (!file) throw new Error(`请上传${field.label}`);
-      setAiWorkflowStatus(`正在上传${field.label}...`);
+      const label = fieldLabel(field);
+      if (!file) throw new Error(t("ai.error.upload", { field: label }));
+      setAiWorkflowStatus(t("ai.status.uploading", { field: label }));
       payload.videoUrl = await uploadFileToR2(file);
     }
   }
@@ -1460,9 +1632,9 @@ async function runAiWorkflow() {
     userPoints -= 20;
     charged = true;
     await updatePointsToDB(userPoints);
-    await logTransaction("generation", -20, workflow.title);
+    await logTransaction("generation", -20, workflowTitle(workflow));
 
-    setAiWorkflowStatus("正在提交 RunningHub 任务...");
+    setAiWorkflowStatus(t("ai.status.submitting"));
     const submitResp = await fetch("/api/ai-workflow", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -1472,10 +1644,10 @@ async function runAiWorkflow() {
     if (!submitResp.ok || !submitData.success || !submitData.taskId) {
       throw new Error(submitData.error || "Submit failed");
     }
-    setAiWorkflowStatus(`任务已提交：${submitData.taskId}`);
+    setAiWorkflowStatus(t("ai.status.task", { taskId: submitData.taskId }));
     await pollAiWorkflowResult(submitData.taskId, mode);
   } catch (err) {
-    setAiWorkflowStatus("生成失败：" + err.message);
+    setAiWorkflowStatus(t("ai.status.failed", { message: err.message }));
     if (charged) {
       userPoints += 20;
       await updatePointsToDB(userPoints);
