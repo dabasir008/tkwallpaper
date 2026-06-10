@@ -14,6 +14,7 @@
 - 未登录状态下积分显示仍按登录态控制：只有登录后显示用户积分。
 - 已推送并验证线上版本 `20260610-ai5-3`，线上 JS 已包含 `All`、AI 预览文案和 `custom-image-video` 精确路由修复。
 - 本窗口继续：将 `Photo to CG` / 图转 CG 预览图替换为 `assets/ai-workflows/photo-to-cg-preview.webp`，并将 AdSense 从 head 直连改为首屏加载后延迟注入；本地版本号更新到 `20260610-ai5-5`，图片引用也带版本参数避免旧预览缓存。
+- 已在 Vercel 添加 `www.tkwallpaper.com`，并补充 `vercel.json` 将 `www` 301 到根域名；补充基础 SEO 文件和首页 canonical/OG/JSON-LD；修复上传接口变量名冲突。
 
 ## 当前主要文件
 

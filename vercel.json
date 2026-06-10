@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.tkwallpaper.com"
+        }
+      ],
+      "destination": "https://tkwallpaper.com/:path*",
+      "permanent": true
+    }
+  ]
+}

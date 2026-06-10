@@ -77,8 +77,8 @@ export default async function handler(req, res) {
   if (!process.env.R2_ACCESS_KEY_ID || !process.env.R2_SECRET_ACCESS_KEY) return res.status(500).json({ error: "R2 env vars are not configured" });
 
   try {
-    const contentType = req.headers["content-type"] || "";
-    const boundary = contentType.split("boundary=")[1]?.replace(/^"|"$/g, "");
+    const requestContentType = req.headers["content-type"] || "";
+    const boundary = requestContentType.split("boundary=")[1]?.replace(/^"|"$/g, "");
     if (!boundary) return res.status(400).json({ error: "Need multipart upload" });
 
     const chunks = [];
@@ -95,15 +95,15 @@ export default async function handler(req, res) {
     if (!filePart) return res.status(400).json({ error: "No file found" });
 
     const ext = (filePart.filename.split(".").pop() || "jpg").toLowerCase();
-    const contentType = contentTypes[ext];
-    if (!contentType) return res.status(400).json({ error: "Unsupported file type" });
+    const uploadContentType = contentTypes[ext];
+    if (!uploadContentType) return res.status(400).json({ error: "Unsupported file type" });
     const key = `uploads/${crypto.randomBytes(16).toString("hex")}.${ext}`;
 
     await s3.send(new PutObjectCommand({
       Bucket: R2_BUCKET,
       Key: key,
       Body: filePart.data,
-      ContentType: contentType,
+      ContentType: uploadContentType,
       CacheControl: "public, max-age=2592000",
     }));
 
