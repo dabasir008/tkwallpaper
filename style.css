@@ -477,6 +477,47 @@ a {
   border-color: #4f46e5;
 }
 
+.seo-links {
+  margin-top: 34px;
+  padding: 22px;
+  border: 1px solid #252525;
+  border-radius: 8px;
+  background: #151515;
+}
+
+.seo-links h2 {
+  margin: 8px 0;
+  font-size: 24px;
+}
+
+.seo-links p {
+  max-width: 760px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+.seo-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.seo-link-grid a {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 13px;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  color: #f1f1f1;
+  background: #101010;
+}
+
+.seo-link-grid a:hover {
+  border-color: #6c5ce7;
+}
+
 /* ===== 搴曢儴 ===== */
 .footer {
   text-align: center;
