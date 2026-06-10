@@ -10,11 +10,14 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 const R2_ENDPOINT = "https://4abbe2c70aaa6ef87964494d6c726ae2.r2.cloudflarestorage.com";
 const R2_BUCKET = "tkwallpaper";
 const R2_PUBLIC = "https://pub-47bcb2d7ff1d4d90b554d3cc5a254b57.r2.dev";
-const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;
 const ALLOWED_TYPES = new Map([
   ["image/jpeg", "jpg"],
   ["image/png", "png"],
   ["image/webp", "webp"],
+  ["video/mp4", "mp4"],
+  ["video/webm", "webm"],
+  ["video/quicktime", "mov"],
 ]);
 
 const s3 = new S3Client({
@@ -34,6 +37,9 @@ const contentTypes = {
   png: "image/png",
   webp: "image/webp",
   gif: "image/gif",
+  mp4: "video/mp4",
+  webm: "video/webm",
+  mov: "video/quicktime",
 };
 
 function parseMultipart(buffer, boundary) {

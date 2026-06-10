@@ -8,7 +8,7 @@
   <title>TK Wallpaper - Free HD & Live Wallpapers</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8489634814754606"
      crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css?v=20260610-cats-1">
+  <link rel="stylesheet" href="style.css?v=20260610-ai5-1">
 </head>
 <body>
 
@@ -116,14 +116,14 @@
     <!-- 图片网格 -->
     <div class="ai-mode-panel" id="aiModePanel" style="display:none;">
       <div class="ai-mode-tabs" aria-label="AI custom mode">
-        <a href="#custom-image" class="ai-mode-tab active" data-ai-mode="image" onclick="window.setAiMode && window.setAiMode('image')" data-i18n="ai.imageMode">Image to Image</a>
-        <a href="#custom-text" class="ai-mode-tab" data-ai-mode="text" onclick="window.setAiMode && window.setAiMode('text')" data-i18n="ai.textMode">Text to Image</a>
+        <a href="#custom-text-image" class="ai-mode-tab active" data-ai-mode="text-image" onclick="window.setAiMode && window.setAiMode('text-image')">文生图</a>
+        <a href="#custom-cg-image" class="ai-mode-tab" data-ai-mode="cg-image" onclick="window.setAiMode && window.setAiMode('cg-image')">真人转CG</a>
+        <a href="#custom-image-video" class="ai-mode-tab" data-ai-mode="image-video" onclick="window.setAiMode && window.setAiMode('image-video')">图生视频</a>
+        <a href="#custom-face-swap" class="ai-mode-tab" data-ai-mode="face-swap" onclick="window.setAiMode && window.setAiMode('face-swap')">AI视频人物替换</a>
+        <a href="#custom-couple-photo" class="ai-mode-tab" data-ai-mode="couple-photo" onclick="window.setAiMode && window.setAiMode('couple-photo')">AI双人合影</a>
       </div>
-      <p class="ai-mode-copy" id="aiModeCopy" data-i18n="ai.copy.image">Upload your photo, preview the target motion style, then generate a live wallpaper.</p>
-      <div class="ai-text-prompt" id="aiTextPromptBox" style="display:none;">
-        <input type="text" id="aiTextPrompt" placeholder="Describe your wallpaper style..." data-i18n-placeholder="ai.prompt.placeholder">
-        <button class="btn-generate" id="aiTextGenerate" data-i18n="ai.generateText">Generate Text Wallpaper (20 pts)</button>
-      </div>
+      <p class="ai-mode-copy" id="aiModeCopy">选择一个 AI 生成工具，上传素材或输入提示词后消耗 20 积分生成。</p>
+      <div class="ai-workflow-panel" id="aiWorkflowPanel"></div>
     </div>
 
     <div class="wallpaper-grid" id="wallpaperGrid">
@@ -275,6 +275,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=20260610-cats-1"></script>
+  <script src="script.js?v=20260610-ai5-1"></script>
 </body>
 </html>

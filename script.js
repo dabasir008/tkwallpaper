@@ -139,13 +139,62 @@ const aiWallpapers = [
   { id: 203, src: "assets/generated/neon-rain-cyber-glow.png", category: "cyberpunk", label: "Neon Rain Style", section: "custom", free: false, points: 20 },
 ];
 let aiTextWallpapers = [];
+const aiWorkflowSamples = [
+  { id: 401, src: "assets/generated/liquid-glass-halo.png", category: "custom", label: "文生图样例", section: "custom", mode: "text-image", free: false, points: 20, workflowPreview: true, badge: "文生图" },
+  { id: 402, src: "assets/generated/forest-deer-glow.png", category: "custom", label: "真人转CG样例", section: "custom", mode: "cg-image", free: false, points: 20, workflowPreview: true, badge: "CG" },
+  { id: 403, src: "assets/live/safe-motion-rain-glass-neon-alley.mp4", videoUrl: "assets/live/safe-motion-rain-glass-neon-alley.mp4", category: "custom", label: "图生视频样例", section: "custom", mode: "image-video", free: false, points: 20, workflowPreview: true, badge: "视频" },
+  { id: 404, src: "assets/ai-workflows/face-swap-result.mp4", videoUrl: "assets/ai-workflows/face-swap-result.mp4", category: "custom", label: "AI视频人物替换样例", section: "custom", mode: "face-swap", free: false, points: 20, workflowPreview: true, badge: "换脸" },
+  { id: 405, src: "assets/generated/poetcore-moon-desk.png", category: "custom", label: "AI双人合影样例", section: "custom", mode: "couple-photo", free: false, points: 20, workflowPreview: true, badge: "合影" },
+];
+const aiWorkflows = {
+  "text-image": {
+    title: "文生图",
+    copy: "输入提示词生成手机壁纸。默认 9:16 竖图，消耗 20 积分。",
+    fields: [
+      { key: "prompt", type: "prompt", label: "提示词", placeholder: "在此输入提示词" },
+    ],
+  },
+  "cg-image": {
+    title: "图生图 - 真人转CG",
+    copy: "上传真人照片，生成 CG 风格成品。下方示例图用于展示效果方向。",
+    fields: [
+      { key: "image", type: "image", label: "真人照片", caption: "在此上传你的照片", sample: "assets/generated/forest-deer-glow.png" },
+    ],
+  },
+  "image-video": {
+    title: "图生视频",
+    copy: "上传图片并输入运动提示词，默认生成 5 秒视频。",
+    fields: [
+      { key: "image", type: "image", label: "上传图片", caption: "上传要生成视频的图片", sample: "assets/generated/rain-glass-neon-alley.png" },
+      { key: "prompt", type: "prompt", label: "视频提示词", placeholder: "在此输入提示词" },
+    ],
+  },
+  "face-swap": {
+    title: "AI视频人物替换",
+    copy: "上传原视频和替换人脸，参考右侧成品效果生成 5 秒视频。",
+    fields: [
+      { key: "video", type: "video", label: "原视频", caption: "上传要替换人物的原视频", sample: "assets/ai-workflows/face-swap-original.mp4" },
+      { key: "face", type: "image", label: "替换人脸", caption: "上传替换的人脸照片", sample: "assets/ai-workflows/face-swap-face.png" },
+      { key: "result", type: "output-video", label: "成品视频", caption: "生成后在此预览并下载", sample: "assets/ai-workflows/face-swap-result.mp4" },
+    ],
+  },
+  "couple-photo": {
+    title: "AI双人合影",
+    copy: "上传两张人物照片，生成自然双人合影。",
+    fields: [
+      { key: "image", type: "image", label: "人物照片 1", caption: "上传第一张照片", sample: "assets/generated/analog-paper-flower.png" },
+      { key: "image2", type: "image", label: "人物照片 2", caption: "上传第二张照片", sample: "assets/generated/jelly-pastel-shapes.png" },
+    ],
+  },
+};
+const aiWorkflowState = {};
 
 // ===== 鐘舵€?=====
 let currentSection = "static";
 let currentCategory = "all";
 let currentSearch = "";
 let currentSort = "popular";
-let currentAiMode = "image";
+let currentAiMode = "text-image";
 let userPoints = 0;
 let extraWallpapers = [];
 let extraIdCounter = 1000;
@@ -490,6 +539,7 @@ const purchaseModalClose = document.getElementById("purchaseModalClose");
 const aiModePanel = document.getElementById("aiModePanel");
 const aiModeTabs = document.querySelectorAll(".ai-mode-tab");
 const aiModeCopy = document.getElementById("aiModeCopy");
+const aiWorkflowPanel = document.getElementById("aiWorkflowPanel");
 const aiTextPromptBox = document.getElementById("aiTextPromptBox");
 const aiTextPrompt = document.getElementById("aiTextPrompt");
 const aiTextGenerate = document.getElementById("aiTextGenerate");
@@ -590,14 +640,104 @@ function updatePointsBarVisibility() {
   if (pointsAccount) pointsAccount.style.display = currentUser ? "inline-flex" : "none";
 }
 
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  }[char]));
+}
+
+function mediaPreviewHTML(field, src) {
+  if (!src) return '<span>+</span>';
+  if (field.type === "video" || field.type === "output-video") {
+    return `<video src="${escapeHtml(src)}" muted loop playsinline autoplay controls></video>`;
+  }
+  return `<img src="${escapeHtml(src)}" alt="${escapeHtml(field.label)}">`;
+}
+
+function workflowFieldHTML(field) {
+  if (field.type === "prompt") {
+    const value = aiWorkflowState[currentAiMode]?.[field.key] || "";
+    return `
+      <label class="ai-workflow-field">
+        <span class="ai-workflow-label">${escapeHtml(field.label)}</span>
+        <textarea class="ai-workflow-textarea js-ai-prompt" data-field="${escapeHtml(field.key)}" placeholder="${escapeHtml(field.placeholder || "在此输入提示词")}">${escapeHtml(value)}</textarea>
+      </label>
+    `;
+  }
+
+  const selected = aiWorkflowState[currentAiMode]?.[field.key];
+  const selectedUrl = selected?.previewUrl || "";
+  const previewSrc = selectedUrl || field.sample || "";
+  const accept = field.type === "video" ? "video/mp4,video/webm,video/quicktime" : "image/*";
+  const tile = `
+    <div class="ai-upload-tile ${field.type === "output-video" ? "ai-output-tile" : ""}" data-field="${escapeHtml(field.key)}">
+      <div class="ai-upload-preview">${mediaPreviewHTML(field, previewSrc)}</div>
+      <div class="ai-upload-caption">
+        <strong>${escapeHtml(field.label)}</strong>
+        <span>${escapeHtml(selected?.file?.name || field.caption || "")}</span>
+      </div>
+    </div>
+  `;
+  if (field.type === "output-video") {
+    return `
+      <div class="ai-workflow-field">
+        ${tile}
+        ${field.sample ? `<a class="btn-small" href="${escapeHtml(field.sample)}" download>下载示例</a>` : ""}
+      </div>
+    `;
+  }
+  return `
+    <label class="ai-workflow-field">
+      <input class="js-ai-file" data-field="${escapeHtml(field.key)}" type="file" accept="${accept}" style="display:none;">
+      ${tile}
+    </label>
+  `;
+}
+
+function renderAiWorkflowPanel() {
+  if (!aiWorkflowPanel) return;
+  const workflow = aiWorkflows[currentAiMode] || aiWorkflows["text-image"];
+  if (aiModeCopy) aiModeCopy.textContent = workflow.copy;
+  aiWorkflowState[currentAiMode] ||= {};
+  aiWorkflowPanel.innerHTML = `
+    <div class="ai-workflow-grid">
+      ${workflow.fields.map(workflowFieldHTML).join("")}
+    </div>
+    <div class="ai-workflow-actions">
+      <button class="btn-generate" id="aiWorkflowGenerate">生成（20积分）</button>
+      <span class="ai-workflow-status" id="aiWorkflowStatus">${escapeHtml(workflow.title)} API 已配置</span>
+    </div>
+  `;
+
+  aiWorkflowPanel.querySelectorAll(".js-ai-prompt").forEach(input => {
+    input.addEventListener("input", () => {
+      aiWorkflowState[currentAiMode][input.dataset.field] = input.value;
+    });
+  });
+  aiWorkflowPanel.querySelectorAll(".js-ai-file").forEach(input => {
+    input.addEventListener("change", () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const fieldKey = input.dataset.field;
+      const previewUrl = URL.createObjectURL(file);
+      aiWorkflowState[currentAiMode][fieldKey] = { file, previewUrl };
+      renderAiWorkflowPanel();
+    });
+  });
+  const generateBtn = document.getElementById("aiWorkflowGenerate");
+  if (generateBtn) generateBtn.addEventListener("click", runAiWorkflow);
+}
+
 function updateAiModeUI() {
   if (aiModePanel) aiModePanel.style.display = currentSection === "custom" ? "block" : "none";
-  if (aiUploadArea) aiUploadArea.style.display = currentSection === "custom" && currentAiMode === "image" ? "block" : "none";
-  if (aiTextPromptBox) aiTextPromptBox.style.display = currentSection === "custom" && currentAiMode === "text" ? "flex" : "none";
-  if (aiModeCopy) {
-    aiModeCopy.textContent = currentAiMode === "image" ? t("ai.copy.image") : t("ai.copy.text");
-  }
+  if (aiUploadArea) aiUploadArea.style.display = "none";
+  if (aiTextPromptBox) aiTextPromptBox.style.display = "none";
   aiModeTabs.forEach(tab => tab.classList.toggle("active", tab.dataset.aiMode === currentAiMode));
+  renderAiWorkflowPanel();
 }
 
 function setWallpaperSection(section) {
@@ -615,7 +755,7 @@ function setWallpaperSection(section) {
 }
 
 function setAiMode(mode) {
-  currentAiMode = mode || "image";
+  currentAiMode = aiWorkflows[mode] ? mode : "text-image";
   currentCategory = "all";
   navLinks.forEach(link => link.classList.toggle("active", link.dataset.category === "all"));
   updateAiModeUI();
@@ -634,8 +774,11 @@ function getSectionData() {
   }
   if (currentSection === "live") return liveWallpapers.concat(extraWallpapers.filter(w => w.section === "live"));
   if (currentSection === "custom") {
-    const baseCustom = currentAiMode === "text" ? aiTextWallpapers : aiWallpapers;
-    return baseCustom.concat(extraWallpapers.filter(w => w.section === "custom" && (w.mode || "image") === currentAiMode));
+    const textSamples = aiTextWallpapers.map(item => ({ ...item, mode: "text-image", workflowPreview: true, badge: "文生图" }));
+    const baseCustom = currentAiMode === "text-image" && textSamples.length
+      ? textSamples
+      : aiWorkflowSamples.filter(item => item.mode === currentAiMode);
+    return baseCustom.concat(extraWallpapers.filter(w => w.section === "custom" && (w.mode || "text-image") === currentAiMode));
   }
   return [];
 }
@@ -726,6 +869,9 @@ function renderCards(data) {
     let extraClass = "";
     if (item.section === "custom" && item.mode === "text") {
       badgeHTML = `<span class="card-badge badge-points">${item.points || 20}P</span><span class="card-badge-dynamic">${t("card.text")}</span>`;
+    } else if (item.section === "custom" && item.workflowPreview) {
+      badgeHTML = `<span class="card-badge badge-points">${item.points || 20}P</span><span class="card-badge-dynamic">${escapeHtml(item.badge || "AI")}</span>`;
+      extraClass = item.videoUrl ? " card-dynamic" : "";
     } else if (item.section === "custom") {
       badgeHTML = `<span class="card-badge badge-points">20P</span><span class="card-badge-dynamic">${t("card.live")}</span>`;
       extraClass = " card-dynamic";
@@ -739,17 +885,21 @@ function renderCards(data) {
     const mediaHTML = item.videoUrl
       ? `<video src="${item.videoUrl}" muted loop playsinline autoplay preload="metadata" aria-label="${item.label}"></video>`
       : `<img src="${item.src}" alt="${item.label}" loading="lazy">`;
-    const actionHint = item.free === false
+    const actionHint = item.workflowPreview
+      ? `${item.badge || "AI"} 预览 - ${item.points || 20} credits`
+      : item.free === false
       ? t(item.mode === "text" ? "card.previewText" : "card.previewLive", { points: item.points })
       : t("card.freeDownload");
     card.innerHTML = `
       ${mediaHTML}
-      <span class="card-label">${item.label}</span>
+      <span class="card-label">${escapeHtml(item.label)}</span>
       <span class="card-action-hint">${actionHint}</span>
       ${badgeHTML}
     `;
     card.addEventListener("click", () => {
-      if (item.section === "custom" && item.mode === "text") {
+      if (item.workflowPreview) {
+        openLightbox(item);
+      } else if (item.section === "custom" && item.mode === "text") {
         openTextPreview(item);
       } else if (item.section === "custom") {
         openCompareModal(item);
@@ -801,16 +951,28 @@ function applyRouteFromHash() {
   const hash = (window.location.hash || "").replace("#", "");
   if (hash === "live" || href.endsWith("#live")) {
     currentSection = "live";
-    currentAiMode = "image";
-  } else if (hash === "custom-text" || href.includes("#custom-text")) {
+    currentAiMode = "text-image";
+  } else if (hash === "custom-text-image" || hash === "custom-text" || href.includes("#custom-text")) {
     currentSection = "custom";
-    currentAiMode = "text";
-  } else if (hash === "custom-image" || hash === "custom" || href.includes("#custom-image") || href.endsWith("#custom")) {
+    currentAiMode = "text-image";
+  } else if (hash === "custom-cg-image" || hash === "custom-image" || href.includes("#custom-cg-image") || href.includes("#custom-image")) {
     currentSection = "custom";
-    currentAiMode = "image";
+    currentAiMode = "cg-image";
+  } else if (hash === "custom-image-video" || href.includes("#custom-image-video")) {
+    currentSection = "custom";
+    currentAiMode = "image-video";
+  } else if (hash === "custom-face-swap" || href.includes("#custom-face-swap")) {
+    currentSection = "custom";
+    currentAiMode = "face-swap";
+  } else if (hash === "custom-couple-photo" || href.includes("#custom-couple-photo")) {
+    currentSection = "custom";
+    currentAiMode = "couple-photo";
+  } else if (hash === "custom" || href.endsWith("#custom")) {
+    currentSection = "custom";
+    currentAiMode = "text-image";
   } else {
     currentSection = "static";
-    currentAiMode = "image";
+    currentAiMode = "text-image";
   }
   currentCategory = "all";
   sectionTabs.forEach(tab => tab.classList.toggle("active", tab.dataset.section === currentSection));
@@ -907,7 +1069,7 @@ loadMoreBtn.addEventListener("click", () => {
   const categories = ["nature", "abstract", "cyberpunk", "minimal", "car", "anime", "animals", "wealth", "lucky", "funny", "cool", "mystic", "sci-fi", "scenery", "fantasy"];
   const count = currentSection === "live" || currentSection === "custom" ? 4 : 8;
   const staticPool = (managedStaticWallpapers.length ? managedStaticWallpapers : staticWallpapers).filter(item => item.src);
-  const customPool = (currentAiMode === "text" ? aiTextWallpapers : aiWallpapers).filter(item => item.src);
+  const customPool = getSectionData().filter(item => item.src);
   for (let i = 0; i < count; i++) {
     const staticItem = staticPool[Math.floor(Math.random() * staticPool.length)];
     const customItem = customPool[Math.floor(Math.random() * customPool.length)];
@@ -924,6 +1086,7 @@ loadMoreBtn.addEventListener("click", () => {
       free: currentSection === "static",
       points: currentSection === "live" ? 15 : currentSection === "custom" ? 20 : 0,
       videoUrl: currentSection === "static" ? "" : videoUrl,
+      mode: currentSection === "custom" ? currentAiMode : undefined,
     });
   }
   applyFilter();
@@ -1172,6 +1335,156 @@ compareBtnGenerate.addEventListener("click", async () => {
   }
 });
 
+function setAiWorkflowStatus(message) {
+  const status = document.getElementById("aiWorkflowStatus");
+  if (status) status.textContent = message;
+}
+
+function setAiWorkflowBusy(isBusy) {
+  const button = document.getElementById("aiWorkflowGenerate");
+  if (!button) return;
+  button.disabled = isBusy;
+  button.textContent = isBusy ? "生成中..." : "生成（20积分）";
+}
+
+function findResultUrl(value, seen = new Set()) {
+  if (!value || seen.has(value)) return "";
+  if (typeof value === "string") return /^https?:\/\//.test(value) ? value : "";
+  if (typeof value !== "object") return "";
+  seen.add(value);
+  if (typeof value.url === "string" && /^https?:\/\//.test(value.url)) return value.url;
+  if (typeof value.fileUrl === "string" && /^https?:\/\//.test(value.fileUrl)) return value.fileUrl;
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const found = findResultUrl(item, seen);
+      if (found) return found;
+    }
+    return "";
+  }
+  for (const item of Object.values(value)) {
+    const found = findResultUrl(item, seen);
+    if (found) return found;
+  }
+  return "";
+}
+
+function showAiWorkflowResult(mode, resultUrl) {
+  if (!resultUrl || !aiWorkflowPanel) return;
+  const isVideo = mode === "image-video" || mode === "face-swap";
+  const outputTile = aiWorkflowPanel.querySelector(".ai-output-tile");
+  const resultMedia = isVideo
+    ? `<video src="${escapeHtml(resultUrl)}" controls loop muted playsinline autoplay></video>`
+    : `<img src="${escapeHtml(resultUrl)}" alt="AI result">`;
+  const resultHTML = `
+    <div class="ai-upload-preview">${resultMedia}</div>
+    <div class="ai-upload-caption">
+      <strong>生成结果</strong>
+      <a href="${escapeHtml(resultUrl)}" download>下载成品</a>
+    </div>
+  `;
+  if (outputTile) {
+    outputTile.innerHTML = resultHTML;
+  } else {
+    aiWorkflowPanel.querySelector(".ai-workflow-grid")?.insertAdjacentHTML("beforeend", `
+      <div class="ai-workflow-field">
+        <div class="ai-upload-tile ai-output-tile">${resultHTML}</div>
+      </div>
+    `);
+  }
+}
+
+async function pollAiWorkflowResult(taskId, mode) {
+  for (let attempt = 1; attempt <= 45; attempt++) {
+    await new Promise(resolve => setTimeout(resolve, 10000));
+    const queryResp = await fetch(`/api/ai-workflow?taskId=${encodeURIComponent(taskId)}`);
+    const queryData = await queryResp.json();
+    setAiWorkflowStatus(`生成中... ${attempt * 10}s`);
+    if (queryData.status === "SUCCESS" || queryData.data?.status === "SUCCESS") {
+      const resultUrl = findResultUrl(queryData);
+      if (resultUrl) {
+        showAiWorkflowResult(mode, resultUrl);
+        setAiWorkflowStatus("生成完成，可预览和下载成品。");
+      } else {
+        setAiWorkflowStatus("任务完成，但没有识别到结果链接，请稍后到 RunningHub 后台查看。");
+      }
+      return true;
+    }
+    if (queryData.status === "FAILED" || queryData.data?.status === "FAILED") {
+      throw new Error("RunningHub task failed");
+    }
+  }
+  throw new Error("Timed out");
+}
+
+async function buildAiWorkflowPayload(mode) {
+  const workflow = aiWorkflows[mode];
+  const state = aiWorkflowState[mode] || {};
+  const payload = { mode };
+
+  for (const field of workflow.fields) {
+    if (field.type === "prompt") {
+      const prompt = String(state[field.key] || "").trim();
+      if (!prompt) throw new Error("请先输入提示词");
+      payload.prompt = prompt;
+    }
+    if (field.type === "image") {
+      const file = state[field.key]?.file;
+      if (!file) throw new Error(`请上传${field.label}`);
+      setAiWorkflowStatus(`正在上传${field.label}...`);
+      const url = await uploadFileToR2(file);
+      if (field.key === "image2") payload.imageUrl2 = url;
+      else if (field.key === "face") payload.faceUrl = url;
+      else payload.imageUrl = url;
+    }
+    if (field.type === "video") {
+      const file = state[field.key]?.file;
+      if (!file) throw new Error(`请上传${field.label}`);
+      setAiWorkflowStatus(`正在上传${field.label}...`);
+      payload.videoUrl = await uploadFileToR2(file);
+    }
+  }
+  return payload;
+}
+
+async function runAiWorkflow() {
+  const mode = currentAiMode;
+  const workflow = aiWorkflows[mode];
+  if (!workflow) return;
+  if (!currentUser) { showAuthModal("login"); return; }
+  if (userPoints < 20) { showPurchaseModal(); return; }
+
+  setAiWorkflowBusy(true);
+  let charged = false;
+  try {
+    const payload = await buildAiWorkflowPayload(mode);
+    userPoints -= 20;
+    charged = true;
+    await updatePointsToDB(userPoints);
+    await logTransaction("generation", -20, workflow.title);
+
+    setAiWorkflowStatus("正在提交 RunningHub 任务...");
+    const submitResp = await fetch("/api/ai-workflow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const submitData = await submitResp.json();
+    if (!submitResp.ok || !submitData.success || !submitData.taskId) {
+      throw new Error(submitData.error || "Submit failed");
+    }
+    setAiWorkflowStatus(`任务已提交：${submitData.taskId}`);
+    await pollAiWorkflowResult(submitData.taskId, mode);
+  } catch (err) {
+    setAiWorkflowStatus("生成失败：" + err.message);
+    if (charged) {
+      userPoints += 20;
+      await updatePointsToDB(userPoints);
+    }
+  } finally {
+    setAiWorkflowBusy(false);
+  }
+}
+
 // ===== 鏂囦欢涓婁紶鍒?R2 =====
 async function uploadFileToR2(file) {
   const formData = new FormData();
@@ -1230,13 +1543,15 @@ compareUpload.addEventListener("click", () => {
   input.click();
 });
 
-aiTextGenerate.addEventListener("click", () => {
-  const prompt = aiTextPrompt.value.trim();
-  if (!prompt) { showToast(t("toast.enterPrompt")); return; }
-  if (!currentUser) { showAuthModal("login"); return; }
-  if (userPoints < 20) { showPurchaseModal(); return; }
-  showToast(t("toast.textApiPending"));
-});
+if (aiTextGenerate && aiTextPrompt) {
+  aiTextGenerate.addEventListener("click", () => {
+    const prompt = aiTextPrompt.value.trim();
+    if (!prompt) { showToast(t("toast.enterPrompt")); return; }
+    if (!currentUser) { showAuthModal("login"); return; }
+    if (userPoints < 20) { showPurchaseModal(); return; }
+    showToast(t("toast.textApiPending"));
+  });
+}
 
 // ===== 绉垎绯荤粺 =====
 const headerPointsDisplay = document.getElementById("headerPointsDisplay");
