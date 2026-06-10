@@ -7,6 +7,16 @@ const today = "2026-06-10";
 const staticItems = JSON.parse(await readFile("data/static-wallpapers.json", "utf8"));
 const liveItems = JSON.parse(await readFile("data/live-wallpapers.json", "utf8"));
 
+async function writeTextFile(filePath, content) {
+  try {
+    await writeFile(filePath, content, "utf8");
+  } catch (error) {
+    if (error?.code !== "EBUSY") throw error;
+    const existing = await readFile(filePath, "utf8").catch(() => null);
+    if (existing !== content) throw error;
+  }
+}
+
 const categoryCopy = {
   nature: "Calm forests, mountains, flowers, and dreamlike natural textures for a clean phone screen.",
   abstract: "Glass, chrome, cosmic, liquid, and geometric wallpapers with a premium visual feel.",
@@ -104,6 +114,13 @@ function pageShell({ title, description, canonical, body, image = "assets/genera
   <meta name="twitter:image" content="${escapeHtml(absUrl(image))}">
   <title>${escapeHtml(title)}</title>
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC18GDMTP1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-BC18GDMTP1");
+  </script>
   <link rel="stylesheet" href="/style.css?v=20260610-ai5-5">
   <style>
     .seo-main { max-width: 1180px; margin: 0 auto; padding: 36px 16px 72px; }
@@ -151,7 +168,7 @@ function card(item) {
 
 async function writePage(filePath, html) {
   await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, html, "utf8");
+  await writeTextFile(filePath, html);
 }
 
 const urls = ["/"];
@@ -258,7 +275,7 @@ ${urls.map(url => `  <url>
   </url>`).join("\n")}
 </urlset>
 `;
-await writeFile("sitemap.xml", sitemap, "utf8");
+await writeTextFile("sitemap.xml", sitemap);
 
 const keywordRows = [
   ["keyword", "target_url", "content_angle"],
@@ -275,7 +292,7 @@ const keywordRows = [
   ["AI video face swap", "/ai/ai-video-face-swap/", "Video face replacement tool"],
 ];
 await mkdir("marketing", { recursive: true });
-await writeFile("marketing/seo-keywords.csv", keywordRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n") + "\n", "utf8");
+await writeTextFile("marketing/seo-keywords.csv", keywordRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n") + "\n");
 
 const socialPlan = `# TK Wallpaper Promotion Pack
 
@@ -302,6 +319,6 @@ const socialPlan = `# TK Wallpaper Promotion Pack
 - Add a short manual note to each platform post so it does not look automated.
 - Reply to early comments within 24 hours.
 `;
-await writeFile("marketing/promotion-pack.md", socialPlan, "utf8");
+await writeTextFile("marketing/promotion-pack.md", socialPlan);
 
 console.log(`Generated ${urls.length} sitemap URLs and promotion files.`);
