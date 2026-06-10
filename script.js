@@ -150,24 +150,302 @@ let userPoints = 0;
 let extraWallpapers = [];
 let extraIdCounter = 1000;
 let managedStaticWallpapers = [];
-const categoryLabels = {
-  all: "All",
-  abstract: "Abstract",
-  animals: "Animals",
-  anime: "Anime",
-  car: "Car",
-  cool: "Cool",
-  cyberpunk: "Cyberpunk",
-  fantasy: "Fantasy",
-  funny: "Funny",
-  lucky: "Lucky",
-  minimal: "Minimal",
-  mystic: "Mystic",
-  nature: "Nature",
-  scenery: "Scenery",
-  "sci-fi": "Sci-Fi",
-  wealth: "Wealth",
+const translations = {
+  en: {
+    "meta.title": "TK Wallpaper - Free HD & Live Wallpapers",
+    "meta.description": "Free HD wallpapers, live wallpapers and AI custom wallpapers for your phone and desktop.",
+    "lang.label": "Language",
+    "nav.menu": "Menu",
+    "nav.close": "Close",
+    "cat.all": "All",
+    "cat.abstract": "Abstract",
+    "cat.animals": "Animals",
+    "cat.anime": "Anime",
+    "cat.car": "Car",
+    "cat.cool": "Cool",
+    "cat.custom": "Custom",
+    "cat.cyberpunk": "Cyberpunk",
+    "cat.fantasy": "Fantasy",
+    "cat.funny": "Funny",
+    "cat.lucky": "Lucky",
+    "cat.minimal": "Minimal",
+    "cat.mystic": "Mystic",
+    "cat.nature": "Nature",
+    "cat.scenery": "Scenery",
+    "cat.sciFi": "Sci-Fi",
+    "cat.wealth": "Wealth",
+    "auth.login": "Login",
+    "auth.logout": "Logout",
+    "auth.signup": "Sign Up",
+    "auth.noAccount": "Don't have an account?",
+    "auth.haveAccount": "Already have an account?",
+    "auth.createAccount": "Create Account",
+    "auth.email": "Email address",
+    "auth.password": "Password",
+    "auth.note": "New users get 10 free credits to try AI wallpapers!",
+    "points.get": "Get Points",
+    "points.my": "My Points:",
+    "points.hint.live": "Live downloads use 15 credits.",
+    "points.hint.custom": "AI generations use 20 credits each.",
+    "points.getCredits": "Get Credits",
+    "points.buyCopy": "Buy credits to download live wallpapers and AI custom wallpapers.",
+    "points.afterPurchase": "After purchase, credits will be added to your account automatically.",
+    "hero.title": "Wallpapers for Your Phone",
+    "hero.copy": "Free static wallpapers, premium live wallpapers, and AI custom wallpapers. Updated with trending styles weekly.",
+    "browse.eyebrow": "Popular phone wallpapers",
+    "browse.title.all": "All {section} Wallpapers",
+    "browse.title.category": "{category} {section} Wallpapers",
+    "browse.subtitle.default": "Browse free static wallpapers, premium live wallpapers, and AI custom samples in a phone-first grid.",
+    "browse.subtitle.static": "Browse free phone wallpapers by category, style, and trend.",
+    "browse.subtitle.live": "Preview moving wallpapers in the grid, then download premium loops with credits.",
+    "browse.subtitle.custom": "Explore AI custom samples, upload your own image, and generate a live wallpaper.",
+    "sort.popular": "Popular",
+    "sort.latest": "Latest",
+    "sort.downloaded": "Most Downloaded",
+    "section.static": "Static",
+    "section.live": "Live",
+    "section.custom": "AI Custom",
+    "section.staticTitle": "Static",
+    "section.liveTitle": "Live",
+    "section.customTitle": "AI Custom",
+    "helper.static": "Free HD phone wallpapers for quick downloads.",
+    "helper.live": "Preview moving wallpapers first, then download with credits.",
+    "helper.custom": "Upload a photo or write a prompt to generate AI wallpapers.",
+    "search.placeholder": "Search wallpapers...",
+    "results.count": "{count} wallpaper",
+    "results.countPlural": "{count} wallpapers",
+    "results.empty": "No wallpapers found. Try a different search or category.",
+    "ai.imageMode": "Image to Image",
+    "ai.textMode": "Text to Image",
+    "ai.copy.image": "Upload your photo, preview the target motion style, then generate a live wallpaper.",
+    "ai.copy.text": "Start from a text prompt, preview proven styles, then generate a fresh AI wallpaper.",
+    "ai.prompt.placeholder": "Describe your wallpaper style...",
+    "ai.generateText": "Generate Text Wallpaper (20 pts)",
+    "upload.title": "Add Your Own Image",
+    "upload.copy": "Upload a photo to turn it into a live wallpaper.",
+    "upload.choose": "Choose from Gallery",
+    "upload.hint": "Upload your own photo to generate",
+    "loadMore": "Load More",
+    "footer.copy": "TK Wallpaper © 2026. Free wallpapers for personal use. Live wallpapers and AI wallpapers require points.",
+    "download": "Download",
+    "download.withPoints": "Download ({points} pts)",
+    "download.regenerate": "Regenerate (20 pts)",
+    "lightbox.liveVideo": "1080 x 1920 - Live Video",
+    "lightbox.phone": "1080 x 1920 - Phone",
+    "compare.before": "Before (Static)",
+    "compare.after": "After (Live Wallpaper)",
+    "compare.uploadPhoto": "Upload Your Photo",
+    "compare.upload": "Upload Photo",
+    "compare.delete": "Delete",
+    "compare.clickGenerate": "Click Generate",
+    "compare.generate": "Generate Live Wallpaper (20 pts)",
+    "status.processing": "Processing...",
+    "status.uploadingImage": "Uploading image...",
+    "status.creatingLive": "AI creating live wallpaper... (1-5 min)",
+    "status.processingSeconds": "Processing... ({seconds}s)",
+    "status.failed": "Failed. Please try again.",
+    "status.timedOut": "Timed out. Credits were restored.",
+    "status.error": "Error: {message}",
+    "pricing.credits100": "100 Credits",
+    "pricing.credits200": "200 Credits",
+    "pricing.credits500": "500 Credits",
+    "pricing.credits1200": "1200 Credits",
+    "pricing.gen5": "5 AI generations",
+    "pricing.gen10": "10 AI generations - Save 12%",
+    "pricing.gen25": "25 AI generations - Save 35%",
+    "pricing.gen60": "60 AI generations - Best value",
+    "pricing.bestSeller": "BEST SELLER",
+    "card.text": "Text",
+    "card.live": "Live",
+    "card.free": "Free",
+    "card.previewText": "Preview text style - {points} credits",
+    "card.previewLive": "Preview live - {points} credits",
+    "card.freeDownload": "Free download",
+    "toast.downloaded": "Downloaded! {points} pts used.",
+    "toast.downloadFailed": "Download failed: {message}",
+    "toast.longPress": "Long-press the image and save, then set as wallpaper in phone settings.",
+    "toast.imageCleared": "Image cleared. Upload a new one.",
+    "toast.generated": "Live wallpaper generated!",
+    "toast.uploading": "Uploading...",
+    "toast.uploadedGenerate": "Image uploaded! Click it to generate.",
+    "toast.uploadedClickGenerate": "Image uploaded! Click Generate to create live wallpaper.",
+    "toast.uploadFailed": "Upload failed: {message}",
+    "toast.enterPrompt": "Enter a text prompt first.",
+    "toast.textApiPending": "Text-to-image generation API will be connected after workflow confirmation.",
+    "toast.fillAuth": "Please fill in email and password.",
+    "toast.welcome": "Welcome! {email}",
+    "toast.loggedOut": "Logged out.",
+    "toast.error": "Error: {message}",
+  },
+  es: {
+    "meta.title": "TK Wallpaper - Fondos HD y animados gratis",
+    "meta.description": "Fondos HD gratis, fondos animados y fondos AI personalizados para tu teléfono y escritorio.",
+    "lang.label": "Idioma",
+    "nav.menu": "Menú",
+    "nav.close": "Cerrar",
+    "cat.all": "Todos",
+    "cat.abstract": "Abstracto",
+    "cat.animals": "Animales",
+    "cat.anime": "Anime",
+    "cat.car": "Autos",
+    "cat.cool": "Cool",
+    "cat.custom": "Personalizado",
+    "cat.cyberpunk": "Cyberpunk",
+    "cat.fantasy": "Fantasía",
+    "cat.funny": "Divertidos",
+    "cat.lucky": "Suerte",
+    "cat.minimal": "Minimal",
+    "cat.mystic": "Místico",
+    "cat.nature": "Naturaleza",
+    "cat.scenery": "Paisajes",
+    "cat.sciFi": "Sci-Fi",
+    "cat.wealth": "Riqueza",
+    "auth.login": "Iniciar sesión",
+    "auth.logout": "Salir",
+    "auth.signup": "Registrarse",
+    "auth.noAccount": "¿No tienes cuenta?",
+    "auth.haveAccount": "¿Ya tienes cuenta?",
+    "auth.createAccount": "Crear cuenta",
+    "auth.email": "Correo electrónico",
+    "auth.password": "Contraseña",
+    "auth.note": "Los usuarios nuevos reciben 10 créditos gratis para probar fondos AI.",
+    "points.get": "Comprar puntos",
+    "points.my": "Mis puntos:",
+    "points.hint.live": "Las descargas animadas usan 15 créditos.",
+    "points.hint.custom": "Las generaciones AI usan 20 créditos cada una.",
+    "points.getCredits": "Comprar créditos",
+    "points.buyCopy": "Compra créditos para descargar fondos animados y fondos AI personalizados.",
+    "points.afterPurchase": "Después de comprar, los créditos se añadirán automáticamente a tu cuenta.",
+    "hero.title": "Fondos para tu teléfono",
+    "hero.copy": "Fondos estáticos gratis, fondos animados premium y fondos AI personalizados. Actualizado cada semana con estilos tendencia.",
+    "browse.eyebrow": "Fondos populares para móvil",
+    "browse.title.all": "Fondos {section}: todos",
+    "browse.title.category": "Fondos {section}: {category}",
+    "browse.subtitle.default": "Explora fondos estáticos gratis, fondos animados premium y muestras AI en una cuadrícula pensada para móvil.",
+    "browse.subtitle.static": "Explora fondos gratis por categoría, estilo y tendencia.",
+    "browse.subtitle.live": "Previsualiza fondos en movimiento y descarga loops premium con créditos.",
+    "browse.subtitle.custom": "Explora muestras AI, sube tu imagen y genera un fondo animado.",
+    "sort.popular": "Populares",
+    "sort.latest": "Recientes",
+    "sort.downloaded": "Más descargados",
+    "section.static": "Estáticos",
+    "section.live": "Animados",
+    "section.custom": "AI Custom",
+    "section.staticTitle": "estáticos",
+    "section.liveTitle": "animados",
+    "section.customTitle": "AI personalizados",
+    "helper.static": "Fondos HD gratis para descargar rápido.",
+    "helper.live": "Previsualiza fondos en movimiento y descárgalos con créditos.",
+    "helper.custom": "Sube una foto o escribe un prompt para generar fondos AI.",
+    "search.placeholder": "Buscar fondos...",
+    "results.count": "{count} fondo",
+    "results.countPlural": "{count} fondos",
+    "results.empty": "No se encontraron fondos. Prueba otra búsqueda o categoría.",
+    "ai.imageMode": "Imagen a imagen",
+    "ai.textMode": "Texto a imagen",
+    "ai.copy.image": "Sube tu foto, previsualiza el estilo animado y genera un fondo.",
+    "ai.copy.text": "Empieza con un prompt, revisa estilos probados y genera un fondo AI nuevo.",
+    "ai.prompt.placeholder": "Describe el estilo del fondo...",
+    "ai.generateText": "Generar fondo con texto (20 pts)",
+    "upload.title": "Añade tu imagen",
+    "upload.copy": "Sube una foto para convertirla en fondo animado.",
+    "upload.choose": "Elegir de la galería",
+    "upload.hint": "Sube tu propia foto para generar",
+    "loadMore": "Cargar más",
+    "footer.copy": "TK Wallpaper © 2026. Fondos gratis para uso personal. Los fondos animados y AI requieren puntos.",
+    "download": "Descargar",
+    "download.withPoints": "Descargar ({points} pts)",
+    "download.regenerate": "Regenerar (20 pts)",
+    "lightbox.liveVideo": "1080 x 1920 - Video animado",
+    "lightbox.phone": "1080 x 1920 - Teléfono",
+    "compare.before": "Antes (estático)",
+    "compare.after": "Después (fondo animado)",
+    "compare.uploadPhoto": "Sube tu foto",
+    "compare.upload": "Subir foto",
+    "compare.delete": "Eliminar",
+    "compare.clickGenerate": "Haz clic en generar",
+    "compare.generate": "Generar fondo animado (20 pts)",
+    "status.processing": "Procesando...",
+    "status.uploadingImage": "Subiendo imagen...",
+    "status.creatingLive": "AI está creando el fondo animado... (1-5 min)",
+    "status.processingSeconds": "Procesando... ({seconds}s)",
+    "status.failed": "Falló. Inténtalo de nuevo.",
+    "status.timedOut": "Tiempo agotado. Se restauraron los créditos.",
+    "status.error": "Error: {message}",
+    "pricing.credits100": "100 créditos",
+    "pricing.credits200": "200 créditos",
+    "pricing.credits500": "500 créditos",
+    "pricing.credits1200": "1200 créditos",
+    "pricing.gen5": "5 generaciones AI",
+    "pricing.gen10": "10 generaciones AI - Ahorra 12%",
+    "pricing.gen25": "25 generaciones AI - Ahorra 35%",
+    "pricing.gen60": "60 generaciones AI - Mejor valor",
+    "pricing.bestSeller": "MÁS VENDIDO",
+    "card.text": "Texto",
+    "card.live": "Animado",
+    "card.free": "Gratis",
+    "card.previewText": "Ver estilo de texto - {points} créditos",
+    "card.previewLive": "Ver animación - {points} créditos",
+    "card.freeDownload": "Descarga gratis",
+    "toast.downloaded": "Descargado. {points} pts usados.",
+    "toast.downloadFailed": "Falló la descarga: {message}",
+    "toast.longPress": "Mantén pulsada la imagen, guárdala y configúrala como fondo en tu teléfono.",
+    "toast.imageCleared": "Imagen eliminada. Sube una nueva.",
+    "toast.generated": "Fondo animado generado.",
+    "toast.uploading": "Subiendo...",
+    "toast.uploadedGenerate": "Imagen subida. Haz clic para generar.",
+    "toast.uploadedClickGenerate": "Imagen subida. Haz clic en Generar para crear un fondo animado.",
+    "toast.uploadFailed": "Falló la subida: {message}",
+    "toast.enterPrompt": "Escribe primero un prompt.",
+    "toast.textApiPending": "La API de texto a imagen se conectará después de confirmar el flujo.",
+    "toast.fillAuth": "Completa el correo y la contraseña.",
+    "toast.welcome": "Bienvenido: {email}",
+    "toast.loggedOut": "Sesión cerrada.",
+    "toast.error": "Error: {message}",
+  },
 };
+const categoryLabelKeys = {
+  all: "cat.all",
+  abstract: "cat.abstract",
+  animals: "cat.animals",
+  anime: "cat.anime",
+  car: "cat.car",
+  cool: "cat.cool",
+  custom: "cat.custom",
+  cyberpunk: "cat.cyberpunk",
+  fantasy: "cat.fantasy",
+  funny: "cat.funny",
+  lucky: "cat.lucky",
+  minimal: "cat.minimal",
+  mystic: "cat.mystic",
+  nature: "cat.nature",
+  scenery: "cat.scenery",
+  "sci-fi": "cat.sciFi",
+  wealth: "cat.wealth",
+};
+const sectionTitleKeys = {
+  static: "section.staticTitle",
+  live: "section.liveTitle",
+  custom: "section.customTitle",
+};
+let currentLang = "en";
+try {
+  currentLang = localStorage.getItem("tk_lang") === "es" ? "es" : "en";
+} catch {}
+
+function t(key, vars = {}) {
+  const textPack = translations[currentLang] || translations.en;
+  let text = textPack[key] || translations.en[key] || key;
+  Object.entries(vars).forEach(([name, value]) => {
+    text = text.replace(new RegExp(`\\{${name}\\}`, "g"), () => String(value ?? ""));
+  });
+  return text;
+}
+
+function getCategoryLabel(category) {
+  if (categoryLabelKeys[category]) return t(categoryLabelKeys[category]);
+  return category.charAt(0).toUpperCase() + category.slice(1);
+}
 const localVideoPool = [
   "assets/live/09-07.mp4",
   "assets/live/11-0850d1ae0cc526e3ae9356b4dd41fdcf.mp4",
@@ -193,6 +471,7 @@ const lightboxClose = document.getElementById("lightboxClose");
 const btnDownload = document.getElementById("btnDownload");
 const btnSetWallpaper = document.getElementById("btnSetWallpaper");
 const menuToggle = document.getElementById("menuToggle");
+const languageSelect = document.getElementById("languageSelect");
 const navEl = document.getElementById("mainNav");
 const pointsBar = document.getElementById("pointsBar");
 const pointsDisplay = document.getElementById("pointsDisplay");
@@ -234,6 +513,74 @@ const compareStatusText = document.getElementById("compareStatusText");
 
 let currentCustomItem = null;
 
+function updateLightboxLabels() {
+  if (!lightbox.classList.contains("show")) return;
+  lightboxRes.textContent = lightbox.dataset.currentVideo === "1" ? t("lightbox.liveVideo") : t("lightbox.phone");
+  const points = parseInt(lightbox.dataset.currentPoints) || 0;
+  btnDownload.textContent = lightbox.dataset.currentFree === "1" ? t("download") : t("download.withPoints", { points });
+}
+
+function updateCompareGenerateButtonLabel() {
+  if (!compareBtnGenerate) return;
+  compareBtnGenerate.textContent = currentCustomItem?.generatedByUser ? t("download.regenerate") : t("compare.generate");
+}
+
+function setCompareStatusText(key, vars = {}) {
+  if (!compareStatusText) return;
+  compareStatusText.dataset.statusKey = key;
+  compareStatusText.dataset.statusVars = JSON.stringify(vars);
+  compareStatusText.textContent = t(key, vars);
+}
+
+function refreshCompareStatusText() {
+  if (!compareStatusText?.dataset.statusKey) return;
+  let vars = {};
+  try { vars = JSON.parse(compareStatusText.dataset.statusVars || "{}"); } catch {}
+  compareStatusText.textContent = t(compareStatusText.dataset.statusKey, vars);
+}
+
+function updateActiveBrowseMode() {
+  if (!activeBrowseMode) return;
+  const activeSort = document.querySelector(".sort-tab.active");
+  activeBrowseMode.textContent = activeSort ? activeSort.textContent.trim() : t("sort.popular");
+}
+
+function updateSectionCopy() {
+  if (sectionHelper) sectionHelper.textContent = t(`helper.${currentSection}`);
+  if (pointsHint) {
+    pointsHint.textContent = currentSection === "custom" ? t("points.hint.custom") : t("points.hint.live");
+  }
+}
+
+function applyTranslations() {
+  document.documentElement.lang = currentLang;
+  document.title = t("meta.title");
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) metaDescription.setAttribute("content", t("meta.description"));
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+
+  if (languageSelect) {
+    languageSelect.value = currentLang;
+    languageSelect.setAttribute("aria-label", t("lang.label"));
+  }
+  if (menuToggle) menuToggle.textContent = navEl.classList.contains("open") ? t("nav.close") : t("nav.menu");
+
+  updateSectionCopy();
+  updateAiModeUI();
+  updateBrowseCopy();
+  updateActiveBrowseMode();
+  setAuthMode(authMode);
+  updateLightboxLabels();
+  updateCompareGenerateButtonLabel();
+  refreshCompareStatusText();
+}
+
 function updatePointsBarVisibility() {
   if (currentSection === "live" || currentSection === "custom") {
     pointsBar.style.display = "flex";
@@ -248,9 +595,7 @@ function updateAiModeUI() {
   if (aiUploadArea) aiUploadArea.style.display = currentSection === "custom" && currentAiMode === "image" ? "block" : "none";
   if (aiTextPromptBox) aiTextPromptBox.style.display = currentSection === "custom" && currentAiMode === "text" ? "flex" : "none";
   if (aiModeCopy) {
-    aiModeCopy.textContent = currentAiMode === "image"
-      ? "Upload your photo, preview the target motion style, then generate a live wallpaper."
-      : "Start from a text prompt, preview proven styles, then generate a fresh AI wallpaper.";
+    aiModeCopy.textContent = currentAiMode === "image" ? t("ai.copy.image") : t("ai.copy.text");
   }
   aiModeTabs.forEach(tab => tab.classList.toggle("active", tab.dataset.aiMode === currentAiMode));
 }
@@ -259,18 +604,7 @@ function setWallpaperSection(section) {
   currentSection = section;
   sectionTabs.forEach(tab => tab.classList.toggle("active", tab.dataset.section === section));
   updateBrowseCopy();
-  if (sectionHelper) {
-    sectionHelper.textContent = currentSection === "static"
-      ? "Free HD phone wallpapers for quick downloads."
-      : currentSection === "live"
-        ? "Preview moving wallpapers first, then download with credits."
-        : "Upload a photo or write a prompt to generate AI wallpapers.";
-  }
-  if (pointsHint) {
-    pointsHint.textContent = currentSection === "custom"
-      ? "AI generations use 20 credits each."
-      : "Live downloads use 15 credits each.";
-  }
+  updateSectionCopy();
   updatePointsBarVisibility();
   updateAiModeUI();
   if (window.location.hash) {
@@ -380,9 +714,9 @@ function sortWallpapers(data) {
 // ===== 娓叉煋鍗＄墖 =====
 function renderCards(data) {
   grid.innerHTML = "";
-  if (resultsCount) resultsCount.textContent = data.length + (data.length === 1 ? " wallpaper" : " wallpapers");
+  if (resultsCount) resultsCount.textContent = t(data.length === 1 ? "results.count" : "results.countPlural", { count: data.length });
   if (data.length === 0) {
-    grid.innerHTML = '<p style="text-align:center;color:#777;grid-column:1/-1;padding:60px 0;">No wallpapers found. Try a different search or category.</p>';
+    grid.innerHTML = `<p style="text-align:center;color:#777;grid-column:1/-1;padding:60px 0;">${t("results.empty")}</p>`;
     return;
   }
   data.forEach(item => {
@@ -391,24 +725,27 @@ function renderCards(data) {
     let badgeHTML = "";
     let extraClass = "";
     if (item.section === "custom" && item.mode === "text") {
-      badgeHTML = `<span class="card-badge badge-points">${item.points || 20}P</span><span class="card-badge-dynamic">Text</span>`;
+      badgeHTML = `<span class="card-badge badge-points">${item.points || 20}P</span><span class="card-badge-dynamic">${t("card.text")}</span>`;
     } else if (item.section === "custom") {
-      badgeHTML = '<span class="card-badge badge-points">20P</span><span class="card-badge-dynamic">Live</span>';
+      badgeHTML = `<span class="card-badge badge-points">20P</span><span class="card-badge-dynamic">${t("card.live")}</span>`;
       extraClass = " card-dynamic";
     } else if (item.free === false) {
       badgeHTML = `<span class="card-badge badge-points">${item.points}P</span>`;
     } else {
-      badgeHTML = '<span class="card-badge badge-free">Free</span>';
+      badgeHTML = `<span class="card-badge badge-free">${t("card.free")}</span>`;
     }
 
     card.className = "wallpaper-card" + extraClass;
     const mediaHTML = item.videoUrl
       ? `<video src="${item.videoUrl}" muted loop playsinline autoplay preload="metadata" aria-label="${item.label}"></video>`
       : `<img src="${item.src}" alt="${item.label}" loading="lazy">`;
+    const actionHint = item.free === false
+      ? t(item.mode === "text" ? "card.previewText" : "card.previewLive", { points: item.points })
+      : t("card.freeDownload");
     card.innerHTML = `
       ${mediaHTML}
       <span class="card-label">${item.label}</span>
-      <span class="card-action-hint">${item.free === false ? (item.mode === "text" ? "Preview text style - " : "Preview live - ") + item.points + " credits" : "Free download"}</span>
+      <span class="card-action-hint">${actionHint}</span>
       ${badgeHTML}
     `;
     card.addEventListener("click", () => {
@@ -431,18 +768,7 @@ sectionTabs.forEach(tab => {
     tab.classList.add("active");
     currentSection = tab.dataset.section;
     updateBrowseCopy();
-    if (sectionHelper) {
-      sectionHelper.textContent = currentSection === "static"
-        ? "Free HD phone wallpapers for quick downloads."
-        : currentSection === "live"
-          ? "Preview moving wallpapers first, then download with credits."
-          : "Upload a photo and generate a live wallpaper sample.";
-    }
-    if (pointsHint) {
-      pointsHint.textContent = currentSection === "custom"
-        ? "AI generations use 20 credits each."
-        : "Live downloads use 15 credits each.";
-    }
+    updateSectionCopy();
 
     updatePointsBarVisibility();
 
@@ -464,18 +790,7 @@ document.addEventListener("click", (event) => {
   tab.classList.add("active");
   currentSection = tab.dataset.section;
   updateBrowseCopy();
-  if (sectionHelper) {
-    sectionHelper.textContent = currentSection === "static"
-      ? "Free HD phone wallpapers for quick downloads."
-      : currentSection === "live"
-        ? "Preview moving wallpapers first, then download with credits."
-        : "Upload a photo or write a prompt to generate AI wallpapers.";
-  }
-  if (pointsHint) {
-    pointsHint.textContent = currentSection === "custom"
-      ? "AI generations use 20 credits each."
-      : "Live downloads use 15 credits each.";
-  }
+  updateSectionCopy();
   updatePointsBarVisibility();
   updateAiModeUI();
   applyFilter();
@@ -501,18 +816,7 @@ function applyRouteFromHash() {
   sectionTabs.forEach(tab => tab.classList.toggle("active", tab.dataset.section === currentSection));
   navLinks.forEach(link => link.classList.toggle("active", link.dataset.category === "all"));
   updateBrowseCopy();
-  if (sectionHelper) {
-    sectionHelper.textContent = currentSection === "static"
-      ? "Free HD phone wallpapers for quick downloads."
-      : currentSection === "live"
-        ? "Preview moving wallpapers first, then download with credits."
-        : "Upload a photo or write a prompt to generate AI wallpapers.";
-  }
-  if (pointsHint) {
-    pointsHint.textContent = currentSection === "custom"
-      ? "AI generations use 20 credits each."
-      : "Live downloads use 15 credits each.";
-  }
+  updateSectionCopy();
   updatePointsBarVisibility();
   updateAiModeUI();
   applyFilter();
@@ -536,7 +840,7 @@ sortTabs.forEach(tab => {
     sortTabs.forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
     currentSort = tab.dataset.sort;
-    if (activeBrowseMode) activeBrowseMode.textContent = tab.textContent.trim();
+    updateActiveBrowseMode();
     applyFilter();
   });
 });
@@ -554,15 +858,15 @@ navLinks.forEach(link => {
 });
 
 function updateBrowseCopy() {
-  const categoryLabel = categoryLabels[currentCategory] || currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
-  const sectionLabel = currentSection === "custom" ? "AI Custom" : currentSection.charAt(0).toUpperCase() + currentSection.slice(1);
-  if (browseTitle) browseTitle.textContent = categoryLabel + " " + sectionLabel + " Wallpapers";
+  const categoryLabel = getCategoryLabel(currentCategory);
+  const sectionLabel = t(sectionTitleKeys[currentSection] || "section.staticTitle");
+  if (browseTitle) {
+    browseTitle.textContent = currentCategory === "all"
+      ? t("browse.title.all", { section: sectionLabel })
+      : t("browse.title.category", { category: categoryLabel, section: sectionLabel });
+  }
   if (!browseSubtitle) return;
-  browseSubtitle.textContent = currentSection === "static"
-    ? "Browse free phone wallpapers by category, style, and trend."
-    : currentSection === "live"
-      ? "Preview moving wallpapers in the grid, then download premium loops with credits."
-      : "Explore AI custom samples, upload your own image, and generate a live wallpaper.";
+  browseSubtitle.textContent = t(`browse.subtitle.${currentSection}`);
 }
 
 // ===== 鎼滅储 =====
@@ -622,7 +926,7 @@ function openLightbox(item) {
     lightboxImg.src = item.src;
     lightboxImg.alt = item.label;
   }
-  lightboxRes.textContent = item.videoUrl ? "1080 x 1920 路 Live Video" : "1080 x 1920 路 Phone";
+  lightboxRes.textContent = item.videoUrl ? t("lightbox.liveVideo") : t("lightbox.phone");
   lightbox.dataset.currentSrc = item.videoUrl || item.src;
   lightbox.dataset.currentLabel = item.label;
   lightbox.dataset.currentPoints = item.points || 0;
@@ -630,14 +934,8 @@ function openLightbox(item) {
   lightbox.dataset.currentVideo = item.videoUrl ? "1" : "0";
   lightbox.classList.add("show");
   document.body.style.overflow = "hidden";
-
-  if (item.free === false) {
-    btnDownload.textContent = "Download (" + item.points + " pts)";
-    btnSetWallpaper.style.display = "none";
-  } else {
-    btnDownload.textContent = "Download";
-    btnSetWallpaper.style.display = "none";
-  }
+  updateLightboxLabels();
+  btnSetWallpaper.style.display = "none";
 }
 
 function closeLightbox() {
@@ -693,9 +991,9 @@ async function downloadWallpaperAsset({ src, label, points = 0, free = true, isV
     a.download = label.replace(/\s+/g, "-").toLowerCase() + ext;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    if (!free) showToast("Downloaded! " + points + " pts used.");
+    if (!free) showToast(t("toast.downloaded", { points }));
   } catch (err) {
-    showToast("Download failed: " + err.message);
+    showToast(t("toast.downloadFailed", { message: err.message }));
   }
 }
 
@@ -710,7 +1008,7 @@ btnDownload.addEventListener("click", async () => {
 });
 
 btnSetWallpaper.addEventListener("click", () => {
-  showToast("Long-press the image and save, then set as wallpaper in phone settings.");
+  showToast(t("toast.longPress"));
 });
 
 // ===== AI 鑷畾涔夊姣斿脊绐?=====
@@ -737,8 +1035,10 @@ function openCompareModal(item) {
   }
   compareImg.alt = item.label || "";
   compareStatus.style.display = "none";
+  delete compareStatusText.dataset.statusKey;
+  delete compareStatusText.dataset.statusVars;
   compareBtnGenerate.style.display = "inline-block";
-  compareBtnGenerate.textContent = "Generate Live Wallpaper (20 pts)";
+  updateCompareGenerateButtonLabel();
   compareModal.classList.add("show");
   document.body.style.overflow = "hidden";
 }
@@ -762,7 +1062,7 @@ compareDelete.addEventListener("click", () => {
   compareVideo.src = "";
   compareVideo.style.display = "none";
   compareResultPlaceholder.style.display = "flex";
-  showToast("Image cleared. Upload a new one.");
+  showToast(t("toast.imageCleared"));
 });
 
 // 涓嬭浇瑙嗛
@@ -792,7 +1092,7 @@ compareBtnGenerate.addEventListener("click", async () => {
 
   compareStatus.style.display = "flex";
   compareBtnGenerate.style.display = "none";
-  compareStatusText.textContent = "Uploading image...";
+  setCompareStatusText("status.uploadingImage");
 
   try {
     const imageUrl = new URL(currentCustomItem.src, window.location.origin).toString();
@@ -805,7 +1105,7 @@ compareBtnGenerate.addEventListener("click", async () => {
     if (!submitData.success) throw new Error(submitData.error || "Submit failed");
 
     const taskId = submitData.taskId;
-    compareStatusText.textContent = "AI creating live wallpaper... (1-5 min)";
+    setCompareStatusText("status.creatingLive");
 
     let attempts = 0;
     while (attempts < 60) {
@@ -813,7 +1113,7 @@ compareBtnGenerate.addEventListener("click", async () => {
       attempts++;
       const queryResp = await fetch(`/api/generate-live?taskId=${taskId}`);
       const queryData = await queryResp.json();
-      compareStatusText.textContent = `Processing... (${attempts * 10}s)`;
+      setCompareStatusText("status.processingSeconds", { seconds: attempts * 10 });
 
       if (queryData.status === "SUCCESS") {
         const resultUrl = queryData.results?.[0]?.url || queryData.results?.[0];
@@ -831,24 +1131,24 @@ compareBtnGenerate.addEventListener("click", async () => {
           compareVideo.play().catch(() => {});
           compareStatus.style.display = "none";
           compareBtnGenerate.style.display = "inline-block";
-          compareBtnGenerate.textContent = "Regenerate (20 pts)";
-          showToast("Live wallpaper generated!");
+          updateCompareGenerateButtonLabel();
+          showToast(t("toast.generated"));
         }
         break;
       } else if (queryData.status === "FAILED") {
-        compareStatusText.textContent = "Failed. Please try again.";
+        setCompareStatusText("status.failed");
         compareBtnGenerate.style.display = "inline-block";
         userPoints += 20; await updatePointsToDB(userPoints);
         break;
       }
     }
     if (attempts >= 60 && compareStatus.style.display !== "none") {
-      compareStatusText.textContent = "Timed out. Credits were restored.";
+      setCompareStatusText("status.timedOut");
       compareBtnGenerate.style.display = "inline-block";
       userPoints += 20; await updatePointsToDB(userPoints);
     }
   } catch (err) {
-    compareStatusText.textContent = "Error: " + err.message;
+    setCompareStatusText("status.error", { message: err.message });
     compareBtnGenerate.style.display = "inline-block";
     userPoints += 20; await updatePointsToDB(userPoints);
   }
@@ -869,7 +1169,7 @@ aiFileInput.addEventListener("change", async () => {
   const file = aiFileInput.files[0];
   if (!file) return;
   try {
-    showToast("Uploading...");
+    showToast(t("toast.uploading"));
     const url = await uploadFileToR2(file);
     aiWallpapers.push({
       id: Date.now(),
@@ -882,9 +1182,9 @@ aiFileInput.addEventListener("change", async () => {
       points: 20,
     });
     applyFilter();
-    showToast("Image uploaded! Click it to generate.");
+    showToast(t("toast.uploadedGenerate"));
   } catch (err) {
-    showToast("Upload failed: " + err.message);
+    showToast(t("toast.uploadFailed", { message: err.message }));
   }
   aiFileInput.value = "";
 });
@@ -898,15 +1198,15 @@ compareUpload.addEventListener("click", () => {
     const file = input.files[0];
     if (!file || !currentCustomItem) return;
     try {
-      showToast("Uploading...");
+      showToast(t("toast.uploading"));
       const url = await uploadFileToR2(file);
       currentCustomItem.src = url;
       compareImg.src = url;
       compareImg.style.display = "block";
       comparePlaceholder.style.display = "none";
-      showToast("Image uploaded! Click Generate to create live wallpaper.");
+      showToast(t("toast.uploadedClickGenerate"));
     } catch (err) {
-      showToast("Upload failed: " + err.message);
+      showToast(t("toast.uploadFailed", { message: err.message }));
     }
   };
   input.click();
@@ -914,10 +1214,10 @@ compareUpload.addEventListener("click", () => {
 
 aiTextGenerate.addEventListener("click", () => {
   const prompt = aiTextPrompt.value.trim();
-  if (!prompt) { showToast("Enter a text prompt first."); return; }
+  if (!prompt) { showToast(t("toast.enterPrompt")); return; }
   if (!currentUser) { showAuthModal("login"); return; }
   if (userPoints < 20) { showPurchaseModal(); return; }
-  showToast("Text-to-image generation API will be connected after workflow confirmation.");
+  showToast(t("toast.textApiPending"));
 });
 
 // ===== 绉垎绯荤粺 =====
@@ -959,12 +1259,12 @@ function showToast(msg) {
 // ===== 鎵嬫満鑿滃崟 =====
 menuToggle.addEventListener("click", () => {
   navEl.classList.toggle("open");
-  menuToggle.textContent = navEl.classList.contains("open") ? "Close" : "Menu";
+  menuToggle.textContent = navEl.classList.contains("open") ? t("nav.close") : t("nav.menu");
 });
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".header") && navEl.classList.contains("open")) {
     navEl.classList.remove("open");
-    menuToggle.textContent = "Menu";
+    menuToggle.textContent = t("nav.menu");
   }
 });
 
@@ -985,18 +1285,27 @@ const btnLogout = document.getElementById("btnLogout");
 
 let authMode = "login"; // "login" | "signup"
 
+if (languageSelect) {
+  languageSelect.addEventListener("change", () => {
+    currentLang = languageSelect.value === "es" ? "es" : "en";
+    try { localStorage.setItem("tk_lang", currentLang); } catch {}
+    applyTranslations();
+    applyFilter();
+  });
+}
+
 function setAuthMode(mode) {
   authMode = mode;
   if (mode === "login") {
-    authModalTitle.textContent = "Login";
-    authBtnSubmit.textContent = "Login";
-    authSwitchText.textContent = "Don't have an account?";
-    authToggle.textContent = "Sign Up";
+    authModalTitle.textContent = t("auth.login");
+    authBtnSubmit.textContent = t("auth.login");
+    authSwitchText.textContent = t("auth.noAccount");
+    authToggle.textContent = t("auth.signup");
   } else {
-    authModalTitle.textContent = "Create Account";
-    authBtnSubmit.textContent = "Sign Up";
-    authSwitchText.textContent = "Already have an account?";
-    authToggle.textContent = "Login";
+    authModalTitle.textContent = t("auth.createAccount");
+    authBtnSubmit.textContent = t("auth.signup");
+    authSwitchText.textContent = t("auth.haveAccount");
+    authToggle.textContent = t("auth.login");
   }
 }
 
@@ -1034,28 +1343,28 @@ function updateAuthUI(user) {
 authBtnSubmit.addEventListener("click", async () => {
   const email = authEmail.value.trim();
   const password = authPassword.value.trim();
-  if (!email || !password) { showToast("Please fill in email and password."); return; }
+  if (!email || !password) { showToast(t("toast.fillAuth")); return; }
   try {
     if (authMode === "signup") {
       const r = await signupUser(email, password);
-      if (r.error || r.error_description) { showToast("Error: " + (r.error_description || r.error)); return; }
+      if (r.error || r.error_description) { showToast(t("toast.error", { message: r.error_description || r.error })); return; }
       if (r.id || r.user?.id) {
         // 鑷姩鐧诲綍
         await loginUser(email, password);
         // 鎵嬪姩鍒涘缓 profile锛坰ervice key 缁曡繃 RLS锛?        try { userPoints = await ensureUserProfile(); } catch {}
         updateAuthUI(currentUser);
         hideAuthModal();
-        showToast("Welcome! " + email);
+        showToast(t("toast.welcome", { email }));
         return;
       }
-      showToast("Error: " + (r.msg || JSON.stringify(r)));
+      showToast(t("toast.error", { message: r.msg || JSON.stringify(r) }));
     } else {
       const user = await loginUser(email, password);
       updateAuthUI(user);
       hideAuthModal();
-      showToast("Welcome! " + user.email);
+      showToast(t("toast.welcome", { email: user.email }));
     }
-  } catch (err) { showToast("Error: " + err.message); }
+  } catch (err) { showToast(t("toast.error", { message: err.message })); }
 });
 
 // 鍒囨崲鐧诲綍/娉ㄥ唽
@@ -1070,7 +1379,7 @@ btnLogin.addEventListener("click", () => showAuthModal("login"));
 btnLogout.addEventListener("click", () => {
   logoutUser();
   updateAuthUI(null);
-  showToast("Logged out.");
+  showToast(t("toast.loggedOut"));
 });
 
 // 鍏抽棴寮圭獥
@@ -1079,7 +1388,7 @@ authModal.addEventListener("click", (e) => { if (e.target === authModal) hideAut
 
 // 椤甸潰鍔犺浇锛氬绾哥珛鍗冲彲瑙侊紝鐧诲綍寮傛鎭㈠
 updatePointsDisplay();
-updateAiModeUI();
+applyTranslations();
 renderCards(staticWallpapers);
 loadWallpaperManifests();
 if (window.location.hash) applyRouteFromHash();

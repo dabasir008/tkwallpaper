@@ -8,7 +8,7 @@
   <title>TK Wallpaper - Free HD & Live Wallpapers</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8489634814754606"
      crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css?v=20260602-ai-modes-4">
+  <link rel="stylesheet" href="style.css?v=20260610-lang-1">
 </head>
 <body>
 
@@ -19,35 +19,42 @@
         <img src="assets/tk-logo.svg" alt="TK Wallpaper">
       </a>
       <nav class="nav" id="mainNav">
-        <a href="#" class="nav-link active" data-category="all">All</a>
-        <a href="#" class="nav-link" data-category="nature">Nature</a>
-        <a href="#" class="nav-link" data-category="cyberpunk">Cyberpunk</a>
-        <a href="#" class="nav-link" data-category="minimal">Minimal</a>
-        <a href="#" class="nav-link" data-category="abstract">Abstract</a>
-        <a href="#" class="nav-link" data-category="car">Car</a>
-        <a href="#" class="nav-link" data-category="anime">Anime</a>
-        <a href="#" class="nav-link" data-category="animals">Animals</a>
-        <a href="#" class="nav-link" data-category="wealth">Wealth</a>
-        <a href="#" class="nav-link" data-category="lucky">Lucky</a>
-        <a href="#" class="nav-link" data-category="funny">Funny</a>
-        <a href="#" class="nav-link" data-category="cool">Cool</a>
-        <a href="#" class="nav-link" data-category="mystic">Mystic</a>
-        <a href="#" class="nav-link" data-category="sci-fi">Sci-Fi</a>
-        <a href="#" class="nav-link" data-category="scenery">Scenery</a>
-        <a href="#" class="nav-link" data-category="fantasy">Fantasy</a>
+        <a href="#" class="nav-link active" data-category="all" data-i18n="cat.all">All</a>
+        <a href="#" class="nav-link" data-category="nature" data-i18n="cat.nature">Nature</a>
+        <a href="#" class="nav-link" data-category="cyberpunk" data-i18n="cat.cyberpunk">Cyberpunk</a>
+        <a href="#" class="nav-link" data-category="minimal" data-i18n="cat.minimal">Minimal</a>
+        <a href="#" class="nav-link" data-category="abstract" data-i18n="cat.abstract">Abstract</a>
+        <a href="#" class="nav-link" data-category="car" data-i18n="cat.car">Car</a>
+        <a href="#" class="nav-link" data-category="anime" data-i18n="cat.anime">Anime</a>
+        <a href="#" class="nav-link" data-category="animals" data-i18n="cat.animals">Animals</a>
+        <a href="#" class="nav-link" data-category="wealth" data-i18n="cat.wealth">Wealth</a>
+        <a href="#" class="nav-link" data-category="lucky" data-i18n="cat.lucky">Lucky</a>
+        <a href="#" class="nav-link" data-category="funny" data-i18n="cat.funny">Funny</a>
+        <a href="#" class="nav-link" data-category="cool" data-i18n="cat.cool">Cool</a>
+        <a href="#" class="nav-link" data-category="mystic" data-i18n="cat.mystic">Mystic</a>
+        <a href="#" class="nav-link" data-category="sci-fi" data-i18n="cat.sciFi">Sci-Fi</a>
+        <a href="#" class="nav-link" data-category="scenery" data-i18n="cat.scenery">Scenery</a>
+        <a href="#" class="nav-link" data-category="fantasy" data-i18n="cat.fantasy">Fantasy</a>
       </nav>
-      <button class="menu-toggle" id="menuToggle">Menu</button>
+      <label class="language-switcher">
+        <span data-i18n="lang.label">Language</span>
+        <select id="languageSelect" aria-label="Language">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+      </label>
+      <button class="menu-toggle" id="menuToggle" data-i18n="nav.menu">Menu</button>
       <!-- 未登录 -->
       <div class="header-auth" id="headerNotLoggedIn">
-        <button class="header-buy-btn" id="btnLogin">Login</button>
+        <button class="header-buy-btn" id="btnLogin" data-i18n="auth.login">Login</button>
       </div>
       <!-- 已登录 -->
       <div class="header-auth" id="headerLoggedIn" style="display:none;">
         <span class="header-email" id="headerEmail"></span>
         <span class="header-points-icon">&#9679;</span>
         <span id="headerPointsDisplay">0</span> pts
-        <button class="header-buy-btn js-buy-points" id="btnBuyPointsHeader">Get Points</button>
-        <button class="header-buy-btn" id="btnLogout" style="border-color:#e53e3e;color:#e53e3e;">Logout</button>
+        <button class="header-buy-btn js-buy-points" id="btnBuyPointsHeader" data-i18n="points.get">Get Points</button>
+        <button class="header-buy-btn" id="btnLogout" style="border-color:#e53e3e;color:#e53e3e;" data-i18n="auth.logout">Logout</button>
       </div>
     </div>
   </header>
@@ -55,40 +62,40 @@
   <!-- 主要内容区 -->
   <main class="main">
     <section class="hero">
-      <h1>Wallpapers for Your Phone</h1>
-      <p>Free static wallpapers, premium live wallpapers, and AI custom wallpapers. Updated with trending styles weekly.</p>
+      <h1 data-i18n="hero.title">Wallpapers for Your Phone</h1>
+      <p data-i18n="hero.copy">Free static wallpapers, premium live wallpapers, and AI custom wallpapers. Updated with trending styles weekly.</p>
     </section>
 
     <section class="browse-panel">
       <div class="browse-copy">
-        <span class="browse-eyebrow">Popular phone wallpapers</span>
+        <span class="browse-eyebrow" data-i18n="browse.eyebrow">Popular phone wallpapers</span>
         <h2 id="browseTitle">All Phone Wallpapers</h2>
-        <p id="browseSubtitle">Browse free static wallpapers, premium live wallpapers, and AI custom samples in a phone-first grid.</p>
+        <p id="browseSubtitle" data-i18n="browse.subtitle.default">Browse free static wallpapers, premium live wallpapers, and AI custom samples in a phone-first grid.</p>
       </div>
       <div class="sort-tabs" aria-label="Wallpaper sorting">
-        <button class="sort-tab active" data-sort="popular">Popular</button>
-        <button class="sort-tab" data-sort="latest">Latest</button>
-        <button class="sort-tab" data-sort="downloaded">Most Downloaded</button>
+        <button class="sort-tab active" data-sort="popular" data-i18n="sort.popular">Popular</button>
+        <button class="sort-tab" data-sort="latest" data-i18n="sort.latest">Latest</button>
+        <button class="sort-tab" data-sort="downloaded" data-i18n="sort.downloaded">Most Downloaded</button>
       </div>
     </section>
 
     <!-- 三大板块切换 -->
     <div class="section-tabs">
       <a href="#static" class="section-tab active" data-section="static" onclick="window.setWallpaperSection && window.setWallpaperSection('static')">
-        Static
+        <span data-i18n="section.static">Static</span>
       </a>
       <a href="#live" class="section-tab" data-section="live" onclick="window.setWallpaperSection && window.setWallpaperSection('live')">
-        Live
+        <span data-i18n="section.live">Live</span>
       </a>
       <a href="#custom" class="section-tab" data-section="custom" onclick="window.setWallpaperSection && window.setWallpaperSection('custom')">
-        AI Custom
+        <span data-i18n="section.custom">AI Custom</span>
       </a>
     </div>
-    <p class="section-helper" id="sectionHelper">Free HD phone wallpapers for quick downloads.</p>
+    <p class="section-helper" id="sectionHelper" data-i18n="helper.static">Free HD phone wallpapers for quick downloads.</p>
 
     <!-- 搜索栏 -->
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search wallpapers...">
+      <input type="text" id="searchInput" placeholder="Search wallpapers..." data-i18n-placeholder="search.placeholder">
     </div>
 
     <div class="results-meta">
@@ -98,23 +105,23 @@
 
     <!-- 动态壁纸提示条 -->
     <div class="points-bar" id="pointsBar" style="display:none;">
-      <span id="pointsHint">Live downloads use 15 credits. AI generations use 20 credits.</span>
+      <span id="pointsHint" data-i18n="points.hint.live">Live downloads use 15 credits. AI generations use 20 credits.</span>
       <span class="points-account" id="pointsAccount" style="display:none;">
-        My Points: <strong id="pointsDisplay">0</strong>
-        <button class="btn-buy-points js-buy-points" id="btnBuyPointsInline">Get Points</button>
+        <span data-i18n="points.my">My Points:</span> <strong id="pointsDisplay">0</strong>
+        <button class="btn-buy-points js-buy-points" id="btnBuyPointsInline" data-i18n="points.get">Get Points</button>
       </span>
     </div>
 
     <!-- 图片网格 -->
     <div class="ai-mode-panel" id="aiModePanel" style="display:none;">
       <div class="ai-mode-tabs" aria-label="AI custom mode">
-        <a href="#custom-image" class="ai-mode-tab active" data-ai-mode="image" onclick="window.setAiMode && window.setAiMode('image')">Image to Image</a>
-        <a href="#custom-text" class="ai-mode-tab" data-ai-mode="text" onclick="window.setAiMode && window.setAiMode('text')">Text to Image</a>
+        <a href="#custom-image" class="ai-mode-tab active" data-ai-mode="image" onclick="window.setAiMode && window.setAiMode('image')" data-i18n="ai.imageMode">Image to Image</a>
+        <a href="#custom-text" class="ai-mode-tab" data-ai-mode="text" onclick="window.setAiMode && window.setAiMode('text')" data-i18n="ai.textMode">Text to Image</a>
       </div>
-      <p class="ai-mode-copy" id="aiModeCopy">Upload your photo, preview the target motion style, then generate a live wallpaper.</p>
+      <p class="ai-mode-copy" id="aiModeCopy" data-i18n="ai.copy.image">Upload your photo, preview the target motion style, then generate a live wallpaper.</p>
       <div class="ai-text-prompt" id="aiTextPromptBox" style="display:none;">
-        <input type="text" id="aiTextPrompt" placeholder="Describe your wallpaper style...">
-        <button class="btn-generate" id="aiTextGenerate">Generate Text Wallpaper (20 pts)</button>
+        <input type="text" id="aiTextPrompt" placeholder="Describe your wallpaper style..." data-i18n-placeholder="ai.prompt.placeholder">
+        <button class="btn-generate" id="aiTextGenerate" data-i18n="ai.generateText">Generate Text Wallpaper (20 pts)</button>
       </div>
     </div>
 
@@ -125,23 +132,23 @@
     <!-- AI自定义板块：上传区 -->
     <div class="ai-upload-area" id="aiUploadArea" style="display:none;">
       <div class="ai-upload-box">
-        <h3>Add Your Own Image</h3>
-        <p>Upload a photo to turn it into a live wallpaper.</p>
+        <h3 data-i18n="upload.title">Add Your Own Image</h3>
+        <p data-i18n="upload.copy">Upload a photo to turn it into a live wallpaper.</p>
         <input type="file" id="aiFileInput" accept="image/*" style="display:none;">
-        <button class="btn-generate" id="aiBtnUpload">Choose from Gallery</button>
-        <span class="ai-upload-or">Upload your own photo to generate</span>
+        <button class="btn-generate" id="aiBtnUpload" data-i18n="upload.choose">Choose from Gallery</button>
+        <span class="ai-upload-or" data-i18n="upload.hint">Upload your own photo to generate</span>
       </div>
     </div>
 
     <!-- 加载更多 -->
     <div class="load-more-wrap">
-      <button class="load-more" id="loadMore">Load More</button>
+      <button class="load-more" id="loadMore" data-i18n="loadMore">Load More</button>
     </div>
   </main>
 
   <!-- 底部 -->
   <footer class="footer">
-    <p>TK Wallpaper &copy; 2026. Free wallpapers for personal use. Live wallpapers and AI wallpapers require points.</p>
+    <p data-i18n="footer.copy">TK Wallpaper &copy; 2026. Free wallpapers for personal use. Live wallpapers and AI wallpapers require points.</p>
   </footer>
 
   <!-- 图片放大弹窗 -->
@@ -152,7 +159,7 @@
       <video src="" id="lightboxVideo" loop muted playsinline autoplay style="display:none;"></video>
       <div class="lightbox-actions">
         <span class="lightbox-res" id="lightboxRes"></span>
-        <button class="btn-download" id="btnDownload">Download</button>
+        <button class="btn-download" id="btnDownload" data-i18n="download">Download</button>
         <button class="btn-set-wallpaper" id="btnSetWallpaper" style="display:none;">Set as Wallpaper</button>
       </div>
     </div>
@@ -163,40 +170,40 @@
     <button class="compare-close" id="compareClose">X</button>
     <div class="compare-body">
       <div class="compare-panel">
-        <span class="compare-label">Before (Static)</span>
+        <span class="compare-label" data-i18n="compare.before">Before (Static)</span>
         <div class="compare-img-wrap" id="compareImgWrap">
           <img src="" alt="Original" id="compareImg">
           <div class="compare-placeholder" id="comparePlaceholder">
             <span class="placeholder-plus">+</span>
-            <span class="placeholder-text">Upload Your Photo</span>
+            <span class="placeholder-text" data-i18n="compare.uploadPhoto">Upload Your Photo</span>
           </div>
         </div>
         <div class="compare-img-actions">
-          <button class="btn-small" id="compareUpload">Upload Photo</button>
-          <button class="btn-small" id="compareDelete">Delete</button>
+          <button class="btn-small" id="compareUpload" data-i18n="compare.upload">Upload Photo</button>
+          <button class="btn-small" id="compareDelete" data-i18n="compare.delete">Delete</button>
         </div>
       </div>
       <div class="compare-arrow">→</div>
       <div class="compare-panel">
-        <span class="compare-label">After (Live Wallpaper)</span>
+        <span class="compare-label" data-i18n="compare.after">After (Live Wallpaper)</span>
         <div class="compare-img-wrap" id="compareResultWrap">
           <img src="" alt="Result" id="compareResultImg" style="display:none;">
           <video id="compareVideo" loop muted playsinline autoplay></video>
           <div class="compare-placeholder" id="compareResultPlaceholder">
             <span class="placeholder-plus">?</span>
-            <span class="placeholder-text">Click Generate</span>
+            <span class="placeholder-text" data-i18n="compare.clickGenerate">Click Generate</span>
           </div>
         </div>
         <div class="compare-actions">
-          <button class="btn-download" id="compareDownload">Download</button>
+          <button class="btn-download" id="compareDownload" data-i18n="download">Download</button>
         </div>
       </div>
     </div>
     <div class="compare-generate">
-      <button class="btn-generate" id="compareBtnGenerate">Generate Live Wallpaper (20 pts)</button>
+      <button class="btn-generate" id="compareBtnGenerate" data-i18n="compare.generate">Generate Live Wallpaper (20 pts)</button>
       <div class="generate-status" id="compareStatus" style="display:none;">
         <div class="spinner"></div>
-        <span id="compareStatusText">Processing...</span>
+        <span id="compareStatusText" data-i18n="status.processing">Processing...</span>
       </div>
     </div>
   </div>
@@ -205,16 +212,16 @@
   <div class="modal-overlay" id="authModal">
     <div class="modal-box">
       <button class="modal-close" id="authModalClose">X</button>
-      <h3 id="authModalTitle">Login</h3>
+      <h3 id="authModalTitle" data-i18n="auth.login">Login</h3>
       <div class="auth-form">
-        <input type="email" id="authEmail" placeholder="Email address">
-        <input type="password" id="authPassword" placeholder="Password">
-        <button class="btn-generate" id="authBtnSubmit">Login</button>
+        <input type="email" id="authEmail" placeholder="Email address" data-i18n-placeholder="auth.email">
+        <input type="password" id="authPassword" placeholder="Password" data-i18n-placeholder="auth.password">
+        <button class="btn-generate" id="authBtnSubmit" data-i18n="auth.login">Login</button>
         <p class="auth-switch">
-          <span id="authSwitchText">Don't have an account?</span>
-          <a href="#" id="authToggle">Sign Up</a>
+          <span id="authSwitchText" data-i18n="auth.noAccount">Don't have an account?</span>
+          <a href="#" id="authToggle" data-i18n="auth.signup">Sign Up</a>
         </p>
-        <p class="auth-note">New users get <strong>10 free credits</strong> to try AI wallpapers!</p>
+        <p class="auth-note" data-i18n="auth.note">New users get 10 free credits to try AI wallpapers!</p>
       </div>
     </div>
   </div>
@@ -226,47 +233,47 @@
   <div class="modal-overlay" id="purchaseModal">
     <div class="modal-box">
       <button class="modal-close" id="purchaseModalClose">X</button>
-      <h3>Get Credits</h3>
-      <p class="modal-sub">Buy credits to download live wallpapers and AI custom wallpapers.</p>
+      <h3 data-i18n="points.getCredits">Get Credits</h3>
+      <p class="modal-sub" data-i18n="points.buyCopy">Buy credits to download live wallpapers and AI custom wallpapers.</p>
       <div class="pricing-list">
         <a href="https://tk-wallpaper.lemonsqueezy.com/checkout/buy/1097506" target="_blank" class="pricing-item">
           <div class="pricing-header">
             <span class="pricing-name">Starter</span>
             <span class="pricing-price">$3.99</span>
           </div>
-          <span class="pricing-credits">100 Credits</span>
-          <span class="pricing-desc">5 AI generations</span>
+          <span class="pricing-credits" data-i18n="pricing.credits100">100 Credits</span>
+          <span class="pricing-desc" data-i18n="pricing.gen5">5 AI generations</span>
         </a>
         <a href="https://tk-wallpaper.lemonsqueezy.com/checkout/buy/1097512" target="_blank" class="pricing-item pricing-popular">
           <div class="pricing-header">
             <span class="pricing-name">Popular</span>
             <span class="pricing-price">$6.99</span>
           </div>
-          <span class="pricing-credits">200 Credits</span>
-          <span class="pricing-desc">10 AI generations · Save 12%</span>
-          <span class="pricing-badge">BEST SELLER</span>
+          <span class="pricing-credits" data-i18n="pricing.credits200">200 Credits</span>
+          <span class="pricing-desc" data-i18n="pricing.gen10">10 AI generations - Save 12%</span>
+          <span class="pricing-badge" data-i18n="pricing.bestSeller">BEST SELLER</span>
         </a>
         <a href="https://tk-wallpaper.lemonsqueezy.com/checkout/buy/1097509" target="_blank" class="pricing-item">
           <div class="pricing-header">
             <span class="pricing-name">Best Value</span>
             <span class="pricing-price">$12.99</span>
           </div>
-          <span class="pricing-credits">500 Credits</span>
-          <span class="pricing-desc">25 AI generations · Save 35%</span>
+          <span class="pricing-credits" data-i18n="pricing.credits500">500 Credits</span>
+          <span class="pricing-desc" data-i18n="pricing.gen25">25 AI generations - Save 35%</span>
         </a>
         <a href="https://tk-wallpaper.lemonsqueezy.com/checkout/buy/1097513" target="_blank" class="pricing-item">
           <div class="pricing-header">
             <span class="pricing-name">Pro</span>
             <span class="pricing-price">$24.99</span>
           </div>
-          <span class="pricing-credits">1200 Credits</span>
-          <span class="pricing-desc">60 AI generations · Best value</span>
+          <span class="pricing-credits" data-i18n="pricing.credits1200">1200 Credits</span>
+          <span class="pricing-desc" data-i18n="pricing.gen60">60 AI generations - Best value</span>
         </a>
       </div>
-      <p class="modal-note">After purchase, credits will be added to your account automatically.</p>
+      <p class="modal-note" data-i18n="points.afterPurchase">After purchase, credits will be added to your account automatically.</p>
     </div>
   </div>
 
-  <script src="script.js?v=20260602-ai-modes-4"></script>
+  <script src="script.js?v=20260610-lang-1"></script>
 </body>
 </html>
