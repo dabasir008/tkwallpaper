@@ -569,7 +569,7 @@ function applyTranslations() {
     languageSelect.value = currentLang;
     languageSelect.setAttribute("aria-label", t("lang.label"));
   }
-  if (menuToggle) menuToggle.textContent = navEl.classList.contains("open") ? t("nav.close") : t("nav.menu");
+  if (menuToggle && navEl) menuToggle.textContent = navEl.classList.contains("open") ? t("nav.close") : t("nav.menu");
 
   updateSectionCopy();
   updateAiModeUI();
@@ -871,10 +871,28 @@ function updateBrowseCopy() {
 
 // ===== 鎼滅储 =====
 let searchTimer;
+function isLikelyAutofillEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function clearSearchAutofill({ rerender = false } = {}) {
+  if (!searchInput || !isLikelyAutofillEmail(searchInput.value)) return false;
+  searchInput.value = "";
+  currentSearch = "";
+  if (rerender) applyFilter();
+  return true;
+}
+
 searchInput.addEventListener("input", () => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => {
-    currentSearch = searchInput.value.trim();
+    const rawSearch = searchInput.value.trim();
+    if (isLikelyAutofillEmail(rawSearch)) {
+      searchInput.value = "";
+      currentSearch = "";
+    } else {
+      currentSearch = rawSearch;
+    }
     applyFilter();
   }, 300);
 });
@@ -1257,12 +1275,14 @@ function showToast(msg) {
 }
 
 // ===== 鎵嬫満鑿滃崟 =====
-menuToggle.addEventListener("click", () => {
-  navEl.classList.toggle("open");
-  menuToggle.textContent = navEl.classList.contains("open") ? t("nav.close") : t("nav.menu");
-});
+if (menuToggle && navEl) {
+  menuToggle.addEventListener("click", () => {
+    navEl.classList.toggle("open");
+    menuToggle.textContent = navEl.classList.contains("open") ? t("nav.close") : t("nav.menu");
+  });
+}
 document.addEventListener("click", (e) => {
-  if (!e.target.closest(".header") && navEl.classList.contains("open")) {
+  if (menuToggle && navEl && !e.target.closest(".header") && navEl.classList.contains("open")) {
     navEl.classList.remove("open");
     menuToggle.textContent = t("nav.menu");
   }
@@ -1387,11 +1407,15 @@ authModalClose.addEventListener("click", hideAuthModal);
 authModal.addEventListener("click", (e) => { if (e.target === authModal) hideAuthModal(); });
 
 // 椤甸潰鍔犺浇锛氬绾哥珛鍗冲彲瑙侊紝鐧诲綍寮傛鎭㈠
+clearSearchAutofill();
 updatePointsDisplay();
 applyTranslations();
 renderCards(staticWallpapers);
 loadWallpaperManifests();
 if (window.location.hash) applyRouteFromHash();
+window.addEventListener("pageshow", () => clearSearchAutofill({ rerender: true }));
+setTimeout(() => clearSearchAutofill({ rerender: true }), 250);
+setTimeout(() => clearSearchAutofill({ rerender: true }), 1200);
 
 restoreSavedSession();
 

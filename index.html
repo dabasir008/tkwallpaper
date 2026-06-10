@@ -8,7 +8,7 @@
   <title>TK Wallpaper - Free HD & Live Wallpapers</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8489634814754606"
      crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css?v=20260610-lang-1">
+  <link rel="stylesheet" href="style.css?v=20260610-cats-1">
 </head>
 <body>
 
@@ -18,24 +18,6 @@
       <a href="/" class="logo" aria-label="TK Wallpaper home">
         <img src="assets/tk-logo.svg" alt="TK Wallpaper">
       </a>
-      <nav class="nav" id="mainNav">
-        <a href="#" class="nav-link active" data-category="all" data-i18n="cat.all">All</a>
-        <a href="#" class="nav-link" data-category="nature" data-i18n="cat.nature">Nature</a>
-        <a href="#" class="nav-link" data-category="cyberpunk" data-i18n="cat.cyberpunk">Cyberpunk</a>
-        <a href="#" class="nav-link" data-category="minimal" data-i18n="cat.minimal">Minimal</a>
-        <a href="#" class="nav-link" data-category="abstract" data-i18n="cat.abstract">Abstract</a>
-        <a href="#" class="nav-link" data-category="car" data-i18n="cat.car">Car</a>
-        <a href="#" class="nav-link" data-category="anime" data-i18n="cat.anime">Anime</a>
-        <a href="#" class="nav-link" data-category="animals" data-i18n="cat.animals">Animals</a>
-        <a href="#" class="nav-link" data-category="wealth" data-i18n="cat.wealth">Wealth</a>
-        <a href="#" class="nav-link" data-category="lucky" data-i18n="cat.lucky">Lucky</a>
-        <a href="#" class="nav-link" data-category="funny" data-i18n="cat.funny">Funny</a>
-        <a href="#" class="nav-link" data-category="cool" data-i18n="cat.cool">Cool</a>
-        <a href="#" class="nav-link" data-category="mystic" data-i18n="cat.mystic">Mystic</a>
-        <a href="#" class="nav-link" data-category="sci-fi" data-i18n="cat.sciFi">Sci-Fi</a>
-        <a href="#" class="nav-link" data-category="scenery" data-i18n="cat.scenery">Scenery</a>
-        <a href="#" class="nav-link" data-category="fantasy" data-i18n="cat.fantasy">Fantasy</a>
-      </nav>
       <label class="language-switcher">
         <span data-i18n="lang.label">Language</span>
         <select id="languageSelect" aria-label="Language">
@@ -43,7 +25,6 @@
           <option value="es">Español</option>
         </select>
       </label>
-      <button class="menu-toggle" id="menuToggle" data-i18n="nav.menu">Menu</button>
       <!-- 未登录 -->
       <div class="header-auth" id="headerNotLoggedIn">
         <button class="header-buy-btn" id="btnLogin" data-i18n="auth.login">Login</button>
@@ -91,11 +72,31 @@
         <span data-i18n="section.custom">AI Custom</span>
       </a>
     </div>
+    <div class="category-nav-wrap">
+      <nav class="nav category-nav" id="mainNav" aria-label="Wallpaper categories">
+        <a href="#" class="nav-link active" data-category="all" data-i18n="cat.all">All</a>
+        <a href="#" class="nav-link" data-category="nature" data-i18n="cat.nature">Nature</a>
+        <a href="#" class="nav-link" data-category="cyberpunk" data-i18n="cat.cyberpunk">Cyberpunk</a>
+        <a href="#" class="nav-link" data-category="minimal" data-i18n="cat.minimal">Minimal</a>
+        <a href="#" class="nav-link" data-category="abstract" data-i18n="cat.abstract">Abstract</a>
+        <a href="#" class="nav-link" data-category="car" data-i18n="cat.car">Car</a>
+        <a href="#" class="nav-link" data-category="anime" data-i18n="cat.anime">Anime</a>
+        <a href="#" class="nav-link" data-category="animals" data-i18n="cat.animals">Animals</a>
+        <a href="#" class="nav-link" data-category="wealth" data-i18n="cat.wealth">Wealth</a>
+        <a href="#" class="nav-link" data-category="lucky" data-i18n="cat.lucky">Lucky</a>
+        <a href="#" class="nav-link" data-category="funny" data-i18n="cat.funny">Funny</a>
+        <a href="#" class="nav-link" data-category="cool" data-i18n="cat.cool">Cool</a>
+        <a href="#" class="nav-link" data-category="mystic" data-i18n="cat.mystic">Mystic</a>
+        <a href="#" class="nav-link" data-category="sci-fi" data-i18n="cat.sciFi">Sci-Fi</a>
+        <a href="#" class="nav-link" data-category="scenery" data-i18n="cat.scenery">Scenery</a>
+        <a href="#" class="nav-link" data-category="fantasy" data-i18n="cat.fantasy">Fantasy</a>
+      </nav>
+    </div>
     <p class="section-helper" id="sectionHelper" data-i18n="helper.static">Free HD phone wallpapers for quick downloads.</p>
 
     <!-- 搜索栏 -->
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search wallpapers..." data-i18n-placeholder="search.placeholder">
+      <input type="search" id="searchInput" name="wallpaper_search_query" placeholder="Search wallpapers..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" data-i18n-placeholder="search.placeholder">
     </div>
 
     <div class="results-meta">
@@ -274,6 +275,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=20260610-lang-1"></script>
+  <script src="script.js?v=20260610-cats-1"></script>
 </body>
 </html>
